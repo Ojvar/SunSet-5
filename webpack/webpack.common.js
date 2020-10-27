@@ -5,6 +5,8 @@ const Path = require("path");
 module.exports = (env, entries) => ({
   entry: getEntries(env, entries),
   output: getOutput(env, entries),
+  module: getModule(env, entries),
+  plugins: getPlugins(env, entries),
   resolve: getResolve(env, entries),
 });
 
@@ -27,6 +29,24 @@ function getOutput(env, entries) {
   const OutputModule = require(Path.resolve(__dirname, "modules/output"));
 
   return OutputModule(env);
+}
+
+/**
+ * Get module
+ */
+function getModule(env, entries) {
+  const ModuleModule = require(Path.resolve(__dirname, "modules/module"));
+
+  return ModuleModule(env);
+}
+
+/**
+ * Get plugins
+ */
+function getPlugins(env, entries) {
+  const PluginsModule = require(Path.resolve(__dirname, "modules/plugins"));
+
+  return PluginsModule(env, entries);
 }
 
 /**

@@ -9,7 +9,14 @@ export class App extends Base {
    */
   constructor() {
     super();
-    console.log("This is CTR of App class");
+    this.init();
+  }
+
+  /**
+   * Init
+   */
+  private init() {
+    console.log("INit of App.ts");
   }
 }
 

@@ -7,7 +7,7 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
  */
 module.exports = (env = {}) => {
   return {
-    extensions: [".ts", ".tsx", ".js", ".jsx", ".vue"],
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".vue", ".pug", ".json"],
     plugins: [new TsconfigPathsPlugin({})],
   };
 };

@@ -27,5 +27,6 @@ function getCommonConfig(env, entries) {
 function getLocalConfig(env, entries) {
   return {
     mode: "development",
+    devtool: "cheap-module-source-map",
   };
 }

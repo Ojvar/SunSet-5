@@ -16,18 +16,19 @@
       "@BE/*": ["backend/*"],
       "@FE/*": ["frontend/*"],
       "@Scripts/*": ["frontend/scripts/*"],
-      "@Components/*": ["frontend/scripts/vue/components/*"]
+      "@Components/*": ["frontend/scripts/components/*"]
     },
 
     "sourceRoot": "src",
     "sourceMap": true,
 
-    "removeComments": true,
-    "resolveJsonModule": false,
+    "typeRoots": ["node_modules/@types", "src/@types"],
+
     "strict": false,
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
-
-    "typeRoots": ["node_modules/@types", "src/@types"]
+    "jsx": "react",
+    "removeComments": true,
+    "resolveJsonModule": false
   }
 }

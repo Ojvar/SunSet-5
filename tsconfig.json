@@ -1,0 +1,33 @@
+{
+  "exclude": ["node_modules"],
+
+  "include": ["src"],
+
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+
+    "outDir": "dist",
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"],
+      "@Core/*": ["core/*"],
+      "@BE/*": ["backend/*"],
+      "@FE/*": ["frontend/*"],
+      "@Scripts/*": ["frontend/scripts/*"],
+      "@Components/*": ["frontend/scripts/vue/components/*"]
+    },
+
+    "sourceRoot": "src",
+    "sourceMap": true,
+
+    "removeComments": true,
+    "resolveJsonModule": false,
+    "strict": false,
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+
+    "typeRoots": ["node_modules/@types", "src/@types"]
+  }
+}

@@ -1,4 +1,6 @@
 import Base from "@Scripts/base";
+import { createApp } from "vue";
+import AppComponent from "@Components/app-component.vue";
 
 /**
  * App class
@@ -16,6 +18,9 @@ export class App extends Base {
    * Init
    */
   private init() {
+    const app = createApp(AppComponent);
+    app.mount("#app");
+
     console.log("INit of App.ts");
   }
 }

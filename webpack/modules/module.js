@@ -18,16 +18,98 @@ function getRules(env) {
 
   return [
     {
-      test: /\.(scss|sass|css)$/,
-      use: [
-        MiniCssExtractPlugin.loader,
+      test: /\.styl(us)?$/,
+      oneOf: [
         {
-          loader: "css-loader",
-          options: {
-            sourceMap: isDev,
-          },
+          resourceQuery: /vue/,
+          use: [
+            "style-loader",
+            {
+              loader: "css-loader",
+              options: {
+                sourceMap: isDev,
+              },
+            },
+            "stylus-loader",
+          ],
         },
-        "sass-loader",
+        {
+          resourceQuery: /(?!vue)/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: "css-loader",
+              options: {
+                sourceMap: isDev,
+              },
+            },
+            "less-loader",
+          ],
+        },
+      ],
+    },
+
+    {
+      test: /\.less$/,
+      oneOf: [
+        {
+          resourceQuery: /vue/,
+          use: [
+            "style-loader",
+            {
+              loader: "css-loader",
+              options: {
+                sourceMap: isDev,
+              },
+            },
+            "less-loader",
+          ],
+        },
+        {
+          resourceQuery: /(?!vue)/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: "css-loader",
+              options: {
+                sourceMap: isDev,
+              },
+            },
+            "less-loader",
+          ],
+        },
+      ],
+    },
+
+    {
+      test: /\.(scss|sass|css)$/,
+      oneOf: [
+        {
+          resourceQuery: /vue/,
+          use: [
+            "style-loader",
+            {
+              loader: "css-loader",
+              options: {
+                sourceMap: isDev,
+              },
+            },
+            "sass-loader",
+          ],
+        },
+        {
+          resourceQuery: /(?!vue)/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: "css-loader",
+              options: {
+                sourceMap: isDev,
+              },
+            },
+            "sass-loader",
+          ],
+        },
       ],
     },
 
@@ -48,13 +130,13 @@ function getRules(env) {
     },
 
     {
-      test: /\.vue(\.html)?$/,
+      test: /\.vue$/,
       loader: "vue-loader",
     },
 
     {
       test: /\.tsx?$/,
-      loader: "awesome-typescript-loader",
+      loader: "ts-loader",
       exclude: /node_modules/,
       options: { appendTsSuffixTo: [/\.vue$/] },
     },
@@ -76,65 +158,3 @@ function getRules(env) {
     },
   ];
 }
-
-// {
-//   test: /\.vue\.s[ac]ss$/,
-//   use: [
-//     "vue-style-loader",
-//     {
-//       loader: "css-loader",
-//       options: {
-//         sourceMap: isDev,
-//       },
-//     },
-//     {
-//       loader: "sass-loader",
-//       options: {},
-//     },
-//   ],
-// },
-
-// {
-//   test: /(!\.vue)\.s[ac]ss$/,
-//   use: [
-//     "vue-style-loader",
-//     {
-//       loader: "css-loader",
-//       options: {
-//         sourceMap: isDev,
-//       },
-//     },
-//     {
-//       loader: "sass-loader",
-//       options: {},
-//     },
-//   ],
-// },
-
-// {
-//   test: /\.less$/,
-//   use: [
-//     "vue-style-loader",
-//     {
-//       loader: "css-loader",
-//       options: {
-//         sourceMap: isDev,
-//       },
-//     },
-//     "less-loader",
-//   ],
-// },
-
-// {
-//   test: /\.styl(us)?$/,
-//   use: [
-//     "vue-style-loader",
-//     {
-//       loader: "css-loader",
-//       options: {
-//         sourceMap: isDev,
-//       },
-//     },
-//     "stylus-loader",
-//   ],
-// },

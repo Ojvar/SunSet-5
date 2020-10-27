@@ -5,8 +5,7 @@ const entries = {
     "scripts/app": "./src/frontend/scripts/app.ts",
   },
   styles: {
-    "styles/app": "./src/frontend/styles/app.css",
-    "styles/app2": "./src/frontend/styles/app.scss",
+    "styles/app": "./src/frontend/styles/app.scss",
   },
   files: {},
   directories: {},

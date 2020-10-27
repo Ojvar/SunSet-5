@@ -25,7 +25,11 @@
 
 <style lang="scss" scoped>
   .section {
+    padding: 5em;
+    line-height: 1.5em;
+    text-align: center;
+    border-radius: 10px;
     background-color: blue;
-    color: yellow;
+    color: white;
   }
 </style>

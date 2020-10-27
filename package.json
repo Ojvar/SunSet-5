@@ -28,6 +28,7 @@
     "pug-plain-loader": "^1.0.0",
     "raw-loader": "^4.0.2",
     "sass-loader": "^10.0.4",
+    "style-loader": "^2.0.0",
     "stylus": "^0.54.8",
     "stylus-loader": "^4.1.1",
     "suppress-chunks-webpack-plugin": "^1.0.6",

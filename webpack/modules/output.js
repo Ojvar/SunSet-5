@@ -9,7 +9,7 @@ module.exports = (env = {}) => {
   const isProd = env.PRODUCTION || false;
 
   return {
-    path: Path.resolve("dist"),
+    path: Path.resolve("dist/public/"),
     publicPath: "/",
     filename: isProd ? "[name]-[contenthash].js" : "[name].js",
   };

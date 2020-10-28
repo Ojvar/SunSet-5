@@ -1,7 +1,6 @@
 {
-  "exclude": ["node_modules"],
-
   "include": ["src"],
+  "exclude": ["node_modules", "src/frontend"],
 
   "compilerOptions": {
     "target": "ESNext",
@@ -15,6 +14,9 @@
       "@Core/*": ["core/*"],
       "@BE/*": ["backend/*"],
       "@FE/*": ["frontend/*"],
+      "@Lib/*": ["lib/*"],
+
+      "@Config/*": ["config/*"],
       "@Scripts/*": ["frontend/scripts/*"],
       "@Components/*": ["frontend/scripts/components/*"]
     },
@@ -22,7 +24,7 @@
     "sourceRoot": "src",
     "sourceMap": true,
 
-    "typeRoots": ["node_modules/@types", "src/@types"],
+    "typeRoots": ["node_modules/@types"],
 
     "strict": false,
     "allowJs": false,

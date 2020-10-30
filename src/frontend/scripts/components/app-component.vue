@@ -25,7 +25,7 @@
 
 <style lang="scss" scoped>
   .section {
-    padding: 5em;
+    padding: 2.5em;
     line-height: 1.5em;
     text-align: center;
     border-radius: 10px;

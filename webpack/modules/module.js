@@ -138,7 +138,7 @@ function getRules(env) {
       test: /\.tsx?$/,
       loader: "ts-loader",
       exclude: /node_modules/,
-      options: { appendTsSuffixTo: [/\.vue$/] },
+      options: { appendTsSuffixTo: [/\.vue$/], compiler: "ttypescript" },
     },
 
     {

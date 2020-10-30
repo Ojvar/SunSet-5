@@ -1,14 +1,16 @@
 {
   "include": ["src"],
-  "exclude": ["node_modules", "src/frontend"],
+  "exclude": ["node_modules", "src/frontend", "**/*.spec.ts"],
 
   "compilerOptions": {
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "CommonJS",
     "moduleResolution": "Node",
+    "jsx": "react",
 
     "outDir": "dist",
-    "baseUrl": "src",
+    "rootDir": "src",
+    "baseUrl": "src/",
     "paths": {
       "@/*": ["*"],
       "@Core/*": ["core/*"],
@@ -22,15 +24,18 @@
     },
 
     "sourceRoot": "src",
-    "sourceMap": true,
+    // "sourceMap": true,
+    "inlineSourceMap": true,
 
     "typeRoots": ["node_modules/@types"],
 
     "strict": false,
     "allowJs": false,
+    // "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
-    "jsx": "react",
     "removeComments": true,
-    "resolveJsonModule": false
+    "resolveJsonModule": false,
+
+    "plugins": [{ "transform": "@zerollup/ts-transform-paths" }]
   }
 }

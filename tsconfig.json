@@ -13,14 +13,18 @@
     "baseUrl": "src/",
     "paths": {
       "@/*": ["*"],
-      "@Core/*": ["core/*"],
-      "@BE/*": ["backend/*"],
-      "@FE/*": ["frontend/*"],
-      "@Lib/*": ["lib/*"],
 
       "@Config/*": ["config/*"],
       "@Scripts/*": ["frontend/scripts/*"],
-      "@Components/*": ["frontend/scripts/components/*"]
+      "@Components/*": ["frontend/scripts/components/*"],
+
+      "@Core/Global/*": ["core/global/*"],
+      "@Core/Modules/*": ["core/modules/*"],
+      "@Core/*": ["core/*"],
+
+      "@BE/*": ["backend/*"],
+      "@FE/*": ["frontend/*"],
+      "@Lib/*": ["lib/*"]
     },
 
     "sourceRoot": "src",
@@ -29,8 +33,8 @@
 
     "typeRoots": ["node_modules/@types"],
 
-    "strict": false,
-    "allowJs": false,
+    "strict": true,
+    "allowJs": true,
     // "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "removeComments": true,

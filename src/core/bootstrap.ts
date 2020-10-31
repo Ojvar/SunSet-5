@@ -1,39 +1,59 @@
-import * as Chalk from "chalk";
-import GlobalData from "./global/global-data";
-import Logger from "./modules/logger-module";
+import { yellow, green } from "chalk";
+import GlobalData from "@Core/Global/global-data";
+import EnvModule from "@Core/Modules/env-module";
+import Logger from "@Core/Modules/logger-module";
 
 /**
  * Bootstrap class
  */
 export class Bootstap {
   /**
-   * Ctr
-   */
-  constructor() {}
-
-  /**
    * Boot method
    */
   public async boot(): Promise<void> {
     await this.initCoreModules();
+
+    GlobalData.logger.info(green("System booted successfully"));
   }
 
   /**
    * Initialize core modules
    */
   private async initCoreModules(): Promise<void> {
+    await this.initEnvData();
     await this.initLogger();
+  }
+
+  /**
+   * Initialize env-data modules
+   */
+  private async initEnvData(): Promise<void> {
+    const envModule = EnvModule.createModule();
+    await envModule.boot();
+
+    console.info(
+      `${yellow(envModule.getModuleName())} module loaded successfully`
+    );
   }
 
   /**
    * Initialize logger modules
    */
   private async initLogger(): Promise<void> {
-    const moduleName: string = Chalk.yellow("Logger");
-    GlobalData.logger = Logger.createLogger();
+    const logger = Logger.createModule();
+    await logger.boot();
 
-    await GlobalData.logger.boot();
-    GlobalData.logger.info(`${moduleName} has been loaded successfully`);
+    GlobalData.logger = logger;
+
+    this.printModuleLog(logger.getModuleName());
+  }
+
+  /**
+   * Print module log
+   * @param moduleName string Module name
+   */
+  private printModuleLog(moduleName: string) {
+    GlobalData.logger.info(`${yellow(moduleName)} module loaded successfully`);
   }
 }
 

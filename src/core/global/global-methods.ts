@@ -1,12 +1,12 @@
-import _ from "lodash";
+import { get as lodashGet } from "lodash";
 import { resolve, extname } from "path";
 import { existsSync, readFileSync } from "fs";
 import * as Glob from "glob";
 import * as Ora from "ora";
 import * as MkDirP from "mkdirp";
 import Express, { NextFunction } from "express";
-import { CsrfConfigType } from "@/lib/types/core/csrf-config-type";
-import { ServerConfigType } from "@/lib/types/core/server-config-type";
+import { CsrfConfigType } from "@Lib/types/core/csrf-config-type";
+import { ServerConfigType } from "@Lib/types/core/server-config-type";
 
 /**
  * Global methods
@@ -116,11 +116,11 @@ export default class GlobalMethods {
     }
 
     let result: T;
-    let path = GlobalMethods.rPath(__dirname, `@Config/${config}`);
+    const path: string = this.rPath(__dirname, `../../config/${config}`);
     result = await GlobalMethods.loadModule<T>(path);
 
     if (keyPath) {
-      result = _.get(result, keyPath) as T;
+      result = lodashGet(result, keyPath) as T;
     }
 
     return result;

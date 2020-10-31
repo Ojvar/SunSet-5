@@ -13,6 +13,20 @@ export default class Logger extends BaseModule implements ICoreModule {
   private errorFilename: string = "";
 
   /**
+   * Logger factory
+   */
+  public static createModule(): Logger {
+    return new Logger(console);
+  }
+
+  /**
+   * Get module name
+   */
+  public getModuleName(): string {
+    return "Logger";
+  }
+
+  /**
    * Get logger
    */
   public get logger(): any {
@@ -32,13 +46,6 @@ export default class Logger extends BaseModule implements ICoreModule {
     }
 
     this._logger = value;
-  }
-
-  /**
-   * Logger factory
-   */
-  public static createLogger(): Logger {
-    return new Logger(console);
   }
 
   /**

@@ -1,4 +1,4 @@
-import Chalk from "chalk";
+import * as Chalk from "chalk";
 import GlobalData from "./global/global-data";
 import Logger from "./modules/logger-module";
 

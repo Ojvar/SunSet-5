@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "server:start": "cross-env node ./dist/core/bootstrap.js",
-    "server:build": "cross-env ttsc",
-    "server:build-dev": "cross-env ttsc -w",
-    "server:watch": "cross-env nodemon ./dist/core/bootstrap.js",
+    "server:prod": "cross-env ttsc",
+    "server:dev": "cross-env ttsc -w",
+    "server:watch": "cross-env nodemon ./dist/server.js",
     "watch": "npm run dev -- --watch",
     "dev": "npm run build -- --env DEVELOPMENT",
     "build": "webpack --config webpack.config.js"

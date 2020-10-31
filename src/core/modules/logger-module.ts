@@ -1,4 +1,4 @@
-import Winston from "winston";
+import { Logform, createLogger, format, transports } from "winston";
 import GlobalMethods from "@Core/global/global-methods";
 import LoggerConfig from "@Config/core/logger-config";
 import { ICoreModule } from "@Lib/interfaces/core/core-module-interface";
@@ -62,6 +62,7 @@ export default class Logger extends BaseModule implements ICoreModule {
    */
   private setupVariables(): void {
     let logPath = LoggerConfig.logFolder;
+    GlobalMethods.createDir(logPath);
 
     this.logsFilename = GlobalMethods.rPath(logPath, "logs.log");
     this.errorFilename = GlobalMethods.rPath(logPath, "errors.log");
@@ -72,8 +73,8 @@ export default class Logger extends BaseModule implements ICoreModule {
    * @param msg Incoming message
    * @returns String
    */
-  private colorPrintFnc(msg: Winston.Logform.TransformableInfo): string {
-    const colorizer: Winston.Logform.Colorizer = Winston.format.colorize();
+  private colorPrintFnc(msg: Logform.TransformableInfo): string {
+    const colorizer: Logform.Colorizer = format.colorize();
 
     return (
       colorizer.colorize(msg.level, `[${msg.level}]`) +
@@ -86,7 +87,7 @@ export default class Logger extends BaseModule implements ICoreModule {
    * @param msg Incoming message
    * @returns String
    */
-  private rawPrintFnc(msg: Winston.Logform.TransformableInfo): string {
+  private rawPrintFnc(msg: Logform.TransformableInfo): string {
     return `[${msg.level}]\t${msg.timestamp}\n\t${msg.message}`;
   }
 
@@ -95,35 +96,35 @@ export default class Logger extends BaseModule implements ICoreModule {
    */
   private initWinstonLogger(): void {
     /* Add to log file  */
-    const logger = Winston.createLogger({
+    const logger = createLogger({
       level: "silly",
 
-      format: Winston.format.combine(
-        Winston.format.timestamp(),
-        Winston.format.simple(),
-        Winston.format.printf(this.rawPrintFnc),
+      format: format.combine(
+        format.timestamp(),
+        format.simple(),
+        format.printf(this.rawPrintFnc)
       ),
 
       transports: [
-        new Winston.transports.File({
+        new transports.File({
           filename: this.errorFilename,
           level: "error",
         }),
-        new Winston.transports.File({ filename: this.logsFilename }),
+        new transports.File({ filename: this.logsFilename }),
       ],
     });
 
     /* Print to console */
     if (!GlobalMethods.isProductionMode()) {
       logger.add(
-        new Winston.transports.Console({
+        new transports.Console({
           level: "silly",
-          format: Winston.format.combine(
-            Winston.format.timestamp(),
-            Winston.format.simple(),
-            Winston.format.printf(this.colorPrintFnc),
+          format: format.combine(
+            format.timestamp(),
+            format.simple(),
+            format.printf(this.colorPrintFnc)
           ),
-        }),
+        })
       );
     }
 

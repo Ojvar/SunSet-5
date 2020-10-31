@@ -1,9 +1,9 @@
 import _ from "lodash";
-import Path from "path";
-import FS from "fs";
-import Glob from "glob";
-import Ora from "ora";
-import MkDirP from "mkdirp";
+import { resolve, extname } from "path";
+import { existsSync, readFileSync } from "fs";
+import * as Glob from "glob";
+import * as Ora from "ora";
+import * as MkDirP from "mkdirp";
 import Express, { NextFunction } from "express";
 import { CsrfConfigType } from "@/lib/types/core/csrf-config-type";
 import { ServerConfigType } from "@/lib/types/core/server-config-type";
@@ -33,7 +33,7 @@ export default class GlobalMethods {
    * @param args string[] Arguments
    */
   public static rPath(...args: string[]): string {
-    return Path.resolve(...args);
+    return resolve(...args);
   }
 
   /**
@@ -53,7 +53,7 @@ export default class GlobalMethods {
   public static async loadFiles(
     pattern: string,
     options?: Glob.IOptions,
-    filterFnc: Function = this.filterIgnoredFiles,
+    filterFnc: Function = this.filterIgnoredFiles
   ): Promise<string[]> {
     let files: string[] = Glob.sync(pattern, options);
 
@@ -99,7 +99,7 @@ export default class GlobalMethods {
    * @param filename string File name
    */
   public static readFile(filename: string): object {
-    let result: object = FS.readFileSync(GlobalMethods.rPath(filename));
+    let result: object = readFileSync(GlobalMethods.rPath(filename));
 
     return result;
   }
@@ -138,10 +138,10 @@ export default class GlobalMethods {
     return function (
       req: Express.Request,
       res: Express.Response,
-      next: NextFunction,
+      next: NextFunction
     ): boolean {
       const index: number = csrfRules.ignoreList.findIndex((rule: string) =>
-        req.originalUrl.match(new RegExp(rule)),
+        req.originalUrl.match(new RegExp(rule))
       );
 
       return index != -1;
@@ -161,7 +161,7 @@ export default class GlobalMethods {
    * @param path string Dir path
    */
   public static async createDir(path: string): Promise<void> {
-    if (!FS.existsSync(path)) {
+    if (!existsSync(path)) {
       await MkDirP(path);
     }
   }
@@ -172,7 +172,7 @@ export default class GlobalMethods {
    */
   public static sleep(timeout: number): Promise<void> {
     return new Promise((resolve, reject) =>
-      setTimeout(() => resolve(), timeout),
+      setTimeout(() => resolve(), timeout)
     );
   }
 
@@ -186,7 +186,7 @@ export default class GlobalMethods {
     }
 
     files = files.filter((file: string): boolean => {
-      const ext = Path.extname(file);
+      const ext = extname(file);
 
       return GlobalMethods.serverConfig.acceptableTypes.indexOf(ext) > -1;
     });

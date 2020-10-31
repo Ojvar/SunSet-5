@@ -1,13 +1,14 @@
-< TODO >
-  2 > Core Modules
-  3 > Router Module
+<-======================= TODO =======================->
+  > Router Module
+  > Redis Module
+  > Mongoose Module
+  > Express Module
 
-  4.1 > Redis Module
-  4.2 > Mongoose Module
 
-  5 > Express Module
+<-======================= DOING =======================->
+  > Events Module
 
-< DOING >
+
+<-======================= DONE =======================->
   1 > Logger
-
-< DONE >
+  2 > Core Modules

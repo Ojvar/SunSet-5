@@ -1,4 +1,5 @@
 import Bootstrap from "@Core/bootstrap";
 
 /* Boot server */
-Bootstrap.boot();
+const bootstrap: Bootstrap = new Bootstrap();
+bootstrap.boot();

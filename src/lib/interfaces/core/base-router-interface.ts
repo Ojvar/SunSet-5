@@ -31,5 +31,5 @@ export interface IBaseRouter {
    * Apply routers
    * @param Express Express.IRouter
    */
-  apply(app: IRouter): void;
+  apply(app: Express.Application): void;
 }

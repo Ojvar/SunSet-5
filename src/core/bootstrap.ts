@@ -1,8 +1,9 @@
 import { yellow, green } from "chalk";
 import GlobalData from "@Core/Global/global-data";
 import EnvModule from "@Core/Modules/env-module";
-import Logger from "@Core/Modules/logger-module";
+import LoggerModule from "@Core/Modules/logger-module";
 import EventsModule from "./modules/events-module";
+import RouterModule from "./modules/router-module";
 
 /**
  * Bootstrap class
@@ -15,9 +16,6 @@ export default class Bootstap {
   public async boot(): Promise<void> {
     /* Setyp core moduels */
     await this.initCoreModules();
-
-    /* Check for arguments */
-    /* Generate route files and .... */
 
     /* Setup express */
     await this.initExpressModules();
@@ -41,6 +39,7 @@ export default class Bootstap {
    */
   private async initExpressModules(): Promise<void> {
     await this.initEvents();
+    await this.initRouterModule();
   }
 
   /**
@@ -61,7 +60,7 @@ export default class Bootstap {
    * @returns Promise<void> Returns promise<void>
    */
   private async initLogger(): Promise<void> {
-    const logger = Logger.createModule();
+    const logger = LoggerModule.createModule();
     await logger.boot();
 
     GlobalData.logger = logger;
@@ -80,6 +79,19 @@ export default class Bootstap {
     GlobalData.events = events;
 
     this.printLog(events.getModuleName() + " module");
+  }
+
+  /**
+   * Init router
+   * @returns Promise<void> Returns promise<void>
+   */
+  private async initRouterModule(): Promise<void> {
+    const router = RouterModule.createModule();
+    await router.boot();
+
+    GlobalData.router = router;
+
+    this.printLog(router.getModuleName() + " module");
   }
 
   /**

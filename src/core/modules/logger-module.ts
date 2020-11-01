@@ -1,5 +1,5 @@
 import { Logform, createLogger, format, transports } from "winston";
-import GlobalMethods from "@Core/global/global-methods";
+import GlobalMethods from "@Core/Global/global-methods";
 import LoggerConfig from "@Config/core/logger-config";
 import { ICoreModule } from "@Lib/interfaces/core/core-module-interface";
 import BaseModule from "./base-module";
@@ -7,7 +7,7 @@ import BaseModule from "./base-module";
 /**
  * Logger class
  */
-export default class Logger extends BaseModule implements ICoreModule {
+export default class LoggerModule extends BaseModule implements ICoreModule {
   private _logger: any = console;
   private logsFilename: string = "";
   private errorFilename: string = "";
@@ -15,8 +15,8 @@ export default class Logger extends BaseModule implements ICoreModule {
   /**
    * Logger factory
    */
-  public static createModule(): Logger {
-    return new Logger(console);
+  public static createModule(): LoggerModule {
+    return new LoggerModule(console);
   }
 
   /**

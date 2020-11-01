@@ -12,7 +12,7 @@ import { RouterItemType } from "@Lib/types/core/router-item-type";
 /**
  * Base Router
  */
-export class BaseRouter implements IBaseRouter {
+export default class BaseRouter implements IBaseRouter {
   private _baseUrl: string = "";
   private _router?: IRouter;
   private _routes: IHash<IRouter> = {};

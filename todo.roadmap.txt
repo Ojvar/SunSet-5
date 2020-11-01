@@ -8,7 +8,8 @@
   > Router Module
     OK > BaseRouter class
     OK > Router class
-    #### > RouterManager class
+    OK > RouterManager class
+    >>> Create routes-mainifest-file
 
 
 <-======================= DONE =======================->

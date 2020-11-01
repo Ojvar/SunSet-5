@@ -3,7 +3,7 @@ import {
   Request as ExpressRequest,
   Response as ExpressResponse,
 } from "express";
-import { BaseRouter } from "@Core/Helpers/base-router-helper";
+import BaseRouter from "@Core/Helpers/base-router-helper";
 
 /**
  * Home router

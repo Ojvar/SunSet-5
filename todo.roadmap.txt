@@ -1,14 +1,17 @@
 <-======================= TODO =======================->
-  > Router Module
   > Redis Module
   > Mongoose Module
   > Express Module
 
 
 <-======================= DOING =======================->
-  > Events Module
+  > Router Module
+    OK > BaseRouter class
+    OK > Router class
+    #### > RouterManager class
 
 
 <-======================= DONE =======================->
-  1 > Logger
-  2 > Core Modules
+  OK > Logger
+  OK > Core Modules
+  OK > Events Module

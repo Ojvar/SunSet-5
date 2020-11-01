@@ -31,7 +31,7 @@ export default class ServerInitHandler implements IEventHandler {
    */
   public async handle(payload: any): Promise<void> {
     GlobalData.logger.info(
-      `${yellow(this.getEventName())} Server Initialized successfully\n\t${
+      `${yellow(this.getEventName())} handler initialized successfully\n\t${
         payload.readyAt
       }`
     );

@@ -12,19 +12,21 @@
     "rootDir": "src",
     "baseUrl": "src/",
     "paths": {
-      "@/*": ["*"],
-
       "@Config/*": ["config/*"],
       "@Scripts/*": ["frontend/scripts/*"],
       "@Components/*": ["frontend/scripts/components/*"],
+      "@Routes/*": ["routes/*"],
 
+      "@Core/Helpers/*": ["core/helpers/*"],
       "@Core/Global/*": ["core/global/*"],
       "@Core/Modules/*": ["core/modules/*"],
       "@Core/*": ["core/*"],
-
+      
       "@BE/*": ["backend/*"],
       "@FE/*": ["frontend/*"],
-      "@Lib/*": ["lib/*"]
+      "@Lib/*": ["lib/*"],
+
+      "@/*": ["*"]
     },
 
     "sourceRoot": "src",

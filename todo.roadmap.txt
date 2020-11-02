@@ -1,18 +1,20 @@
+#Ojvar: MOjvar.AmirHossein@GMail.com
+
 <-======================= TODO =======================->
-  > Redis Module
   > Mongoose Module
   > Express Module
 
 
 <-======================= DOING =======================->
-  > Router Module
-    OK > BaseRouter class
-    OK > Router class
-    OK > RouterManager class
-    >>> Create routes-mainifest-file
 
 
 <-======================= DONE =======================->
   OK > Logger
   OK > Core Modules
   OK > Events Module
+  OK > Router Module
+    OK > BaseRouter class
+    OK > Router class
+    OK > RouterManager class
+    OK > Create routes-mainifest-file
+  OK > Redis Helper

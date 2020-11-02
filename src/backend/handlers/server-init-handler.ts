@@ -1,7 +1,7 @@
 "use strict";
 
 import { yellow } from "chalk";
-import GlobalData from "@/core/global/global-data";
+import GlobalData from "@Core/Global/global-data";
 import IEventHandler from "@Lib/interfaces/core/event-handler-interface";
 
 /**

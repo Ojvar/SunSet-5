@@ -1,9 +1,12 @@
+import { writeFileSync } from "fs";
+import { dirname } from "path";
 import { yellow, green } from "chalk";
 import GlobalData from "@Core/Global/global-data";
 import GlobalMethods from "@Core/Global/global-methods";
 import { IBaseRouter } from "@Lib/interfaces/core/base-router-interface";
 import IHash from "@Lib/interfaces/hash-interface";
 import { RouterItemType } from "@Lib/types/core/router-item-type";
+import { ServerConfigType } from "@Lib/types/core/server-config-type";
 
 /**
  * Router manager
@@ -73,5 +76,33 @@ export default class RouterManager {
     });
 
     return result;
+  }
+
+  /**
+   * Create manifest file
+   * @param path string Manifest file path
+   */
+  public async createManifestFile(path?: string): Promise<void> {
+    if (!path) {
+      const serverConfig: ServerConfigType = await GlobalMethods.config<
+        ServerConfigType
+      >("core/server");
+
+      path = serverConfig.routerManifest;
+    }
+    if (!path) {
+      throw new Error("route-manifest file path is not specified");
+    } else {
+      path = GlobalMethods.rPath(path);
+    }
+
+    /* Create public directory if not exists */
+    await GlobalMethods.createDir(dirname(path));
+
+    /* Grab data */
+    const routesList: IHash<RouterItemType> = await this.getRoutesList();
+
+    /* Write to file */
+    writeFileSync(path, JSON.stringify(routesList, null, 2));
   }
 }

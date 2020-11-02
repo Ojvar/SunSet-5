@@ -88,6 +88,7 @@ export default class Bootstap {
   private async initRouterModule(): Promise<void> {
     const router = RouterModule.createModule();
     await router.boot();
+    await router.routerManager.createManifestFile();
 
     GlobalData.router = router;
 

@@ -1,6 +1,7 @@
 # Sunset ignores
-dist
-public
+dist/
+dist/public/
+public/
 .env
 private/ssl/*.pem
 

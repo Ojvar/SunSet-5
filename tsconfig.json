@@ -21,8 +21,10 @@
       "@Core/Global/*": ["core/global/*"],
       "@Core/Modules/*": ["core/modules/*"],
       "@Core/*": ["core/*"],
-      
+
+      "@BE/Controllers/*": ["backend/controllers/*"],
       "@BE/*": ["backend/*"],
+
       "@FE/*": ["frontend/*"],
       "@Lib/*": ["lib/*"],
 

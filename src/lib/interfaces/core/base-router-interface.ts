@@ -12,6 +12,11 @@ export interface IBaseRouter {
   getBaseUrl(): string;
 
   /**
+   * Get router name
+   */
+  getName(): string;
+
+  /**
    * Get router
    */
   getRouter(): IRouter;

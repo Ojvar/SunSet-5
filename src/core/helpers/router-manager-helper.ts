@@ -1,3 +1,5 @@
+import { yellow, green } from "chalk";
+import GlobalData from "@Core/Global/global-data";
 import GlobalMethods from "@Core/Global/global-methods";
 import { IBaseRouter } from "@Lib/interfaces/core/base-router-interface";
 import IHash from "@Lib/interfaces/hash-interface";
@@ -26,17 +28,20 @@ export default class RouterManager {
       "../../routes/**/*"
     );
 
-    /* Load router */
+    /* Load routers */
     const files: string[] = await GlobalMethods.loadFiles(routesPath);
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-
+    await files.forEach(async (file) => {
       const RouterModule = await GlobalMethods.loadModule(file);
       const routerModule: IBaseRouter = new RouterModule() as IBaseRouter;
 
-      const routerName: string = routerModule.getBaseUrl();
-      this._routers[routerName] = routerModule;
-    }
+      const routerUrl: string = routerModule.getBaseUrl();
+      const routerName: string = routerModule.getName();
+      this._routers[routerUrl] = routerModule;
+
+      GlobalData.logger.info(
+        `Route ${yellow(routerName)}:${green(routerUrl)} loaded successfully`
+      );
+    });
   }
 
   /**

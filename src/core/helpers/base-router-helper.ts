@@ -14,6 +14,7 @@ import { RouterItemType } from "@Lib/types/core/router-item-type";
  */
 export default class BaseRouter implements IBaseRouter {
   private _baseUrl: string = "";
+  private _name: string = "";
   private _router?: IRouter;
   private _routes: IHash<IRouter> = {};
 
@@ -33,16 +34,28 @@ export default class BaseRouter implements IBaseRouter {
    * @param baseUrl string BaseUrl
    * @param routerOptions RouterOptions Router options
    */
-  constructor(baseUrl: string, routerOptions?: RouterOptions) {
+  constructor(
+    baseUrl: string,
+    name: string = baseUrl,
+    routerOptions?: RouterOptions
+  ) {
     this._baseUrl = baseUrl;
+    this._name = name;
     this._router = Router(routerOptions);
+  }
+
+  /**
+   * Get router base-url
+   */
+  public getBaseUrl(): string {
+    return this._baseUrl;
   }
 
   /**
    * Get router name
    */
-  public getBaseUrl(): string {
-    return this._baseUrl;
+  public getName(): string {
+    return this._name;
   }
 
   /**

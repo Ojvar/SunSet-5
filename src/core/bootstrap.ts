@@ -4,6 +4,7 @@ import EnvModule from "@Core/Modules/env-module";
 import LoggerModule from "@Core/Modules/logger-module";
 import EventsModule from "./modules/events-module";
 import RouterModule from "./modules/router-module";
+import DatabaseModule from "./modules/database-module";
 
 /**
  * Bootstrap class
@@ -39,6 +40,7 @@ export default class Bootstap {
    */
   private async initExpressModules(): Promise<void> {
     await this.initEvents();
+    await this.initDatabaseModule();
     await this.initRouterModule();
   }
 
@@ -93,6 +95,25 @@ export default class Bootstap {
     GlobalData.router = router;
 
     this.printLog(router.getModuleName() + " module");
+  }
+
+  /**
+   * Init Database module
+   * @returns Promise<void> Returns promise<void>
+   */
+  private async initDatabaseModule(): Promise<void> {
+    const dbModule = DatabaseModule.createModule();
+    await dbModule.boot();
+
+    try {
+      GlobalData.dbEngine = dbModule.engine;
+    } catch (err) {
+      GlobalData.logger.warn(
+        yellow("No any database engine has been selected")
+      );
+    }
+
+    this.printLog(dbModule.getModuleName() + " module");
   }
 
   /**

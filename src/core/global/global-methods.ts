@@ -1,12 +1,12 @@
-import { get as lodashGet } from "lodash";
+import { get as _get } from "lodash";
 import { resolve, extname } from "path";
 import { existsSync, readFileSync } from "fs";
 import * as Glob from "glob";
 import * as Ora from "ora";
 import * as MkDirP from "mkdirp";
 import Express, { NextFunction } from "express";
-import { CsrfConfigType } from "@Lib/types/core/csrf-config-type";
-import { ServerConfigType } from "@Lib/types/core/server-config-type";
+import { CsrfConfigType } from "@Lib/types/config/csrf-config-type";
+import { ServerConfigType } from "@Lib/types/config/server-config-type";
 
 /**
  * Global methods
@@ -120,7 +120,7 @@ export default class GlobalMethods {
     result = await GlobalMethods.loadModule<T>(path);
 
     if (keyPath) {
-      result = lodashGet(result, keyPath) as T;
+      result = _get(result, keyPath) as T;
     }
 
     return result;

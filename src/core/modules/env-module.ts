@@ -1,5 +1,5 @@
 import { config } from "dotenv";
-import { ICoreModule } from "@/lib/interfaces/core/core-module-interface";
+import { ICoreModule } from "@Lib/interfaces/core/core-module-interface";
 import GlobalMethods from "../global/global-methods";
 import BaseModule from "./base-module";
 
@@ -18,7 +18,7 @@ export default class EnvModule extends BaseModule implements ICoreModule {
    * Get module name
    */
   public getModuleName(): string {
-    return "EnvData";
+    return "Env";
   }
 
   /**

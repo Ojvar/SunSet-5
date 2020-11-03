@@ -1,7 +1,7 @@
 import { union } from "lodash";
-import { ICoreModule } from "@/lib/interfaces/core/core-module-interface";
-import IEventHandler from "@/lib/interfaces/core/event-handler-interface";
-import IHash from "@/lib/interfaces/hash-interface";
+import { ICoreModule } from "@Lib/interfaces/core/core-module-interface";
+import IEventHandler from "@Lib/interfaces/core/event-handler-interface";
+import IHash from "@Lib/interfaces/hash-interface";
 import GlobalMethods from "../global/global-methods";
 import BaseModule from "./base-module";
 

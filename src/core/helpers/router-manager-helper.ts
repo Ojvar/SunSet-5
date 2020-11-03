@@ -6,7 +6,7 @@ import GlobalMethods from "@Core/Global/global-methods";
 import { IBaseRouter } from "@Lib/interfaces/core/base-router-interface";
 import IHash from "@Lib/interfaces/hash-interface";
 import { RouterItemType } from "@Lib/types/core/router-item-type";
-import { ServerConfigType } from "@Lib/types/core/server-config-type";
+import { ServerConfigType } from "@Lib/types/config/server-config-type";
 
 /**
  * Router manager

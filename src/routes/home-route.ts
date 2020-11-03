@@ -19,6 +19,6 @@ export default class HomeRoute extends BaseRouter {
    * Define routes
    */
   private defineRoutes(): void {
-    super.get("/", [this.homeController.index], "home.index");
+    super.get("/:name?", [this.homeController.index], "home.index");
   }
 }

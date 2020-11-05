@@ -5,6 +5,7 @@ import LoggerModule from "@Core/Modules/logger-module";
 import EventsModule from "./modules/events-module";
 import RouterModule from "./modules/router-module";
 import DatabaseModule from "./modules/database-module";
+import ExpressModule from "./modules/express-module";
 
 /**
  * Bootstrap class
@@ -19,7 +20,7 @@ export default class Bootstap {
     await this.initCoreModules();
 
     /* Setup express */
-    await this.initExpressModules();
+    await this.initApplicationModules();
 
     GlobalData.logger.info(yellow("System booted successfully"));
     GlobalData.events.raise("ServerInit", { readyAt: new Date() });
@@ -35,13 +36,14 @@ export default class Bootstap {
   }
 
   /**
-   * Initialize express modules
+   * Initialize application modules
    * @returns Promise<void> Returns promise<void>
    */
-  private async initExpressModules(): Promise<void> {
+  private async initApplicationModules(): Promise<void> {
     await this.initEvents();
     await this.initDatabaseModule();
     await this.initRouterModule();
+    await this.initExpressModule();
   }
 
   /**
@@ -95,6 +97,19 @@ export default class Bootstap {
     GlobalData.router = router;
 
     this.printLog(router.getModuleName() + " module");
+  }
+
+  /**
+   * Init express
+   * @returns Promise<void> Returns promise<void>
+   */
+  private async initExpressModule(): Promise<void> {
+    const express = ExpressModule.createModule();
+    await express.boot();
+
+    GlobalData.express = express;
+
+    this.printLog(express.getModuleName() + " module");
   }
 
   /**

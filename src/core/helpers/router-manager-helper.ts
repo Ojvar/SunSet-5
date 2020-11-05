@@ -1,6 +1,7 @@
 import { writeFileSync } from "fs";
 import { dirname } from "path";
 import { yellow, green } from "chalk";
+import * as Express from "express";
 import GlobalData from "@Core/Global/global-data";
 import GlobalMethods from "@Core/Global/global-methods";
 import { IBaseRouter } from "@Lib/interfaces/core/base-router-interface";
@@ -56,10 +57,11 @@ export default class RouterManager {
       throw new Error("App is null");
     }
 
-    Object.keys(this.routers).forEach((key) => {
+    await Object.keys(this.routers).forEach(async (key) => {
       let router: IBaseRouter = this.routers[key];
 
       router.apply(app);
+      GlobalData.logger.info(`Express router ${yellow(key)} applied`);
     });
   }
 

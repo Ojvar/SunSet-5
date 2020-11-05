@@ -22,8 +22,9 @@ export default class GlobalMethods {
    * @param path string Module path
    */
   public static async loadModule<T = any>(path: string): Promise<T> {
-    const RawModule: any = await import(GlobalMethods.rPath(path));
-    const ModuleData: T = RawModule.default as T;
+    path = GlobalMethods.rPath(path);
+    const RawModule: any = await import(path);
+    const ModuleData: T = (RawModule.default || RawModule) as T;
 
     return ModuleData;
   }

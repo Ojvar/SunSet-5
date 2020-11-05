@@ -13,8 +13,7 @@
     "baseUrl": "src/",
     "paths": {
       "@Config/*": ["config/*"],
-      "@Scripts/*": ["frontend/scripts/*"],
-      "@Components/*": ["frontend/scripts/components/*"],
+
       "@Routes/*": ["routes/*"],
 
       "@Core/Helpers/*": ["core/helpers/*"],
@@ -25,7 +24,10 @@
       "@BE/Controllers/*": ["backend/controllers/*"],
       "@BE/*": ["backend/*"],
 
+      "@FE/Scripts/*": ["frontend/scripts/*"],
+      "@FE/Components/*": ["frontend/scripts/components/*"],
       "@FE/*": ["frontend/*"],
+
       "@Lib/*": ["lib/*"],
 
       "@/*": ["*"]
@@ -42,7 +44,7 @@
     // "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "removeComments": true,
-    "resolveJsonModule": false,
+    "resolveJsonModule": true,
 
     "plugins": [{ "transform": "@zerollup/ts-transform-paths" }]
   }

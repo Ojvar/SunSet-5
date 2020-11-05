@@ -1,6 +1,6 @@
-import Base from "@Scripts/base";
 import { createApp } from "vue";
-import AppComponent from "@Components/app-component.vue";
+import Base from "@FE/Scripts/base";
+import AppComponent from "@FE/Components/app-component.vue";
 
 /**
  * App class
@@ -21,7 +21,7 @@ export class App extends Base {
     const app = createApp(AppComponent);
     app.mount("#app");
 
-    console.log("INit of App.ts");
+    console.log("Init of App.ts");
   }
 }
 

@@ -1,3 +1,4 @@
+import { extname } from "path";
 import GlobalMethods from "@Core/Global/global-methods";
 import IHash from "@Lib/interfaces/hash-interface";
 import { ExpressConfigType } from "@Lib/types/config/express-config-type";
@@ -7,15 +8,15 @@ import { RouteArgType, RouteDataType } from "@Lib/types/core/route-data-type";
  * Frontend Global Helper
  */
 export default class FrontendGlobalHelper {
-  private mixManifest: IHash<string> = {};
+  private webpackManifest: IHash<string> = {};
   private appConfig: ExpressConfigType = {} as ExpressConfigType;
   private routesData: IHash<RouteDataType> | undefined;
 
   /**
-   * Load mix-manifest data
+   * Load webpack-manifest data
    */
   public async prepare() {
-    if (this.appConfig.publicPath == null) {
+    if (null == this.appConfig.publicPath) {
       await this.loadAppConfig();
     }
 
@@ -23,11 +24,11 @@ export default class FrontendGlobalHelper {
       await this.loadRoutesData();
     }
 
-    const mixData: object = await GlobalMethods.loadModule<any>(
-      "dist/public/mix-manifest.json"
+    const webpackManifestData: object = await GlobalMethods.loadModule<any>(
+      "dist/public/webpack-manifest.json"
     );
 
-    this.mixManifest = mixData as IHash<string>;
+    this.webpackManifest = webpackManifestData as IHash<string>;
   }
 
   /**
@@ -104,12 +105,16 @@ export default class FrontendGlobalHelper {
    * @returns string The compiled url
    */
   public mix(url: string): string {
-    if (!url.startsWith("/")) {
-      url = "/" + url;
+    if (url.startsWith("/")) {
+      url = url.substr(1);
     }
 
-    url = this.mixManifest[url] as string;
-    url = `${this.appConfig.protocol}://${this.appConfig.url}${url}`;
+    const ext = extname(url).replace(".", "");
+    url = url.replace(new RegExp(`\.${ext}$`, "g"), "");
+
+    const routeData: any = this.webpackManifest[url];
+    url = routeData[ext] as string;
+    url = `${this.appConfig.url}${url}`;
 
     return url;
   }

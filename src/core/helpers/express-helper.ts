@@ -75,11 +75,18 @@ export default class ExpressHelper {
     /* Setup pugEngine */
     await this.setupPugEngine();
 
+    /* Enable session */
+    await this.setupSession();
+
     /* Setup middlewares */
     await this.setupMiddlewares();
 
     /* Setup routes */
-    await this.applyRoutes();
+    await this.applyRouters();
+
+    /* Apply core routes */
+    await this.setupRouteHandler();
+    await this.setupRouteErrors();
 
     /* Create server */
     await this.listen();
@@ -113,8 +120,8 @@ export default class ExpressHelper {
   /**
    * Apply routes
    */
-  private async applyRoutes(): Promise<void> {
-    GlobalData.router.routerManager.apply(this.app);
+  private async applyRouters(): Promise<void> {
+    await GlobalData.router.routerManager.apply(this.app);
   }
 
   /**
@@ -177,7 +184,7 @@ Server started
    * Setup middlewares
    */
   private async setupMiddlewares(): Promise<void> {
-    this.app.use(Express.static("public"));
+    this.app.use(Express.static("dist/public"));
 
     await this.setupBodyAndCookieParser();
     await this.setupTrustedProxy();
@@ -186,11 +193,6 @@ Server started
     await this.setupHelmet();
     await this.setupCSRF();
     await this.setupMulter();
-
-    await this.setupSession();
-
-    await this.setupRouteHandler();
-    await this.setupRouteErrors();
   }
 
   /**

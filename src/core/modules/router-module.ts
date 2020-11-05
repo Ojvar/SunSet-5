@@ -36,8 +36,6 @@ export default class RouterModule extends BaseModule implements ICoreModule {
    */
   public async boot(payload?: any): Promise<void> {
     await this._routerManager.initRouters();
-
-    /* TODO: CREATE-ROUTES-MANIFEST FILE */
-    // await this._routerManager.createManifestFile();
+    await this._routerManager.createManifestFile();
   }
 }

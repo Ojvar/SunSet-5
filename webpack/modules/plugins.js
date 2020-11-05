@@ -68,7 +68,11 @@ function miniCssExtract(env, entries) {
  * WebpackManifest plugin
  */
 function manifest(env, entries) {
-  const { WebpackLaravelMixManifest } = require("webpack-laravel-mix-manifest");
+  const Chunks2JsonPlugin = require("chunks-2-json-webpack-plugin");
 
-  return new WebpackLaravelMixManifest();
+  return new Chunks2JsonPlugin({
+    outputDir: "dist/public",
+    publicPath: "/",
+    filename: "webpack-manifest.json",
+  });
 }

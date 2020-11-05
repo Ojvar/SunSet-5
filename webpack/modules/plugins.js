@@ -9,6 +9,7 @@ module.exports = (env = {}, entries) => {
     vuePluginLoader(env),
     suppressPlugin(env, entries),
     miniCssExtract(env, entries),
+    manifest(env),
   ];
 };
 
@@ -48,7 +49,7 @@ function suppressPlugin(env, entries) {
         name: key,
         match: /\.js$/,
       }
-    ),
+    )
   );
 
   return new SuppressChunksPlugin(options);
@@ -61,4 +62,13 @@ function miniCssExtract(env, entries) {
   const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
   return new MiniCssExtractPlugin();
+}
+
+/**
+ * WebpackManifest plugin
+ */
+function manifest(env, entries) {
+  const { WebpackLaravelMixManifest } = require("webpack-laravel-mix-manifest");
+
+  return new WebpackLaravelMixManifest();
 }

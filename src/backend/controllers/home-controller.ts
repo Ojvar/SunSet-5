@@ -15,12 +15,6 @@ export default class HomeController {
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    res
-      .status(200)
-      .send({
-        success: true,
-        data: "Welcome to Sunset IV framework",
-      })
-      .end();
+    res.render("home.pug");
   }
 }

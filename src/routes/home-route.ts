@@ -11,7 +11,7 @@ export default class HomeRoute extends BaseRouter {
    * Constructor
    */
   constructor() {
-    super("/home", "HomeRoute");
+    super("/", "HomeRoute");
     this.defineRoutes();
   }
 
@@ -20,7 +20,5 @@ export default class HomeRoute extends BaseRouter {
    */
   private defineRoutes(): void {
     super.get("/", [this.homeController.index], "home.index");
-    super.get("/t1", [this.homeController.index], "home.t1");
-    super.get("/t2", [this.homeController.index], "home.t2");
   }
 }

@@ -2,12 +2,13 @@
   "name": "sunset-iv",
   "version": "2.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
-    "server:start": "cross-env node ./dist/core/bootstrap.js",
-    "server:prod": "cross-env ttsc",
-    "server:dev": "cross-env ttsc -w",
-    "server:watch": "cross-env nodemon ./dist/server.js",
+    "server:run": "cross-env node ./dist/core/bootstrap.js",
+    "server:run:watch": "cross-env nodemon ./dist/server.js",
+    "server:dev": "cross-env ttsc --p ./tsconfig/tsconfig.dev.json",
+    "server:dev:watch": "npm run server:dev -- -w",
+    "server:prod": "cross-env ttsc --p ./tsconfig/tsconfig.prod.json",
     "watch": "npm run dev -- --watch",
     "dev": "npm run build -- --env DEVELOPMENT",
     "build": "webpack --config webpack.config.js"

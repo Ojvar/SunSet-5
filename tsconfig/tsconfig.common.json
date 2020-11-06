@@ -1,0 +1,49 @@
+{
+  "include": ["../src"],
+  "exclude": ["../node_modules", "../**/*.spec.ts"],
+
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "jsx": "react",
+
+    "outDir": "../dist",
+    "rootDir": "../src",
+    "baseUrl": "../src",
+    "paths": {
+      "@Config/*": ["config/*"],
+      "@Routes/*": ["routes/*"],
+      "@Lib/*": ["lib/*"],
+
+      "@Core/Helpers/*": ["core/helpers/*"],
+      "@Core/Global/*": ["core/global/*"],
+      "@Core/Modules/*": ["core/modules/*"],
+      "@Core/*": ["core/*"],
+
+      "@BE/Controllers/*": ["backend/controllers/*"],
+      "@BE/*": ["backend/*"],
+
+      "@FE/Scripts/*": ["frontend/scripts/*"],
+      "@FE/Components/*": ["frontend/scripts/components/*"],
+      "@FE/*": ["frontend/*"],
+
+      "@/*": ["*"]
+    },
+
+    "sourceRoot": "src",
+    // "sourceMap": true,
+    "inlineSourceMap": true,
+
+    "typeRoots": ["../node_modules/@types"],
+
+    "strict": true,
+    "allowJs": true,
+    // "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "removeComments": true,
+    "resolveJsonModule": true,
+
+    "plugins": [{ "transform": "@zerollup/ts-transform-paths" }]
+  }
+}

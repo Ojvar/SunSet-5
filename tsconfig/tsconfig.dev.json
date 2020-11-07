@@ -1,4 +1,4 @@
 {
   "extends": "./tsconfig.common.json",
-  "exclude": ["node_modules", "**/*.spec.ts", "src/frontend"]
+  "exclude": ["node_modules", "**/*.spec.ts", "../src/frontend"]
 }

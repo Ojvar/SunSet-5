@@ -6,6 +6,7 @@ html(lang='en')
     title Sunset V4.2
     link(rel='stylesheet' href=Helper.mix('styles/app.css'))
   body
-    h1 Hello to Sunset v4.2
     #app
+    h1 Hello to Sunset v4.2
+      p visits count #{sessionData.viewCount}
     script(defer src=Helper.mix('scripts/app.js'))

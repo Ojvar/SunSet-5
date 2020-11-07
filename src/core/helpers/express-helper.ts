@@ -1,6 +1,8 @@
-import * as BodyParser from "body-parser";
 import * as Helmet from "helmet";
+import * as BodyParser from "body-parser";
 import * as CookieParser from "cookie-parser";
+import * as Compress from "compression";
+import * as MethodOverride from "method-override";
 import * as CORS from "cors";
 import * as CSURF from "csurf";
 import * as Multer from "multer";
@@ -75,11 +77,11 @@ export default class ExpressHelper {
     /* Setup pugEngine */
     await this.setupPugEngine();
 
-    /* Enable session */
-    await this.setupSession();
-
     /* Setup middlewares */
     await this.setupMiddlewares();
+
+    /* Setup session */
+    await this.setupSession();
 
     /* Setup routes */
     await this.applyRouters();
@@ -187,10 +189,12 @@ Server started
     this.app.use(Express.static("dist/public"));
 
     await this.setupBodyAndCookieParser();
+    await this.setupCompression();
+    await this.setupMethodOverride();
     await this.setupTrustedProxy();
+    await this.setupHelmet();
     await this.setupCORS();
     await this.setupThrottle();
-    await this.setupHelmet();
     await this.setupCSRF();
     await this.setupMulter();
   }
@@ -221,7 +225,6 @@ Server started
 
   /**
    * Setup throttle
-   * @param app Express.Applicaiton Application instance
    */
   private async setupThrottle(): Promise<void> {
     const rateLimitOptions: RateLimit.Options = {
@@ -238,8 +241,25 @@ Server started
   }
 
   /**
+   * Setup Compression
+   */
+  private async setupCompression(): Promise<void> {
+    const app = this.app;
+
+    app.use(Compress({}));
+  }
+
+  /**
+   * Setup MethodOverride
+   */
+  private async setupMethodOverride(): Promise<void> {
+    const app = this.app;
+
+    app.use(MethodOverride("X-HTTP-Method-Override"));
+  }
+
+  /**
    * Setup Body and Cookie parsers
-   * @param app Express.Applicaiton Application instance
    */
   private async setupBodyAndCookieParser(): Promise<void> {
     const app = this.app;
@@ -259,7 +279,6 @@ Server started
 
   /**
    * Setup Helmet
-   * @param app Express.Applicaiton Application instance
    */
   private async setupHelmet(): Promise<void> {
     const app = this.app;
@@ -298,7 +317,6 @@ Server started
 
   /**
    * Setup CSRF
-   * @param app Express.Applicaiton Application instance
    */
   private async setupCSRF(): Promise<void> {
     const app = this.app;
@@ -334,7 +352,6 @@ Server started
 
   /**
    * Setup Multer
-   * @param app Express.Applicaiton Application instance
    */
   private async setupMulter(): Promise<void> {
     const app = this.app;
@@ -374,7 +391,6 @@ Server started
 
   /**
    * Setup RouteHandler
-   * @param app Express.Applicaiton Application instance
    */
   private async setupRouteHandler(): Promise<void> {
     const app = this.app;
@@ -410,7 +426,6 @@ Server started
 
   /**
    * Setup RouteErrors
-   * @param app Express.Applicaiton Application instance
    */
   private async setupRouteErrors(): Promise<void> {
     const app = this.app;
@@ -468,6 +483,6 @@ Server started
     const sessionModule = new SessionHelper();
     await sessionModule.init(app);
 
-    GlobalData.logger.info("Session initialized");
+    GlobalData.logger.info(`${yellow("Session")} initialized successfully`);
   }
 }

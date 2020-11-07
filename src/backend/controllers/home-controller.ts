@@ -1,4 +1,5 @@
-import { Request, Response, NextFunction, RequestHandler } from "express";
+import SessionDataModel from "@BE/data-model/session-data-model";
+import { Request, Response, NextFunction } from "express";
 
 /**
  * Home controller
@@ -15,6 +16,9 @@ export default class HomeController {
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    res.render("home.pug");
+    let sessionData: SessionDataModel = req.session as SessionDataModel;
+    sessionData.viewCount = (sessionData.viewCount ?? 0) + 1;
+
+    res.render("home.pug", { sessionData });
   }
 }

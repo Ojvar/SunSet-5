@@ -39,11 +39,6 @@ export default class SessionHelper {
 
     /* Setup application */
     app.use(Session(config.options));
-
-    /* Log */
-    GlobalData.logger.info(
-      `${yellow("Session")} helper initialized successfully`
-    );
   }
 
   /**

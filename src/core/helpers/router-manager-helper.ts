@@ -14,6 +14,7 @@ import { ServerConfigType } from "@Lib/types/config/server-config-type";
  */
 export default class RouterManager {
   private _routers: IHash<IBaseRouter> = {};
+  private _routes: IHash<RouterItemType> = {};
 
   /**
    * Getter: routers
@@ -21,6 +22,13 @@ export default class RouterManager {
    */
   public get routers(): IHash<IBaseRouter> {
     return this._routers;
+  }
+  /**
+   * Getter: routes
+   * @returns IHash<IBaseRouter> Return routers
+   */
+  public get routes(): IHash<RouterItemType> {
+    return this._routes;
   }
 
   /**
@@ -34,7 +42,9 @@ export default class RouterManager {
 
     /* Load routers */
     const files: string[] = await GlobalMethods.loadFiles(routesPath);
-    await files.forEach(async (file) => {
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
       const RouterModule = await GlobalMethods.loadModule(file);
       const routerModule: IBaseRouter = new RouterModule() as IBaseRouter;
 
@@ -45,7 +55,10 @@ export default class RouterManager {
       GlobalData.logger.info(
         `Route ${yellow(routerName)}:${green(routerUrl)} loaded successfully`
       );
-    });
+    }
+
+    /* Collect routes-data */
+    this._routes = await this.getRoutesList();
   }
 
   /**
@@ -68,7 +81,7 @@ export default class RouterManager {
   /**
    * Get routers list
    */
-  public async getRoutesList(): Promise<IHash<RouterItemType>> {
+  private async getRoutesList(): Promise<IHash<RouterItemType>> {
     let result: IHash<RouterItemType> = {};
 
     Object.keys(this.routers).forEach((key) => {
@@ -101,10 +114,7 @@ export default class RouterManager {
     /* Create public directory if not exists */
     await GlobalMethods.createDir(dirname(path));
 
-    /* Grab data */
-    const routesList: IHash<RouterItemType> = await this.getRoutesList();
-
     /* Write to file */
-    writeFileSync(path, JSON.stringify(routesList, null, 2));
+    writeFileSync(path, JSON.stringify(this.routes, null, 2));
   }
 }

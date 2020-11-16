@@ -1,7 +1,6 @@
+import * as Debug from "debug";
 import { ICoreModule } from "@Lib/interfaces/core/core-module-interface";
 import BaseModule from "./base-module";
-import * as Debug from "debug";
-import GlobalData from "@Core/Global/global-data";
 import GlobalMethods from "@Core/Global/global-methods";
 import { DebugConfigType } from "@Lib/types/config/debug-config-type";
 
@@ -33,7 +32,7 @@ export default class DebugModule extends BaseModule implements ICoreModule {
       throw new Error("Debugger is undefined");
     }
 
-    return this.debugger as Debug.Debugger;
+    return this._debugger as Debug.Debugger;
   }
 
   /**

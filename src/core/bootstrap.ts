@@ -66,12 +66,14 @@ export default class Bootstap {
    * @returns Promise<void> Returns promise<void>
    */
   private async initDebugger(): Promise<void> {
-    const debug = DebugModule.createModule();
-    await debug.boot();
+    const debugModule = DebugModule.createModule();
+    await debugModule.boot();
 
-    GlobalData.debug = debug.debugger;
+    GlobalData.debug = debugModule.debugger;
 
-    this.printLog(debug.getModuleName() + " module");
+    console.info(
+      `${yellow(debugModule.getModuleName())} module loaded successfully`
+    );
   }
 
   /**

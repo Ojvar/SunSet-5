@@ -2,6 +2,7 @@ import { yellow, green } from "chalk";
 import GlobalData from "@Core/Global/global-data";
 import EnvModule from "@Core/Modules/env-module";
 import LoggerModule from "@Core/Modules/logger-module";
+import DebugModule from "@Core/Modules/debug-module";
 import EventsModule from "./modules/events-module";
 import RouterModule from "./modules/router-module";
 import DatabaseModule from "./modules/database-module";
@@ -16,7 +17,7 @@ export default class Bootstap {
    * @returns Promise<void> Returns promise<void>
    */
   public async boot(): Promise<void> {
-    /* Setyp core moduels */
+    /* Setup core moduels */
     await this.initCoreModules();
 
     /* Setup express */
@@ -32,6 +33,7 @@ export default class Bootstap {
    */
   private async initCoreModules(): Promise<void> {
     await this.initEnvData();
+    await this.initDebugger();
     await this.initLogger();
   }
 
@@ -57,6 +59,19 @@ export default class Bootstap {
     console.info(
       `${yellow(envModule.getModuleName())} module loaded successfully`
     );
+  }
+
+  /**
+   * Initialize debugger
+   * @returns Promise<void> Returns promise<void>
+   */
+  private async initDebugger(): Promise<void> {
+    const debug = DebugModule.createModule();
+    await debug.boot();
+
+    GlobalData.debug = debug.debugger;
+
+    this.printLog(debug.getModuleName() + " module");
   }
 
   /**

@@ -2,7 +2,8 @@ import { extname } from "path";
 import GlobalMethods from "@Core/Global/global-methods";
 import IHash from "@Lib/interfaces/hash-interface";
 import { ExpressConfigType } from "@Lib/types/config/express-config-type";
-import { RouteArgType, RouteDataType } from "@Lib/types/core/route-data-type";
+import { RouteKeyType, RouteItemType } from "@Lib/types/core/route-data-type";
+import RouterManager from "./router-manager-helper";
 
 /**
  * Frontend Global Helper
@@ -10,7 +11,7 @@ import { RouteArgType, RouteDataType } from "@Lib/types/core/route-data-type";
 export default class FrontendGlobalHelper {
   private webpackManifest: IHash<string> = {};
   private appConfig: ExpressConfigType = {} as ExpressConfigType;
-  private routesData: IHash<RouteDataType> | undefined;
+  private routesData: IHash<RouteItemType> | undefined;
 
   /**
    * Load webpack-manifest data
@@ -40,7 +41,7 @@ export default class FrontendGlobalHelper {
       "router-manifest.json"
     );
 
-    this.routesData = await GlobalMethods.loadModule<IHash<RouteDataType>>(
+    this.routesData = await GlobalMethods.loadModule<IHash<RouteItemType>>(
       path
     );
   }
@@ -60,29 +61,12 @@ export default class FrontendGlobalHelper {
    * @param args IHash<string|number> Arguments
    * @returns string The Route path
    */
-  public route(routeName: string, args: IHash<string | number> = {}): string {
-    const route: RouteDataType = (this.routesData as IHash<RouteDataType>)[
+  public route(routeName: string, args: IHash<string> = {}): string {
+    const route: RouteItemType = (this.routesData as IHash<RouteItemType>)[
       routeName
     ];
 
-    /* Perpare */
-    let keys: Array<RouteArgType> = route.keys;
-    let routePath = route.path;
-    let baseUrl = route.baseUrl;
-
-    /*  Apply arguments */
-    keys.forEach((key) => {
-      const newValue: string = (args[key.name] as string) || "";
-      const argKey = `/\\:${key.name}${key.optional ? "\\??" : ""}`;
-      const regexp = new RegExp(argKey, "g");
-
-      routePath = routePath.replace(regexp, `/${newValue}`);
-    });
-
-    /* Generate result */
-    let result = `${baseUrl}${routePath}`;
-
-    return result;
+    return RouterManager.getRoute(route, args);
   }
 
   /**
@@ -91,8 +75,8 @@ export default class FrontendGlobalHelper {
    * @param args Array[string|number] Arguments
    * @returns string The Route data
    */
-  public routeData(routeName: string): RouteDataType {
-    let route: RouteDataType = (this.routesData as IHash<RouteDataType>)[
+  public routeData(routeName: string): RouteItemType {
+    let route: RouteItemType = (this.routesData as IHash<RouteItemType>)[
       routeName
     ];
 

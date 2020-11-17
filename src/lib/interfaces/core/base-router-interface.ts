@@ -1,4 +1,4 @@
-import { RouterItemType } from "@Lib/types/core/router-item-type";
+import { RouteItemType } from "@Lib/types/core/route-data-type";
 import { IRouter } from "express";
 import IHash from "../hash-interface";
 
@@ -30,7 +30,7 @@ export interface IBaseRouter {
    * Get routes list in JSON format
    * @returns IHash<RouterItemType> Routes list data
    */
-  getRoutesList(): IHash<RouterItemType>;
+  getRoutesList(): IHash<RouteItemType>;
 
   /**
    * Apply routers

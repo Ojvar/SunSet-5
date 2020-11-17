@@ -1,3 +1,4 @@
+import GlobalData from "@Core/Global/global-data";
 import RouterManager from "@Core/Helpers/router-manager-helper";
 import { ICoreModule } from "@Lib/interfaces/core/core-module-interface";
 import BaseModule from "./base-module";
@@ -35,7 +36,9 @@ export default class RouterModule extends BaseModule implements ICoreModule {
    * @param payload any Payload object
    */
   public async boot(payload?: any): Promise<void> {
+    await RouterManager.loadStaticData();
     await this._routerManager.initRouters();
-    await this._routerManager.createManifestFile();
+
+    GlobalData.events.raise("RouterInitialized", this._routerManager);
   }
 }

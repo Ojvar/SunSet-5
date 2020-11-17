@@ -7,7 +7,7 @@ import {
 } from "express";
 import IHash from "@Lib/interfaces/hash-interface";
 import { IBaseRouter } from "@Lib/interfaces/core/base-router-interface";
-import { RouterItemType } from "@Lib/types/core/router-item-type";
+import { RouteItemType } from "@Lib/types/core/route-data-type";
 
 /**
  * Base Router
@@ -90,8 +90,8 @@ export default class BaseRouter implements IBaseRouter {
   /**
    * Get routes list
    */
-  public getRoutesList(): IHash<RouterItemType> {
-    const result: IHash<RouterItemType> = {};
+  public getRoutesList(): IHash<RouteItemType> {
+    const result: IHash<RouteItemType> = {};
     const keys = Object.keys(this._routes);
 
     keys.forEach((key) => {
@@ -103,7 +103,7 @@ export default class BaseRouter implements IBaseRouter {
         path: route.route.path,
         keys: route.keys,
         method: route.route.stack.map((x: any) => x.method),
-      } as RouterItemType;
+      } as RouteItemType;
     });
 
     return result;

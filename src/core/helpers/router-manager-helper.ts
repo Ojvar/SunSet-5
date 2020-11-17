@@ -6,15 +6,17 @@ import GlobalData from "@Core/Global/global-data";
 import GlobalMethods from "@Core/Global/global-methods";
 import { IBaseRouter } from "@Lib/interfaces/core/base-router-interface";
 import IHash from "@Lib/interfaces/hash-interface";
-import { RouterItemType } from "@Lib/types/core/router-item-type";
+import { RouteKeyType, RouteItemType } from "@Lib/types/core/route-data-type";
 import { ServerConfigType } from "@Lib/types/config/server-config-type";
+import { ExpressConfigType } from "@Lib/types/config/express-config-type";
 
 /**
  * Router manager
  */
 export default class RouterManager {
+  private static appConfig: ExpressConfigType = {} as ExpressConfigType;
   private _routers: IHash<IBaseRouter> = {};
-  private _routes: IHash<RouterItemType> = {};
+  private _routes: IHash<RouteItemType> = {};
 
   /**
    * Getter: routers
@@ -27,8 +29,17 @@ export default class RouterManager {
    * Getter: routes
    * @returns IHash<IBaseRouter> Return routers
    */
-  public get routes(): IHash<RouterItemType> {
+  public get routes(): IHash<RouteItemType> {
     return this._routes;
+  }
+
+  /**
+   * Load static data
+   */
+  public static async loadStaticData() {
+    RouterManager.appConfig = await GlobalMethods.config<ExpressConfigType>(
+      "core/express"
+    );
   }
 
   /**
@@ -81,14 +92,51 @@ export default class RouterManager {
   /**
    * Get routers list
    */
-  private async getRoutesList(): Promise<IHash<RouterItemType>> {
-    let result: IHash<RouterItemType> = {};
+  private async getRoutesList(): Promise<IHash<RouteItemType>> {
+    let result: IHash<RouteItemType> = {};
 
     Object.keys(this.routers).forEach((key) => {
-      let routes: IHash<RouterItemType> = this.routers[key].getRoutesList();
+      let routes: IHash<RouteItemType> = this.routers[key].getRoutesList();
 
       result = { ...result, ...routes };
     });
+
+    return result;
+  }
+
+  /**
+   * Get route by name (with parameters)
+   * @param name string Route name
+   * @param args Array<any> parameters
+   */
+  public route(name: string, args: IHash<string> = {}): string {
+    return RouterManager.getRoute(this.routes[name], args);
+  }
+
+  /**
+   * Get route path with applied arguments
+   */
+  public static getRoute(route: RouteItemType, args: IHash<string>): string {
+    if (null == route) {
+      throw new Error(`Route ${yellow(name)} not found`);
+    }
+
+    /* Perpare */
+    let keys: Array<RouteKeyType> = route.keys || [];
+    let routePath = route.path;
+    let baseUrl = route.baseUrl;
+
+    /*  Apply arguments */
+    keys.forEach((key) => {
+      const newValue: string = (args[key.name] as string) || "";
+      const argKey = `/\\:${key.name}${key.optional ? "\\??" : ""}`;
+      const regexp = new RegExp(argKey, "g");
+
+      routePath = routePath.replace(regexp, `/${newValue}`);
+    });
+
+    /* Generate result */
+    let result = `${RouterManager.appConfig.url}${baseUrl}${routePath}`;
 
     return result;
   }
@@ -105,6 +153,7 @@ export default class RouterManager {
 
       path = serverConfig.routerManifest;
     }
+
     if (!path) {
       throw new Error("route-manifest file path is not specified");
     } else {

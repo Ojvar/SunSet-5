@@ -151,10 +151,5 @@ function getRules(env) {
         },
       },
     },
-
-    {
-      test: /\.txt$/,
-      use: "raw-loader",
-    },
   ];
 }

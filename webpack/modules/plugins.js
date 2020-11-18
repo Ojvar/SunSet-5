@@ -4,14 +4,48 @@
  * Export
  */
 module.exports = (env = {}, entries) => {
-  return [
-    checkerPlugin(env),
-    vuePluginLoader(env),
+  const plugins = [
+    checkerPlugin(env, entries),
+    vuePluginLoader(env, entries),
     suppressPlugin(env, entries),
     miniCssExtract(env, entries),
-    manifest(env),
+    manifest(env, entries),
   ];
+
+  /* Copy files and directories */
+  const copyFilesResult = copyFiles(env, entries);
+  if (copyFilesResult) {
+    plugins.push(copyFilesResult);
+  }
+
+  return plugins;
 };
+
+/**
+ * copyFilePlugins
+ */
+function copyFiles(env, entries = {}) {
+  const CopyPlugin = require("copy-webpack-plugin");
+  let patterns = entries.copy || {};
+
+  if (Object.values(patterns).length) {
+    patterns = Object.keys(patterns).map((key) => ({
+      from: key,
+      to: patterns[key],
+    }));
+
+    const result = {
+      patterns,
+      options: {
+        concurrency: 100,
+      },
+    };
+
+    return new CopyPlugin(result);
+  }
+
+  return null;
+}
 
 /**
  * checkerPlugin

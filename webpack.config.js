@@ -7,8 +7,10 @@ const entries = {
   styles: {
     "styles/app": "./src/frontend/styles/app.scss",
   },
-  files: {},
-  directories: {},
+  copy: {
+    "./src/frontend/images": "images",
+    "./src/frontend/fonts": "fonts",
+  },
 };
 
 /* Export */

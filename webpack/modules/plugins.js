@@ -5,7 +5,6 @@
  */
 module.exports = (env = {}, entries) => {
   const plugins = [
-    checkerPlugin(env, entries),
     vuePluginLoader(env, entries),
     suppressPlugin(env, entries),
     miniCssExtract(env, entries),
@@ -45,15 +44,6 @@ function copyFiles(env, entries = {}) {
   }
 
   return null;
-}
-
-/**
- * checkerPlugin
- */
-function checkerPlugin(env) {
-  const { CheckerPlugin } = require("awesome-typescript-loader");
-
-  return new CheckerPlugin();
 }
 
 /**

@@ -156,11 +156,12 @@ function getRules(env) {
       test: /\.(png|svg|jpg|jpeg|gif)$/i,
       loader: "file-loader",
       options: {
-        outputPath: "resources",
         name(resourcePath, resourceQuery) {
           // `resourcePath` - `/absolute/path/to/file.js`
           // `resourceQuery` - `?foo=bar`
-          return env.PRODUCTION ? "[contenthash].[ext]" : "[path][name].[ext]";
+          return env.PRODUCTION
+            ? "[contenthash].[ext]"
+            : parseResourceFileName(resourcePath);
         },
       },
     },
@@ -169,13 +170,24 @@ function getRules(env) {
       test: /\.(woff|woff2|eot|ttf|otf)$/i,
       loader: "file-loader",
       options: {
-        outputPath: "fonts",
         name(resourcePath, resourceQuery) {
           // `resourcePath` - `/absolute/path/to/file.js`
           // `resourceQuery` - `?foo=bar`
-          return env.PRODUCTION ? "[contenthash].[ext]" : "[path][name].[ext]";
+          return env.PRODUCTION
+            ? "[contenthash].[ext]"
+            : parseResourceFileName(resourcePath);
         },
       },
     },
   ];
+}
+
+/**
+ * Extract relative file path
+ * @param {string} filePath File apth
+ */
+function parseResourceFileName(filePath) {
+  const Path = require("path");
+
+  return filePath.replace(Path.resolve("src/frontend"), "");
 }

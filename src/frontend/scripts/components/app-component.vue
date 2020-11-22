@@ -1,35 +1,37 @@
 <template lang="pug">
 .section
-  h1 Hello from App component
-  h2 Hi {{ name }}
+  .field
+    p.control.has-icons-left.has-icons-right
+      input.input(type='email' placeholder='Email')
+      span.icon.is-small.is-left
+        i.fas.fa-envelope
+      span.icon.is-small.is-right
+        i.fas.fa-check
+  .field
+    p.control.has-icons-left
+      input.input(type='password' placeholder='Password')
+      span.icon.is-small.is-left
+        i.fas.fa-lock
+  .field
+    p.control
+      button.button.is-success
+        | Login
+
 </template>
 
 <script lang="ts">
-  import { defineComponent, Ref, ref } from "vue";
+import { defineComponent, Ref, ref } from "vue";
 
-  export default defineComponent({
-    name: "AppComponent",
+export default defineComponent({
+  name: "AppComponent",
 
-    /**
-     * Setup
-     */
-    setup(porps, { emit }) {
-      const name: Ref<string> = ref("MyName");
-
-      return {
-        name,
-      };
-    },
-  });
+  /**
+   * Setup
+   */
+  setup(porps, { emit }) {
+    return {};
+  },
+});
 </script>
 
-<style lang="scss" scoped>
-  .section {
-    padding: 2.5em;
-    line-height: 1.5em;
-    text-align: center;
-    border-radius: 10px;
-    background-color: blue;
-    color: white;
-  }
-</style>
+<style lang="scss" scoped></style>

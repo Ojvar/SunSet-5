@@ -3,10 +3,39 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    title Welcome page
-  body
-    h1 Hello world 
-      h2 #{ message }
+    title Sunset 4.2
+    link(rel="shortcut icon" href=Helper.asset("resources/sunset.svg"))
+    link(rel="stylesheet", href=Helper.mix("styles/app.css"))
+    link(rel="stylesheet", href=Helper.mix("styles/pages/home.css"))
 
-      a(href=Helper.route("home.login")) Login
-      a(href=Helper.route("home.logout")) Logout
+  body
+    nav.navbar(role='navigation' aria-label='main navigation')
+      .navbar-brand
+        a.navbar-item(href=Helper.route("home.index"))
+          img.login-icon
+        a.navbar-burger.burger(role='button' aria-label='menu' aria-expanded='false' data-target='navbarBasicExample')
+          span(aria-hidden='true')
+          span(aria-hidden='true')
+          span(aria-hidden='true')
+
+      #navbarBasicExample.navbar-menu
+        .navbar-start
+          a.navbar-item(href=Helper.route("home.index")) Home
+          .navbar-item.has-dropdown.is-hoverable
+            a.navbar-link More
+            .navbar-dropdown
+              a.navbar-item(href=Helper.route("home.index")) About
+              a.navbar-item(href=Helper.route("home.index")) Contact
+              hr.navbar-divider
+              a.navbar-item(href=Helper.route("home.index")) Report an issue
+        .navbar-end
+          .navbar-item
+            .buttons
+              if (loggedIn)
+                a.button.is-light(href=Helper.route("home.logout")) Logout
+              else
+                a.button.is-primary(href=Helper.route("home.login")) Login
+
+    #app.section
+
+    script(defer, src=Helper.mix("scripts/app.js"))

@@ -102,4 +102,19 @@ export default class FrontendGlobalHelper {
 
     return url;
   }
+
+  /**
+   * Asset function
+   * @param url string Url path
+   * @returns string The compiled url
+   */
+  public asset(url: string): string {
+    if (!url.startsWith("/")) {
+      url = `/${url}`;
+    }
+
+    url = `${this.appConfig.url}${url}`;
+
+    return url;
+  }
 }

@@ -6,6 +6,7 @@ const entries = {
   },
   styles: {
     "styles/app": "./src/frontend/styles/app.scss",
+    "styles/pages/home": "./src/frontend/styles/pages/home.scss",
   },
   copy: {},
 };

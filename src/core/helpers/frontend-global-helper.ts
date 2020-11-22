@@ -9,12 +9,12 @@ import RouterManager from "./router-manager-helper";
  * Frontend Global Helper
  */
 export default class FrontendGlobalHelper {
-  private webpackManifest: IHash<string> = {};
+  private webpackManifest: Array<any> = [];
   private appConfig: ExpressConfigType = {} as ExpressConfigType;
   private routesData: IHash<RouteItemType> | undefined;
 
   /**
-   * Load webpack-manifest data
+   * Load assets data
    */
   public async prepare() {
     if (null == this.appConfig.publicPath) {
@@ -26,10 +26,10 @@ export default class FrontendGlobalHelper {
     }
 
     const webpackManifestData: object = await GlobalMethods.loadModule<any>(
-      "dist/public/webpack-manifest.json"
+      "dist/public/assets.json"
     );
 
-    this.webpackManifest = webpackManifestData as IHash<string>;
+    this.webpackManifest = webpackManifestData as Array<any>;
   }
 
   /**
@@ -96,9 +96,9 @@ export default class FrontendGlobalHelper {
     const ext = extname(url).replace(".", "");
     url = url.replace(new RegExp(`\.${ext}$`, "g"), "");
 
-    const routeData: any = this.webpackManifest[url];
-    url = routeData[ext] as string;
-    url = `${this.appConfig.url}${url}`;
+    const routeData = this.webpackManifest.find((x) => x.name == url);
+    url = routeData["filename"] as string;
+    url = `${this.appConfig.url}/${url}`;
 
     return url;
   }

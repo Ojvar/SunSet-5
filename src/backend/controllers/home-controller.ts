@@ -24,9 +24,12 @@ export default class HomeController {
       let sessionData: ISessionDataModel = req.session as ISessionDataModel;
       sessionData.viewCount = (sessionData.viewCount ?? 0) + 1;
 
-      res.render("home.pug", { message: "Your are loged in" });
+      res.render("home.pug", { message: "Your are logged in", loggedIn: true });
     } else {
-      res.render("home.pug", { message: "Your are not loged in" });
+      res.render("home.pug", {
+        message: "Your are not logged in",
+        loggedIn: false,
+      });
     }
   }
 

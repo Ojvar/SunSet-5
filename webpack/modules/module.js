@@ -1,7 +1,5 @@
 "use strict";
 
-const Path = require("path");
-
 /**
  * Export
  */
@@ -158,11 +156,11 @@ function getRules(env) {
       test: /\.(png|svg|jpg|jpeg|gif)$/i,
       loader: "file-loader",
       options: {
-        publicPath: "/",
+        publicPath: "/resources",
+        outputPath: "resources",
         useRelativePaths: true,
         name(resourcePath, resourceQuery) {
-          const path = parseResourceFileName(resourcePath);
-          return env.PRODUCTION ? "[contenthash].[ext]" : path;
+          return env.PRODUCTION ? "[hash].[ext]" : "[name].[hash].[ext]";
         },
       },
     },
@@ -171,24 +169,13 @@ function getRules(env) {
       test: /\.(woff|woff2|eot|ttf|otf)$/i,
       loader: "file-loader",
       options: {
-        publicPath: "/",
+        publicPath: "/fonts",
+        outputPath: "fonts",
         useRelativePaths: true,
         name(resourcePath, resourceQuery) {
-          return env.PRODUCTION
-            ? "[contenthash].[ext]"
-            : parseResourceFileName(resourcePath);
+          return env.PRODUCTION ? "[hash].[ext]" : "[name].[hash].[ext]";
         },
       },
     },
   ];
-}
-
-/**
- * Extract relative file path
- * @param {string} filePath File apth
- */
-function parseResourceFileName(filePath) {
-  const Path = require("path");
-
-  return filePath.replace(Path.resolve("src/frontend") + "/", "");
 }

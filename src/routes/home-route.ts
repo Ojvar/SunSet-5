@@ -11,7 +11,7 @@ export default class HomeRoute extends BaseRouter {
    * Constructor
    */
   constructor() {
-    super("/home", "HomeRoute");
+    super("", "HomeRoute");
     this.defineRoutes();
   }
 

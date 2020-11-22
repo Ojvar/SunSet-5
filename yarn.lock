@@ -1703,6 +1703,11 @@
   "resolved" "https://registry.npmjs.org/assert-plus/-/assert-plus-1.0.0.tgz"
   "version" "1.0.0"
 
+"asset-list-webpack-plugin@^0.4.0":
+  "integrity" "sha512-itT1iTKtv7GQHNX8JKBEqoTIH2cZBVF1INU0dGvEIq7xV/VBbY9eF5gPEhAlQzFYH2dZGpC05QBSt6Al4WaxAg=="
+  "resolved" "https://registry.npmjs.org/asset-list-webpack-plugin/-/asset-list-webpack-plugin-0.4.0.tgz"
+  "version" "0.4.0"
+
 "assign-symbols@^1.0.0":
   "integrity" "sha1-WWZ/QfrdTyDMvCu5a41Pf3jsA2c="
   "resolved" "https://registry.npmjs.org/assign-symbols/-/assign-symbols-1.0.0.tgz"
@@ -2285,11 +2290,6 @@
   "version" "1.0.2"
   dependencies:
     "tslib" "^1.9.0"
-
-"chunks-2-json-webpack-plugin@^1.0.4":
-  "integrity" "sha512-hQ5y/AUbKUszhJa2ag60V9VR+Zxs0Ub3Z+7u6udjkka4Q36LJ4+KKYbIOq2hAzwjvafhRanpNAPQgvIbE/gWaw=="
-  "resolved" "https://registry.npmjs.org/chunks-2-json-webpack-plugin/-/chunks-2-json-webpack-plugin-1.0.4.tgz"
-  "version" "1.0.4"
 
 "ci-info@^2.0.0":
   "integrity" "sha512-5tK7EtrZ0N+OLFMthtqOj4fI2Jeb88C4CAZPu25LDVUgXJ0A3Js4PMGqrn0JU1W0Mh1/Z8wZzYPxqUrXeBboCQ=="

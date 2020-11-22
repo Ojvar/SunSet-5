@@ -92,11 +92,7 @@ function miniCssExtract(env, entries) {
  * WebpackManifest plugin
  */
 function manifest(env, entries) {
-  const Chunks2JsonPlugin = require("chunks-2-json-webpack-plugin");
-
-  return new Chunks2JsonPlugin({
-    outputDir: "dist/public",
-    publicPath: "/",
-    filename: "webpack-manifest.json",
-  });
+  const AssetListWebpackPlugin = require("asset-list-webpack-plugin");
+  
+  return new AssetListWebpackPlugin({});
 }

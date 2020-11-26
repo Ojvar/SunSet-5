@@ -12,6 +12,8 @@ module.exports = (env = {}) => {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".vue", ".pug", ".json"],
     plugins: [new TsconfigPathsPlugin({})],
     alias: {
+      vue$: "vue/dist/vue.esm.js",
+      "@PUBLIC": Path.resolve("dist/public"),
       "@FONTS": Path.resolve("src/frontend/fonts"),
       "@IMAGES": Path.resolve("src/frontend/images"),
       "@SCRIPTS": Path.resolve("src/frontend/scripts"),

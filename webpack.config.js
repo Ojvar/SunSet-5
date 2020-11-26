@@ -2,7 +2,7 @@
 
 const entries = {
   scripts: {
-    "scripts/app": "./src/frontend/scripts/app.ts",
+    "scripts/pages/home": "./src/frontend/scripts/pages/home.ts",
   },
   styles: {
     "styles/app": "./src/frontend/styles/app.scss",

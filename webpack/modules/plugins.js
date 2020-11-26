@@ -49,7 +49,7 @@ function copyFiles(env, entries = {}) {
 /**
  * Vue plugin loader
  */
-function vuePluginLoader(env) {
+function vuePluginLoader(env, etnries) {
   const { VueLoaderPlugin } = require("vue-loader");
 
   return new VueLoaderPlugin();
@@ -93,6 +93,6 @@ function miniCssExtract(env, entries) {
  */
 function manifest(env, entries) {
   const AssetListWebpackPlugin = require("asset-list-webpack-plugin");
-  
+
   return new AssetListWebpackPlugin({});
 }

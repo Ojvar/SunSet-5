@@ -1,5 +1,5 @@
-import { RouteItemType } from "@Lib/types/core/route-data-type";
 import { IRouter } from "express";
+import { RouteItemType } from "@Lib/types/core/route-data-type";
 import IHash from "../hash-interface";
 
 /**

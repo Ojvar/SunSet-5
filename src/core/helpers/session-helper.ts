@@ -1,10 +1,8 @@
-import { yellow } from "chalk";
 import { Application } from "express";
 import * as Session from "express-session";
 import * as ConnectRedis from "connect-redis";
 import { SessionConfigType } from "@Lib/types/config/session-config-type";
-import GlobalData from "@Core/Global/global-data";
-import GlobalMethods from "@Core/Global/global-methods";
+import GlobalMethods from "@/core/global/global-methods";
 import RedisClientHelper from "./redis-client-helper";
 
 /**

@@ -2,8 +2,8 @@ import { extname } from "path";
 import GlobalMethods from "@Core/Global/global-methods";
 import IHash from "@Lib/interfaces/hash-interface";
 import { ExpressConfigType } from "@Lib/types/config/express-config-type";
-import { RouteKeyType, RouteItemType } from "@Lib/types/core/route-data-type";
-import RouterManager from "./router-manager-helper";
+import { RouteFileType, RouteItemType } from "@Lib/types/core/route-data-type";
+import RouterHelper from "./route-helper";
 
 /**
  * Frontend Global Helper
@@ -11,7 +11,7 @@ import RouterManager from "./router-manager-helper";
 export default class FrontendGlobalHelper {
   private webpackManifest: Array<any> = [];
   private appConfig: ExpressConfigType = {} as ExpressConfigType;
-  private routesData: IHash<RouteItemType> | undefined;
+  private routesData: RouteFileType | undefined;
 
   /**
    * Load assets data
@@ -41,9 +41,7 @@ export default class FrontendGlobalHelper {
       "router-manifest.json"
     );
 
-    this.routesData = await GlobalMethods.loadModule<IHash<RouteItemType>>(
-      path
-    );
+    this.routesData = await GlobalMethods.loadModule<RouteFileType>(path);
   }
 
   /**
@@ -62,11 +60,10 @@ export default class FrontendGlobalHelper {
    * @returns string The Route path
    */
   public route(routeName: string, args: IHash<string> = {}): string {
-    const route: RouteItemType = (this.routesData as IHash<RouteItemType>)[
-      routeName
-    ];
+    const route: RouteItemType = (this.routesData
+      ?.routes as IHash<RouteItemType>)[routeName];
 
-    return RouterManager.getRoute(route, args);
+    return RouterHelper.getRoute(route, args, this.appConfig.url);
   }
 
   /**
@@ -76,9 +73,8 @@ export default class FrontendGlobalHelper {
    * @returns string The Route data
    */
   public routeData(routeName: string): RouteItemType {
-    let route: RouteItemType = (this.routesData as IHash<RouteItemType>)[
-      routeName
-    ];
+    let route: RouteItemType = (this.routesData
+      ?.routes as IHash<RouteItemType>)[routeName];
 
     return route;
   }

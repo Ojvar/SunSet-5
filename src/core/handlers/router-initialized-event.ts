@@ -1,7 +1,7 @@
 import { yellow } from "chalk";
-import GlobalData from "@Core/Global/global-data";
+import GlobalData from "@/core/global/global-data";
 import IEventHandler from "@Lib/interfaces/core/event-handler-interface";
-import RouterManager from "@Core/Helpers/router-manager-helper";
+import RouterManager from "@/core/helpers/router-manager-helper";
 
 /**
  * Server-init handler

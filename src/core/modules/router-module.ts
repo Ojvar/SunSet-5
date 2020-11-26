@@ -1,5 +1,5 @@
-import GlobalData from "@Core/Global/global-data";
-import RouterManager from "@Core/Helpers/router-manager-helper";
+import GlobalData from "@/core/global/global-data";
+import RouterManager from "@/core/helpers/router-manager-helper";
 import { ICoreModule } from "@Lib/interfaces/core/core-module-interface";
 import BaseModule from "./base-module";
 

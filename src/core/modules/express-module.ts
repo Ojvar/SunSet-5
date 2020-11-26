@@ -1,5 +1,5 @@
 import BaseModule from "./base-module";
-import ExpressHelper from "@Core/Helpers/express-helper";
+import ExpressHelper from "@/core/helpers/express-helper";
 import { ICoreModule } from "@Lib/interfaces/core/core-module-interface";
 
 /**

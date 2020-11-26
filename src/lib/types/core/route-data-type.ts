@@ -1,3 +1,5 @@
+import IHash from "@Lib/interfaces/hash-interface";
+
 /**
  * Route data type
  */
@@ -16,4 +18,12 @@ export type RouteKeyType = {
   name: string;
   optional: boolean;
   offset: number;
+};
+
+/**
+ * Route file type
+ */
+export type RouteFileType = {
+  url: string;
+  routes: IHash<RouteItemType>;
 };

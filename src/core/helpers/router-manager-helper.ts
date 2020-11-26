@@ -2,13 +2,14 @@ import { writeFileSync } from "fs";
 import { dirname } from "path";
 import { yellow, green } from "chalk";
 import * as Express from "express";
-import GlobalData from "@Core/Global/global-data";
-import GlobalMethods from "@Core/Global/global-methods";
+import GlobalData from "@/core/global/global-data";
+import GlobalMethods from "@/core/global/global-methods";
 import { IBaseRouter } from "@Lib/interfaces/core/base-router-interface";
 import IHash from "@Lib/interfaces/hash-interface";
-import { RouteKeyType, RouteItemType } from "@Lib/types/core/route-data-type";
+import { RouteItemType, RouteFileType } from "@Lib/types/core/route-data-type";
 import { ServerConfigType } from "@Lib/types/config/server-config-type";
 import { ExpressConfigType } from "@Lib/types/config/express-config-type";
+import RouterHelper from "./route-helper";
 
 /**
  * Router manager
@@ -81,12 +82,14 @@ export default class RouterManager {
       throw new Error("App is null");
     }
 
-    await Object.keys(this.routers).forEach(async (key) => {
+    const keys: string[] = Object.keys(this.routers);
+    for (let i: number = 0; i < keys.length; ++i) {
+      const key: string = keys[i];
       let router: IBaseRouter = this.routers[key];
 
       router.apply(app);
       GlobalData.logger.info(`Express router ${yellow(key)} applied`);
-    });
+    }
   }
 
   /**
@@ -110,35 +113,11 @@ export default class RouterManager {
    * @param args Array<any> parameters
    */
   public route(name: string, args: IHash<string> = {}): string {
-    return RouterManager.getRoute(this.routes[name], args);
-  }
-
-  /**
-   * Get route path with applied arguments
-   */
-  public static getRoute(route: RouteItemType, args: IHash<string>): string {
-    if (null == route) {
-      throw new Error(`Route ${yellow(name)} not found`);
-    }
-
-    /* Perpare */
-    let keys: Array<RouteKeyType> = route.keys || [];
-    let routePath = route.path;
-    let baseUrl = route.baseUrl;
-
-    /*  Apply arguments */
-    keys.forEach((key) => {
-      const newValue: string = (args[key.name] as string) || "";
-      const argKey = `/\\:${key.name}${key.optional ? "\\??" : ""}`;
-      const regexp = new RegExp(argKey, "g");
-
-      routePath = routePath.replace(regexp, `/${newValue}`);
-    });
-
-    /* Generate result */
-    let result = `${RouterManager.appConfig.url}${baseUrl}${routePath}`;
-
-    return result;
+    return RouterHelper.getRoute(
+      this.routes[name],
+      args,
+      RouterManager.appConfig.url
+    );
   }
 
   /**
@@ -147,9 +126,9 @@ export default class RouterManager {
    */
   public async createManifestFile(path?: string): Promise<void> {
     if (!path) {
-      const serverConfig: ServerConfigType = await GlobalMethods.config<
-        ServerConfigType
-      >("core/server");
+      const serverConfig: ServerConfigType = await GlobalMethods.config<ServerConfigType>(
+        "core/server"
+      );
 
       path = serverConfig.routerManifest;
     }
@@ -163,7 +142,13 @@ export default class RouterManager {
     /* Create public directory if not exists */
     await GlobalMethods.createDir(dirname(path));
 
+    /* Create content */
+    const content: RouteFileType = {
+      url: RouterManager.appConfig.url,
+      routes: this.routes,
+    };
+
     /* Write to file */
-    writeFileSync(path, JSON.stringify(this.routes, null, 2));
+    writeFileSync(path, JSON.stringify(content, null, 2));
   }
 }

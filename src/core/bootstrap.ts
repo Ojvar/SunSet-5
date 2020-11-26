@@ -1,8 +1,8 @@
 import { yellow, green } from "chalk";
-import GlobalData from "@Core/Global/global-data";
-import EnvModule from "@Core/Modules/env-module";
-import LoggerModule from "@Core/Modules/logger-module";
-import DebugModule from "@Core/Modules/debug-module";
+import GlobalData from "@/core/global/global-data";
+import EnvModule from "@/core/modules/env-module";
+import LoggerModule from "@/core/modules/logger-module";
+import DebugModule from "@/core/modules/debug-module";
 import EventsModule from "./modules/events-module";
 import RouterModule from "./modules/router-module";
 import DatabaseModule from "./modules/database-module";

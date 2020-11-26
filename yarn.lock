@@ -1223,6 +1223,11 @@
   "resolved" "https://registry.npmjs.org/@types/uuid/-/uuid-8.3.0.tgz"
   "version" "8.3.0"
 
+"@types/validatorjs@^3.15.0":
+  "integrity" "sha512-tqozguXICRdPQVGho1A+lYH4IzU3ggP82OmfFrmb6N6pxmWuXegpw4Th20hy5KtMfuyP+jXB466ABFMO9vma4Q=="
+  "resolved" "https://registry.npmjs.org/@types/validatorjs/-/validatorjs-3.15.0.tgz"
+  "version" "3.15.0"
+
 "@vue/compiler-core@3.0.2":
   "integrity" "sha512-GOlEMTlC/OdzBkKaKOniYErbkjoKxkBOmulxGmMR10I2JJX6TvXd/peaO/kla2xhpliV/M6Z4TLJp0yjAvRIAw=="
   "resolved" "https://registry.npmjs.org/@vue/compiler-core/-/compiler-core-3.0.2.tgz"
@@ -7302,6 +7307,11 @@
   dependencies:
     "spdx-correct" "^3.0.0"
     "spdx-expression-parse" "^3.0.0"
+
+"validatorjs@^3.21.0":
+  "integrity" "sha512-YguPf+VDg6bk29cotMDqz/wuBqpgUnOUdbW6B4wHTX10Tz/Jmcz0PF7PdjjXG3XSrWwSr0+OX7Dg2+Lsv5zAZQ=="
+  "resolved" "https://registry.npmjs.org/validatorjs/-/validatorjs-3.21.0.tgz"
+  "version" "3.21.0"
 
 "vary@^1", "vary@~1.1.2":
   "integrity" "sha1-IpnwLG3tMNSllhsLn3RSShj2NPw="

@@ -16,8 +16,8 @@ import * as Https from "https";
 import * as Express from "express";
 import { readFileSync } from "fs";
 import { blue, green, red, yellow } from "chalk";
-import GlobalData from "@Core/Global/global-data";
-import GlobalMethods from "@Core/Global/global-methods";
+import GlobalData from "@/core/global/global-data";
+import GlobalMethods from "@/core/global/global-methods";
 import { ExpressConfigType } from "@Lib/types/config/express-config-type";
 import FrontendGlobalHelper from "./frontend-global-helper";
 import SessionHelper from "./session-helper";
@@ -357,9 +357,9 @@ Server started
     const app = this.app;
 
     /* Setup multer */
-    const multerConfig: MulterConfigType = await GlobalMethods.config<
-      MulterConfigType
-    >("core/multer");
+    const multerConfig: MulterConfigType = await GlobalMethods.config<MulterConfigType>(
+      "core/multer"
+    );
 
     /* Create storage diretory */
     await GlobalMethods.createDir(multerConfig.storage);

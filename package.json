@@ -47,6 +47,7 @@
     "@types/rate-limit-redis": "^1.7.1",
     "@types/redis": "^2.8.28",
     "@types/uuid": "^8.3.0",
+    "@types/validatorjs": "^3.15.0",
     "@vue/compiler-sfc": "^3.0.2",
     "@zerollup/ts-transform-paths": "^1.7.18",
     "asset-list-webpack-plugin": "^0.4.0",
@@ -116,6 +117,7 @@
     "rate-limit-redis": "^2.0.0",
     "redis": "^3.0.2",
     "uuid": "^8.3.1",
+    "validatorjs": "^3.21.0",
     "winston": "^3.3.3"
   }
 }

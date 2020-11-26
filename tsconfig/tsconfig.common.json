@@ -1,6 +1,6 @@
 {
   "include": ["../src"],
-  "exclude": ["../node_modules", "../**/*.spec.ts"],
+  "exclude": ["../node_modules", "../**/*.spec.ts", "../dist"],
 
   "compilerOptions": {
     "target": "ESNext",
@@ -9,26 +9,27 @@
     "jsx": "react",
 
     "outDir": "../dist",
-    "rootDir": "../src",
-    "baseUrl": "../src",
+    "rootDir": "../",
+    "baseUrl": "../",
     "paths": {
-      "@Config/*": ["config/*"],
-      "@Routes/*": ["routes/*"],
-      "@Lib/*": ["lib/*"],
+      "@PUBLIC/*": ["dist/public/*"],
+      "@Config/*": ["src/config/*"],
+      "@Routes/*": ["src/routes/*"],
+      "@Lib/*": ["src/lib/*"],
 
-      "@Core/Helpers/*": ["core/helpers/*"],
-      "@Core/Global/*": ["core/global/*"],
-      "@Core/Modules/*": ["core/modules/*"],
-      "@Core/*": ["core/*"],
+      "@Core/Helpers/*": ["src/core/helpers/*"],
+      "@Core/Global/*": ["src/core/global/*"],
+      "@Core/Modules/*": ["src/core/modules/*"],
+      "@Core/*": ["src/core/*"],
 
-      "@BE/Controllers/*": ["backend/controllers/*"],
-      "@BE/*": ["backend/*"],
+      "@BE/Controllers/*": ["src/backend/controllers/*"],
+      "@BE/*": ["src/backend/*"],
 
-      "@FE/Scripts/*": ["frontend/scripts/*"],
-      "@FE/Components/*": ["frontend/scripts/components/*"],
-      "@FE/*": ["frontend/*"],
+      "@FE/Scripts/*": ["src/frontend/scripts/*"],
+      "@FE/Components/*": ["src/frontend/scripts/components/*"],
+      "@FE/*": ["src/frontend/*"],
 
-      "@/*": ["*"]
+      "@/*": ["src/*"]
     },
 
     "sourceRoot": "src",

@@ -2,7 +2,6 @@ import RouterHelper from "@Core/Helpers/route-helper";
 import IHash from "@Lib/interfaces/hash-interface";
 import { RouteFileType, RouteItemType } from "@Lib/types/core/route-data-type";
 import Base from "./base";
-import * as X from "@PUBLIC/router-manifest.json";
 
 /**
  * App class
@@ -16,10 +15,9 @@ export class App extends Base {
   constructor() {
     super();
 
-    // import("@PUBLIC/router-manifest.json").then((res) => {
-    //   this.routesData = res.default || res;
-    // });
-    this.routesData = X;
+    import("@PUBLIC/router-manifest.json").then((res) => {
+      this.routesData = res.default || res;
+    });
   }
 
   /**

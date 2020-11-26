@@ -5,7 +5,7 @@
   "main": "dist/server.js",
   "scripts": {
     "server:run": "cross-env node ./dist/core/bootstrap.js",
-    "server:run:watch": "cross-env nodemon ./dist/server.js",
+    "server:run:watch": "cross-env nodemon ./dist/src/server.js",
     "server:dev": "cross-env ttsc --p ./tsconfig/tsconfig.dev.json",
     "server:dev:watch": "npm run server:dev -- -w",
     "server:prod": "cross-env ttsc --p ./tsconfig/tsconfig.prod.json",

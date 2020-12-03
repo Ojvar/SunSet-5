@@ -7,6 +7,7 @@ import RouterModule from "@Core/Modules/router-module";
 import IDatabaseDriver from "@Lib/interfaces/core/database-driver-interface";
 import EventsModule from "../modules/events-module";
 import { Debugger } from "debug";
+import RedisClientHelper from "@Core/Helpers/redis-client-helper";
 
 /**
  * Global data
@@ -17,6 +18,7 @@ export default class GlobalData {
   public static router: RouterModule;
   public static express: ExpressModule;
   public static dbEngine: IDatabaseDriver;
+  public static redisEngine: RedisClientHelper;
 
   public static debug: Debugger;
   public static rateLimiter: RateLimit;

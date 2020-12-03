@@ -4,6 +4,7 @@ import * as ConnectRedis from "connect-redis";
 import { SessionConfigType } from "@Lib/types/config/session-config-type";
 import GlobalMethods from "@/core/global/global-methods";
 import RedisClientHelper from "./redis-client-helper";
+import { ClientOpts } from "redis";
 
 /**
  * Events class
@@ -15,7 +16,7 @@ export default class SessionHelper {
    */
   public async init(app: Application): Promise<void> {
     const config: SessionConfigType = (await GlobalMethods.config(
-      "core/session"
+      "core/session",
     )) as SessionConfigType;
 
     /* Init Session */
@@ -43,8 +44,12 @@ export default class SessionHelper {
    * Create a Redis-Session Store
    */
   private async createRedisSessionStore(): Promise<Session.Store> {
+    let config: ClientOpts = await GlobalMethods.config(
+      "core/redis",
+    ) as ClientOpts;
+
     /* Intialize redis-client */
-    const redisHelper: RedisClientHelper = new RedisClientHelper();
+    const redisHelper: RedisClientHelper = new RedisClientHelper(config);
     await redisHelper.connect();
 
     /* Init RedisStore */

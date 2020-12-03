@@ -1,6 +1,8 @@
 import ISessionDataModel from "@BE/data-model/session-data-model";
 import AuthHelper from "@BE/helpers/auth-helper";
+import RedisHelper from "@BE/helpers/redis-helper";
 import GlobalData from "@Core/Global/global-data";
+import RedisClientHelper from "@Core/Helpers/redis-client-helper";
 import { Request, Response, NextFunction } from "express";
 
 /**

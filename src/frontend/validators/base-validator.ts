@@ -25,7 +25,7 @@ export default class BaseValidator {
     const validatorJS: ValidatorJs.Validator<T> = new ValidatorJs(
       data,
       validator.getRules(),
-      validator.getMessages()
+      validator.getMessages(),
     );
     validator.setup<T>(validatorJS);
     validatorJS.setAttributeNames(validator.getAttributes());

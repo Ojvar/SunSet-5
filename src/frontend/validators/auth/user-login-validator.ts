@@ -1,14 +1,13 @@
 import IValidator from "@Lib/interfaces/frontend/validators/validator-interface";
 import { UserLoginType } from "@Lib/types/frontend/auth/user-login-type";
 import { ActionResultType } from "@Lib/types/frontend/global/action-result-type";
-import { Validator, AttributeNames, Rules, ErrorMessages } from "validatorjs";
+import { AttributeNames, ErrorMessages, Rules, Validator } from "validatorjs";
 import BaseValidator from "../base-validator";
 
 /**
  * Validator of UserLogin
  */
-export default class LoginDataValidator
-  extends BaseValidator
+export default class LoginDataValidator extends BaseValidator
   implements IValidator {
   /**
    * Get rules

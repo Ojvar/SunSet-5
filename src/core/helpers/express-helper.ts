@@ -109,13 +109,13 @@ export default class ExpressHelper {
       (
         req: Express.Request,
         res: Express.Response,
-        next: Express.NextFunction
+        next: Express.NextFunction,
       ) => {
         globalFuncs.prepare();
 
         res.locals.Helper = globalFuncs;
         next();
-      }
+      },
     );
   }
 
@@ -159,10 +159,10 @@ Server started
 
     if (useHttps) {
       const serverPKeyPath: string = GlobalMethods.rPath(
-        this.config.sslServerKey
+        this.config.sslServerKey,
       );
       const serverCertPath: string = GlobalMethods.rPath(
-        this.config.sslServerCert
+        this.config.sslServerCert,
       );
 
       const privateKey: string = readFileSync(serverPKeyPath).toString();
@@ -216,11 +216,11 @@ Server started
       origin: true,
       // some legacy browsers (IE11, various SmartTVs) choke on 204
       optionsSuccessStatus: 200,
-    };
+    } as CORS.CorsOptions;
 
     const app = this.app;
-    app.options("*", CORS(corsOptions));
-    app.use(CORS());
+    // app.options("*", CORS(corsOptions));
+    app.use(CORS(corsOptions));
   }
 
   /**
@@ -271,7 +271,7 @@ Server started
     app.use(
       BodyParser.urlencoded({
         extended: false,
-      } as BodyParser.OptionsUrlencoded)
+      } as BodyParser.OptionsUrlencoded),
     );
 
     app.use(BodyParser.json());
@@ -289,15 +289,15 @@ Server started
       (
         req: Express.Request,
         res: Express.Response,
-        next: Express.NextFunction
+        next: Express.NextFunction,
       ) => {
         res.locals.nonce = Crypto.randomBytes(16).toString("hex");
         next();
-      }
+      },
     );
 
     app.use(
-      Helmet.contentSecurityPolicy(helmetConfig.contentSecurityPolicy || {})
+      Helmet.contentSecurityPolicy(helmetConfig.contentSecurityPolicy || {}),
     );
     app.use(Helmet.dnsPrefetchControl(helmetConfig.dnsPrefetchControl || {}));
     app.use(Helmet.expectCt(helmetConfig.expectCt || {}));
@@ -308,8 +308,8 @@ Server started
     app.use(Helmet.noSniff());
     app.use(
       Helmet.permittedCrossDomainPolicies(
-        helmetConfig.permittedCrossDomainPolicies || {}
-      )
+        helmetConfig.permittedCrossDomainPolicies || {},
+      ),
     );
     app.use(Helmet.referrerPolicy(helmetConfig.referrerPolicy || {}));
     app.use(Helmet.xssFilter());
@@ -328,25 +328,25 @@ Server started
       (
         req: Express.Request,
         res: Express.Response,
-        next: Express.NextFunction
+        next: Express.NextFunction,
       ) => {
         if (GlobalMethods.useCSRF(req)) {
           next();
         } else {
           csrf(req, res, next);
         }
-      }
+      },
     );
 
     app.use(
       (
         req: Express.Request,
         res: Express.Response,
-        next: Express.NextFunction
+        next: Express.NextFunction,
       ) => {
         res.locals.csrftoken = req.csrfToken ? req.csrfToken() : "";
         next();
-      }
+      },
     );
   }
 
@@ -357,8 +357,10 @@ Server started
     const app = this.app;
 
     /* Setup multer */
-    const multerConfig: MulterConfigType = await GlobalMethods.config<MulterConfigType>(
-      "core/multer"
+    const multerConfig: MulterConfigType = await GlobalMethods.config<
+      MulterConfigType
+    >(
+      "core/multer",
     );
 
     /* Create storage diretory */
@@ -399,7 +401,7 @@ Server started
       (
         req: Express.Request,
         res: Express.Response,
-        next: Express.NextFunction
+        next: Express.NextFunction,
       ): void => {
         switch (GlobalMethods.getRequestType(req)) {
           case "html":
@@ -420,7 +422,7 @@ Server started
             res.status(404).send("Bad Request").end();
             break;
         }
-      }
+      },
     );
   }
 
@@ -434,7 +436,7 @@ Server started
       error: Error,
       req: Express.Request,
       res: Express.Response,
-      next: Express.NextFunction
+      next: Express.NextFunction,
     ): void => {
       if (res.headersSent) {
         return next(error);

@@ -2,7 +2,7 @@
     "name": "sunset-iv",
     "version": "2.0.0",
     "description": "",
-    "main": "dist/server.js",
+    "main": "dist/src/server.js",
     "scripts": {
         "sr": "npm run server:run",
         "srw": "npm run server:run:watch",

@@ -146,7 +146,7 @@ export default class LoggerModule extends BaseModule implements ICoreModule {
      * @param tag String Log tag
      */
     public log(type: string, log: string | object, tag?: string): string {
-        if (typeof log != 'string')) {
+        if (typeof log != "string") {
             log = JSON.stringify(log);
         }
 

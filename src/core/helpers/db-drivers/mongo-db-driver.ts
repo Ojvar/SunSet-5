@@ -1,10 +1,10 @@
 import { blue } from "chalk";
+import * as Mongoose from "mongoose";
 import GlobalData from "@Core/Global/global-data";
 import GlobalMethods from "@Core/Global/global-methods";
 import DatabaseDriverInterface from "@Lib/interfaces/core/database-driver-interface";
 import IDBModel from "@Lib/interfaces/core/db-model-interface";
 import { DatabaseConfigType } from "@Lib/types/config/database-config-type";
-import * as Mongoose from "mongoose";
 
 /**
  * MongoDB driver

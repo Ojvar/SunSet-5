@@ -106,12 +106,12 @@ export default class ExpressHelper {
     const globalFuncs: FrontendGlobalHelper = new FrontendGlobalHelper();
 
     app.use(
-      (
+      async (
         req: Express.Request,
         res: Express.Response,
         next: Express.NextFunction,
       ) => {
-        globalFuncs.prepare();
+        await globalFuncs.prepare();
 
         res.locals.Helper = globalFuncs;
         next();

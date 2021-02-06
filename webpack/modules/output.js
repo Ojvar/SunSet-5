@@ -1,16 +1,16 @@
-"use strict";
-
 const Path = require("path");
+const Global = require("./global");
 
-/**
- * Export
- */
-module.exports = (env = {}) => {
-  const isProd = env.PRODUCTION || false;
+module.exports = (devMode) => ({
+    path: Path.resolve("dist/public"),
 
-  return {
-    path: Path.resolve("dist/public/"),
-    publicPath: "/",
-    filename: isProd ? "[name]-[contenthash].js" : "[name].js",
-  };
-};
+    filename: (chunk) => {
+        const name = chunk.chunk.name + ".js";
+        return name.startsWith("styles__") ? name : Global.convertName(name);
+    },
+
+    chunkFilename: (chunk) => {
+        const name = chunk.chunk.name + ".js";
+        return name.startsWith("styles__") ? name : Global.convertName(name);
+    },
+});

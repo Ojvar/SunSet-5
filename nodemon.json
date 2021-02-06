@@ -1,6 +1,6 @@
 {
     "watch": ["src"],
     "ext": "ts",
-    "ignore": ["dist/**/*", "public/**/*", "README", "src/**/*.spec.ts"],
-    "exec": "ts-node-dev -P tsconfig.json -r tsconfig-paths/register src/server.ts"
+    "ignore": ["dist/*", "README", "src/**/*.spec.ts", "src/frontend/**/*"],
+    "exec": "TS_NODE_PROJECT=tsconfig.json ts-node-dev -P tsconfig.json -r tsconfig-paths/register src/server.ts"
 }

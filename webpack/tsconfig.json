@@ -1,16 +1,16 @@
 {
-    "include": ["../src"],
-    "exclude": ["../node_modules", "../**/*.spec.ts", "../dist"],
-
     "compilerOptions": {
-        "target": "ESNext",
-        "module": "CommonJS",
-        "moduleResolution": "Node",
+        "noImplicitAny": true,
+        "module": "es2020",
+        "target": "es2020",
         "jsx": "react",
+        "allowJs": true,
+        "moduleResolution": "Node",
+        "allowSyntheticDefaultImports": true,
 
-        "outDir": "../dist",
-        "rootDir": "../",
-        "baseUrl": "../",
+        "outDir": "./dist/",
+        "rootDir": "./",
+        "baseUrl": "./",
         "paths": {
             "@PUBLIC/*": ["dist/public/*"],
             "@Config/*": ["src/config/*"],
@@ -32,19 +32,6 @@
             "@/*": ["src/*"]
         },
 
-        "sourceRoot": "src",
-        // "sourceMap": true,
-        "inlineSourceMap": true,
-
-        "typeRoots": ["../node_modules/@types"],
-
-        "strict": true,
-        "allowJs": true,
-        // "isolatedModules": true,
-        "allowSyntheticDefaultImports": true,
-        "removeComments": false,
-        "resolveJsonModule": true,
-
-        "plugins": [{ "transform": "@zerollup/ts-transform-paths" }]
+        "sourceRoot": "./src"
     }
 }

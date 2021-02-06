@@ -1,98 +1,52 @@
-"use strict";
+const Global = require("./global");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+module.exports = (devMode, entries) => [
+    new vueLoaderPlugin(),
+    miniCssExtractPlugin(entries),
+    suppressPlugin(entries),
+    manifest(),
+];
 
 /**
- * Export
+ * VueLoader plugin
  */
-module.exports = (env = {}, entries) => {
-  const plugins = [
-    vuePluginLoader(env, entries),
-    suppressPlugin(env, entries),
-    miniCssExtract(env, entries),
-    manifest(env, entries),
-  ];
+function vueLoaderPlugin() {
+    const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
-  /* Copy files and directories */
-  const copyFilesResult = copyFiles(env, entries);
-  if (copyFilesResult) {
-    plugins.push(copyFilesResult);
-  }
-
-  return plugins;
-};
-
-/**
- * copyFilePlugins
- */
-function copyFiles(env, entries = {}) {
-  const CopyPlugin = require("copy-webpack-plugin");
-  let patterns = entries.copy || {};
-
-  if (Object.values(patterns).length) {
-    patterns = Object.keys(patterns).map((key) => ({
-      from: key,
-      to: patterns[key],
-    }));
-
-    const result = {
-      patterns,
-      options: {
-        concurrency: 100,
-      },
-    };
-
-    return new CopyPlugin(result);
-  }
-
-  return null;
-}
-
-/**
- * Vue plugin loader
- */
-function vuePluginLoader(env, etnries) {
-  const { VueLoaderPlugin } = require("vue-loader");
-
-  return new VueLoaderPlugin();
+    return new VueLoaderPlugin();
 }
 
 /**
  * Suppress plugin
  */
-function suppressPlugin(env, entries) {
-  const SuppressChunksPlugin = require("suppress-chunks-webpack-plugin")
-    .default;
+function suppressPlugin(entries) {
+    const SuppressChunksPlugin = require("suppress-chunks-webpack-plugin")
+        .default;
+    const options = Object.keys(entries).filter((x) =>
+        x.startsWith("styles__")
+    );
 
-  const styles = entries.styles || {};
-  const options = Object.keys(styles).map(
-    (key) => (
-      {
-        name: key,
-        match: /\.js\.map$/,
-      },
-      {
-        name: key,
-        match: /\.js$/,
-      }
-    )
-  );
-
-  return new SuppressChunksPlugin(options);
+    return new SuppressChunksPlugin(options, { filter: /\.js$/ });
 }
 
 /**
- * MiniCssExtract plugin
+ * Mini Css plugin
  */
-function miniCssExtract(env, entries) {
-  const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
-  return new MiniCssExtractPlugin();
+function miniCssExtractPlugin(entries) {
+    return new MiniCssExtractPlugin({
+        filename: (chunk) => Global.convertName(chunk.chunk.name) + ".css",
+        chunkFilename: (chunk) => Global.convertName(chunk.chunk.name) + ".css",
+        // filename: devMode ? "[name].css" : "[name].[contenthash].css",
+        // chunkFilename: devMode ? "[id].css" : "[id].[contenthash].css",
+    });
 }
 
 /**
  * WebpackManifest plugin
  */
 function manifest(env, entries) {
-  const AssetListWebpackPlugin = require("asset-list-webpack-plugin");
+    const AssetListWebpackPlugin = require("asset-list-webpack-plugin");
 
-  return new AssetListWebpackPlugin({});
+    return new AssetListWebpackPlugin({});
 }

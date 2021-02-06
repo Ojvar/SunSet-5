@@ -2,48 +2,48 @@
  * Helmet config
  */
 export default {
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: [
-        "'self'",
-        "data: blob: filesystem: about: ws: wss: 'unsafe-inline' 'unsafe-eval' 'unsafe-dynamic'",
-      ],
-      scriptSrc: [
-        "'self'",
-        "data: blob: 'unsafe-inline' 'unsafe-eval'",
-        // "https://unpkg.com", /* Use any external url you used in your site */
-      ],
-      connectSrc: ["'self'", "data: blob: 'unsafe-inline'"],
-      imgSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
-      frameSrc: ["'self'", " data: blob:"],
-      styleSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
-      fontSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: [
+                "'self'",
+                "data: blob: filesystem: about: ws: wss: 'unsafe-inline' 'unsafe-eval' 'unsafe-dynamic'",
+            ],
+            scriptSrc: [
+                "'self'",
+                "data: blob: 'unsafe-inline' 'unsafe-eval'",
+                // "https://unpkg.com", /* Use any external url you used in your site */
+            ],
+            connectSrc: ["'self'", "data: blob: 'unsafe-inline'"],
+            imgSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
+            frameSrc: ["'self'", " data: blob:"],
+            styleSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
+            fontSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
 
-      // upgradeInsecureRequests: ["'self'"],
+            // upgradeInsecureRequests: ["'self'"],
+        },
+        //  reportOnly: true,
+        // setAllHeaders: true,
     },
-    //  reportOnly: true,
-    setAllHeaders: true,
-  },
 
-  dnsPrefetchControl: {},
+    dnsPrefetchControl: {},
 
-  expectCt: {},
+    expectCt: {},
 
-  frameguard: {},
+    frameguard: {},
 
-  hidePoweredBy: {},
+    hidePoweredBy: {},
 
-  hsts: {},
+    hsts: {},
 
-  ieNoOpen: {},
+    ieNoOpen: {},
 
-  noSniff: {},
+    noSniff: {},
 
-  permittedCrossDomainPolicies: {},
+    permittedCrossDomainPolicies: {},
 
-  referrerPolicy: {
-    policy: "no-referrer",
-  },
+    referrerPolicy: {
+        policy: "no-referrer",
+    },
 
-  xssFilter: {},
+    xssFilter: {},
 };

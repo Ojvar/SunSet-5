@@ -8,29 +8,19 @@
         "moduleResolution": "Node",
         "allowSyntheticDefaultImports": true,
 
-        "outDir": "./dist/",
-        "rootDir": "./",
-        "baseUrl": "./",
+        "outDir": "./dist/public",
+        "rootDir": "./src/frontend",
 
+        "baseUrl": ".",
         "paths": {
-            // "@PUBLIC/*": ["dist/public/*"],
-            // "@Config/*": ["src/config/*"],
-            // "@Routes/*": ["src/routes/*"],
-            // "@Lib/*": ["src/lib/*"],
+            "@PUBLIC/*": ["dist/public/*"],
+            "@Config/*": ["src/config/*"],
+            "@Routes/*": ["src/routes/*"],
+            "@Lib/*": ["src/lib/*"],
 
-            // "@Core/Helpers/*": ["src/core/helpers/*"],
-            // "@Core/Global/*": ["src/core/global/*"],
-            // "@Core/Modules/*": ["src/core/modules/*"],
-            // "@Core/*": ["src/core/*"],
-
-            // "@BE/Controllers/*": ["src/backend/controllers/*"],
-            // "@BE/*": ["src/backend/*"],
-
-            // "@FE/Scripts/*": ["src/frontend/scripts/*"],
-            // "@FE/Components/*": ["src/frontend/scripts/components/*"],
-            "@FE/*": ["src/frontend/*"],
-
-            // "@/*": ["src/*"]
+            "@FE/Scripts/*": ["src/frontend/scripts/*"],
+            "@FE/Components/*": ["src/frontend/scripts/components/*"],
+            "@FE/*": ["src/frontend/*"]
         }
     }
 }

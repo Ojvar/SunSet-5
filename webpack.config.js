@@ -6,10 +6,9 @@ const entries = {
         "pages/auth": "./src/frontend/scripts/pages/auth/login.ts",
     },
     styles: {
-        // app: "./src/frontend/styles/app.scss",
-        // "pages/home": "./src/frontend/styles/pages/home.scss",
+        app: "./src/frontend/styles/app.scss",
+        "pages/home": "./src/frontend/styles/pages/home.scss",
     },
-    copy: {},
 };
 
 /**

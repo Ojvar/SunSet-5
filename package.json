@@ -4,6 +4,7 @@
     "description": "",
     "main": "",
     "scripts": {
+        "build": "cross-env NODE_ENV=production webpack --config=webpack/webpack.config.js",
         "dev": "cross-env NODE_ENV=development webpack --config=webpack/webpack.config.js",
         "watch": "cross-env NODE_ENV=development webpack --config=webpack/webpack.config.js --watch"
     },

@@ -1,7 +1,13 @@
 const Global = require("../helpers/global");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = (entries) => ({
     minimize: !Global.devMode,
+    minimizer: [
+        new TerserPlugin({
+            extractComments: false,
+        }),
+    ],
 
     splitChunks: {
         chunks: "async",

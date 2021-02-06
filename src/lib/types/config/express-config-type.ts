@@ -2,22 +2,26 @@
  * ExpressConfigType Config Type
  */
 export type ExpressConfigType = {
-  publicPath: string;
+    publicPath: string;
 
-  host: string;
-  port: number;
-  url: string;
-  protocol: string;
+    host: string;
+    port: number;
+    url: string;
+    protocol: string;
 
-  trustedProxy: string;
+    trustedProxy: string;
 
-  throttleStore: string;
-  throttleWindow: number;
-  throttleMax: number;
-  throttleDelay: number;
+    throttleStore: string;
+    throttleWindow: number;
+    throttleMax: number;
+    throttleDelay: number;
 
-  useMulter: boolean;
+    useMulter: boolean;
 
-  sslServerKey: string;
-  sslServerCert: string;
+    bodyParser: {
+        limit: string;
+    };
+
+    sslServerKey: string;
+    sslServerCert: string;
 };

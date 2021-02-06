@@ -5,22 +5,26 @@ import BaseRouter from "@Core/Helpers/base-router-helper";
  * Home router
  */
 export default class HomeRoute extends BaseRouter {
-  private homeController: HomeController = new HomeController();
+    /**
+     * Constructor
+     */
+    constructor() {
+        super("", "HomeRoute");
+        this.defineRoutes();
+    }
 
-  /**
-   * Constructor
-   */
-  constructor() {
-    super("", "HomeRoute");
-    this.defineRoutes();
-  }
+    /**
+     * Define routes
+     */
+    private defineRoutes(): void {
+        const controller: HomeController = new HomeController();
 
-  /**
-   * Define routes
-   */
-  private defineRoutes(): void {
-    super.get("/login", [this.homeController.login], "home.login");
-    super.get("/logout", [this.homeController.logout], "home.logout");
-    super.get("/", [this.homeController.index], "home.index");
-  }
+        super.get("/", [controller.index.bind(controller)], "home.index");
+
+        super.get(
+            "/logout",
+            [controller.logout.bind(controller)],
+            "home.logout"
+        );
+    }
 }

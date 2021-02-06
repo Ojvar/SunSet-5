@@ -1,6 +1,11 @@
 const Global = require("./modules/global");
 
 module.exports = (env, entries) => {
+    entries = {
+        ...Global.convertItems("scripts__", entries.scripts),
+        ...Global.convertItems("styles__", entries.styles),
+    };
+
     let result = {
         mode: Global.webpackMode,
 

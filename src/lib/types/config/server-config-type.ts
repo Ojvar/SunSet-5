@@ -2,9 +2,9 @@
  * Server Config Type
  */
 export type ServerConfigType = {
-  envFile: string;
+    envFile: string;
 
-  publicFolder: string;
-  routerManifest: string;
-  acceptableTypes: string[];
+    publicFolder: string;
+    routerManifest: string;
+    acceptableTypes: string[];
 };

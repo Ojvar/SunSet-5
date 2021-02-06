@@ -1,41 +1,12 @@
 <!DOCTYPE html>
 html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    title Sunset 4.2
-    link(rel="shortcut icon" href=Helper.mix("resources/sunset.svg"))
-    link(rel="stylesheet", href=Helper.mix("styles/app.css"))
-    link(rel="stylesheet", href=Helper.mix("styles/pages/home.css"))
-
-  body
-    nav.navbar(role='navigation' aria-label='main navigation')
-      .navbar-brand
-        a.navbar-item(href=Helper.route("home.index"))
-          img.login-icon
-        a.navbar-burger.burger(role='button' aria-label='menu' aria-expanded='false' data-target='navbarBasicExample')
-          span(aria-hidden='true')
-          span(aria-hidden='true')
-          span(aria-hidden='true')
-
-      #navbarBasicExample.navbar-menu
-        .navbar-start
-          a.navbar-item(href=Helper.route("home.index")) Home
-          .navbar-item.has-dropdown.is-hoverable
-            a.navbar-link More
-            .navbar-dropdown
-              a.navbar-item(href=Helper.route("home.index")) About
-              a.navbar-item(href=Helper.route("home.index")) Contact
-              hr.navbar-divider
-              a.navbar-item(href=Helper.route("home.index")) Report an issue
-        .navbar-end
-          .navbar-item
-            .buttons
-              if (loggedIn)
-                a.button.is-light(href=Helper.route("home.logout")) Logout
-              else
-                a.button.is-primary(href=Helper.route("home.login")) Login
-
-    #app.section
-
-    script(defer, src=Helper.mix("scripts/pages/home.js"))
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title سازمان نظام مهندسی ساختمان
+        link(rel="stylesheet", href=Helper.mix("/styles/app.css"))
+        link(rel="stylesheet", href=Helper.mix("/styles/pages/home.css"))
+    body
+        #app
+            new-dashboard
+        script(defer, nonce=nonce, src=Helper.mix("/scripts/pages/test.js"))

@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = (devMode) => ({
     rules: [
         {
-            test: /\.m?js$/,
+            test: /\.m?js$/i,
             exclude: /node_modules/,
             use: {
                 loader: "babel-loader",
@@ -40,7 +40,7 @@ module.exports = (devMode) => ({
         },
 
         {
-            test: /\.styl(us)?$/,
+            test: /\.styl(us)?$/i,
             oneOf: [
                 {
                     resourceQuery: /vue/,
@@ -72,7 +72,7 @@ module.exports = (devMode) => ({
         },
 
         {
-            test: /\.less$/,
+            test: /\.less$/i,
             oneOf: [
                 {
                     resourceQuery: /vue/,
@@ -135,7 +135,7 @@ module.exports = (devMode) => ({
             ],
         },
         {
-            test: /\.pug$/,
+            test: /\.pug$/i,
             oneOf: [
                 {
                     resourceQuery: /^\?vue/,
@@ -148,18 +148,18 @@ module.exports = (devMode) => ({
         },
 
         {
-            test: /\.vue$/,
+            test: /\.vue$/i,
             loader: "vue-loader",
         },
 
         {
-            test: /\.tsx?$/,
+            test: /\.tsx?$/i,
             use: "ts-loader",
             exclude: /node_modules/,
         },
 
         {
-            test: /\.jsx?$/,
+            test: /\.jsx?$/i,
             exclude: /(node_modules)/,
             use: {
                 loader: "babel-loader",

@@ -37,5 +37,10 @@
         "vue-template-compiler": "^2.6.12",
         "webpack": "^5.21.1",
         "webpack-cli": "^4.5.0"
+    },
+    "dependencies": {
+        "vue": "^2.6.12",
+        "vue-router": "^3.5.1",
+        "vuex": "^3.6.2"
     }
 }

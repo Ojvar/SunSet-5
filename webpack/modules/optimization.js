@@ -1,51 +1,43 @@
-module.exports = (devMode) => ({
-    splitChunks: {
-        chunks: "all",
-        maxAsyncRequests: 30,
-        minChunks: 1,
+const Global = require("../helpers/global");
 
+module.exports = (entries) => ({
+    minimize: !Global.devMode,
+
+    splitChunks: {
+        chunks: "async",
+        minSize: 20000,
+        minRemainingSize: 0,
+        maxSize: 300000,
+        minChunks: 1,
+        maxAsyncRequests: 30,
+        maxInitialRequests: 30,
+        enforceSizeThreshold: 50000,
         cacheGroups: {
             vue: {
-                chunks: "all",
                 test: /[\\/]node_modules[\\/]vue/,
-                name: `chunks/vue`,
-            },
-
-            commons: {
-                chunks: "all",
-                test: /[\\/]node_modules[\\/]/,
                 name(module, chunks, cacheGroupKey) {
-                    const chunkData = extractChunkData(
-                        module,
-                        chunks,
-                        cacheGroupKey
-                    );
-                    const chunkFileName = chunkData.moduleFileName;
+                    const moduleFileName = module
+                        .identifier()
+                        .split("/")
+                        .reduceRight((item) => item);
 
-                    return `chunks/${chunkFileName}`;
+                    return `chunks/vue`;
                 },
+                chunks: "all",
+                reuseExistingChunk: true,
             },
+
+            // defaultVendors: {
+            //     test: /[\\/]node_modules[\\/]/,
+            //     priority: -10,
+            //     reuseExistingChunk: true,
+            // },
+
+            // default: {
+            //     minChunks: 2,
+            //     priority: -20,
+            //     reuseExistingChunk: true,
+            // },
         },
     },
 });
-
-/**
- * ExtractChunkData
- * @param {*} module
- * @param {*} chunk
- * @param {*} cacheGroupKey
- */
-function extractChunkData(module, chunks, cacheGroupKey) {
-    const moduleFileName = module
-        .identifier()
-        .split("/")
-        .reduceRight((item) => item);
-
-    const allChunksNames = chunks.map((item) => item.name).join("~");
-
-    return {
-        moduleFileName,
-        allChunksNames,
-        cacheGroupKey,
-    };
-}

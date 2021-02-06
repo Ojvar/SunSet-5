@@ -1,141 +1,10 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const Path = require("path");
 
-module.exports = (devMode) => ({
+module.exports = () => ({
     rules: [
         {
-            test: /\.m?js$/i,
-            exclude: /node_modules/,
-            use: {
-                loader: "babel-loader",
-                options: {
-                    presets: ["@babel/preset-env"],
-                },
-            },
-        },
-
-        {
-            test: /\.(png|svg|jpg|jpeg|gif)$/i,
-            loader: "file-loader",
-            options: {
-                publicPath: "/resources",
-                outputPath: "resources",
-                useRelativePaths: true,
-                name(resourcePath, resourceQuery) {
-                    return devMode ? "[name].[ext]" : "[name].[hash].[ext]";
-                },
-            },
-        },
-
-        {
-            test: /\.(woff|woff2|eot|ttf|otf)$/i,
-            loader: "file-loader",
-            options: {
-                publicPath: "/fonts",
-                outputPath: "fonts",
-                useRelativePaths: true,
-                name(resourcePath, resourceQuery) {
-                    return devMode ? "[name].[ext]" : "[name].[hash].[ext]";
-                },
-            },
-        },
-
-        {
-            test: /\.styl(us)?$/i,
-            oneOf: [
-                {
-                    resourceQuery: /vue/,
-                    use: [
-                        "style-loader",
-                        {
-                            loader: "css-loader",
-                            options: {
-                                sourceMap: devMode,
-                            },
-                        },
-                        "stylus-loader",
-                    ],
-                },
-                {
-                    resourceQuery: /(?!vue)/,
-                    use: [
-                        MiniCssExtractPlugin.loader,
-                        {
-                            loader: "css-loader",
-                            options: {
-                                sourceMap: devMode,
-                            },
-                        },
-                        "less-loader",
-                    ],
-                },
-            ],
-        },
-
-        {
-            test: /\.less$/i,
-            oneOf: [
-                {
-                    resourceQuery: /vue/,
-                    use: [
-                        "style-loader",
-                        {
-                            loader: "css-loader",
-                            options: {
-                                sourceMap: devMode,
-                            },
-                        },
-                        "less-loader",
-                    ],
-                },
-                {
-                    resourceQuery: /(?!vue)/,
-                    use: [
-                        MiniCssExtractPlugin.loader,
-                        {
-                            loader: "css-loader",
-                            options: {
-                                sourceMap: devMode,
-                            },
-                        },
-                        "less-loader",
-                    ],
-                },
-            ],
-        },
-
-        {
-            test: /\.(scss|sass|css)$/i,
-            oneOf: [
-                {
-                    resourceQuery: /vue/,
-                    use: [
-                        "style-loader",
-                        {
-                            loader: "css-loader",
-                            options: {
-                                sourceMap: devMode,
-                            },
-                        },
-                        "sass-loader",
-                    ],
-                },
-                {
-                    resourceQuery: /(?!vue)/,
-                    use: [
-                        MiniCssExtractPlugin.loader,
-                        {
-                            loader: "css-loader",
-                            options: {
-                                sourceMap: devMode,
-                            },
-                        },
-                        "sass-loader",
-                    ],
-                },
-            ],
-        },
-        {
             test: /\.pug$/i,
+            exclude: /node_modules/,
             oneOf: [
                 {
                     resourceQuery: /^\?vue/,
@@ -148,25 +17,34 @@ module.exports = (devMode) => ({
         },
 
         {
-            test: /\.vue$/i,
+            test: /\.vue$/,
             loader: "vue-loader",
         },
 
+        // this will apply to both plain `.js` files
+        // AND `<script>` blocks in `.vue` files
         {
-            test: /\.tsx?$/i,
-            use: "ts-loader",
-            exclude: /node_modules/,
+            test: /\.js$/,
+            loader: "babel-loader",
+        },
+
+        // this will apply to both plain `.css` files
+        // AND `<style>` blocks in `.vue` files
+        {
+            test: /\.css$/,
+            use: ["vue-style-loader", "css-loader"],
         },
 
         {
-            test: /\.jsx?$/i,
-            exclude: /(node_modules)/,
+            test: /\.tsx?$/,
             use: {
-                loader: "babel-loader",
+                loader: "ts-loader",
                 options: {
-                    presets: ["@babel/preset-env"],
+                    configFile: Path.resolve("webpack/tsconfig.webpack.json"),
+                    transpileOnly: true,
                 },
             },
+            exclude: /node_modules/,
         },
     ],
 });

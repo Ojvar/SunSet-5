@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "rootDir": "./",
+
+        "jsx": "react",
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+
+        "strict": true,
+        "allowJs": true,
+        "noImplicitAny": true,
+        "esModuleInterop": true,
+
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+
+        "baseUrl": "./",
+        "paths": {
+            "@VueC/*": ["resources/scripts/components/*"]
+        }
+    },
+
+    "exclude": ["node_modules"]
+}

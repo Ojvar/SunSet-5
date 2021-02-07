@@ -1,7 +1,7 @@
 const Global = require("../helpers/global");
 const TerserPlugin = require("terser-webpack-plugin");
 
-module.exports = (entries) => ({
+module.exports = () => ({
     minimize: !Global.devMode,
     minimizer: [
         new TerserPlugin({
@@ -20,14 +20,15 @@ module.exports = (entries) => ({
         enforceSizeThreshold: 50000,
         cacheGroups: {
             vue: {
-                test: /[\\/]node_modules[\\/]vue/,
+                test: /[\\/]node_modules[\\/]vue/i,
                 name(module, chunks, cacheGroupKey) {
                     const moduleFileName = module
                         .identifier()
                         .split("/")
-                        .reduceRight((item) => item);
+                        .reduceRight((item) => item)
+                        .replace(".js", "");
 
-                    return `chunks/vue`;
+                    return `chunks/${moduleFileName}`;
                 },
                 chunks: "all",
                 reuseExistingChunk: true,

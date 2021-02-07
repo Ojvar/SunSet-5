@@ -5,11 +5,17 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Document
-    body 
+    body
         h1 Hello New 
         #app
             logo
-            Hello {{ name }}
+            ul
+                li
+                    router-link(to="/") Home
+                li
+                    router-link(to="/contactUs") Contact Us
+            router-view
 
-    script(defer, src="/chunks/vue.js")
+    script(defer, src="/chunks/vue.esm.js")
+    script(defer, src="/chunks/vue-router.esm.js")
     script(defer, src="/home.js")

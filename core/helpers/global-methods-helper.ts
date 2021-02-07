@@ -1,7 +1,23 @@
+import { Request } from "express";
 import { resolve, basename, extname } from "path";
 import Glob from "glob";
 
 export class GlobalMethods {
+    /**
+     * Check for RequestType
+     * @param req Express.Request The request
+     */
+    public static getRequestType(req: Request): string | boolean {
+        return req.accepts(["html", "json"]);
+    }
+
+    /**
+     * Is in production mode
+     */
+    public static isProductionMode(): boolean {
+        return process.env.NODE_ENV == "production";
+    }
+
     /**
      * Return root-relative path
      * @param path string[]

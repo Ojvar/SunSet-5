@@ -5,9 +5,5 @@ const controller: HomeController = new HomeController();
 
 export const routeBase: string = "/";
 export const routes: RouteItem[] = [
-    RouteItem.get(
-        "/:name?/:family?",
-        controller.index.bind(controller),
-        "home.index"
-    ),
+    RouteItem.get("/", controller.index.bind(controller), "home.index"),
 ];

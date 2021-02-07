@@ -1,6 +1,7 @@
-import Express, { NextFunction } from "express";
+import Express from "express";
 import ServerConfig from "@CONFIGS/core/server";
-import { GlobalMethods } from "./global-methods";
+import { GlobalMethods } from "./global-methods-helper";
+import { RouteManager } from "./route-manager";
 
 /**
  * Express helper
@@ -9,12 +10,20 @@ export class ExpressHelper {
     private logger: Console = console;
     private app?: Express.Application;
     private config: ExpressConfigType = ServerConfig;
+    private routeManager?: RouteManager;
 
     /**
      * Get app instance
      */
     public get App(): Express.Application {
         return this.app as Express.Application;
+    }
+
+    /**
+     * Get route-mamanger
+     */
+    public get RouteManager(): RouteManager {
+        return this.routeManager as RouteManager;
     }
 
     /**
@@ -37,6 +46,7 @@ export class ExpressHelper {
      */
     constructor(logger: Console) {
         this.logger = logger;
+        this.routeManager = new RouteManager(logger);
     }
 
     /**
@@ -68,16 +78,8 @@ export class ExpressHelper {
      * Setup routes
      */
     public async setupRoutes() {
-        this.app?.get(
-            "/",
-            (
-                req: Express.Request,
-                res: Express.Response,
-                next: NextFunction
-            ) => {
-                res.render("home.pug");
-            }
-        );
+        await this.routeManager?.loadRoutes();
+        await this.routeManager?.applyRoutes(this.app as Express.Application);
     }
 
     /**

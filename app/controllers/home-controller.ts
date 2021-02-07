@@ -8,7 +8,6 @@ export class HomeController {
      * @param next
      */
     public index(req: Request, res: Response, next: NextFunction) {
-        console.log(req.params)
         res.render("home.pug", { ...req.params });
     }
 }

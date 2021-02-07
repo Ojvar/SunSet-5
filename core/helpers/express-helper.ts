@@ -1,5 +1,6 @@
-import Express from "express";
+import Express, { NextFunction } from "express";
 import ServerConfig from "@CONFIGS/core/server";
+import { GlobalMethods } from "./global-methods";
 
 /**
  * Express helper
@@ -43,6 +44,40 @@ export class ExpressHelper {
      */
     public async init(payload?: any): Promise<void> {
         this.app = Express();
+        await this.setupStaticFolders();
+        await this.setupViewEngine();
+        await this.setupRoutes();
+    }
+
+    /**
+     * Setup static folder
+     */
+    public async setupStaticFolders() {
+        this.app?.use(Express.static(GlobalMethods.rPath("dist/public")));
+    }
+
+    /**
+     * Setup view engine
+     */
+    public async setupViewEngine() {
+        this.app?.set("view engine", "pug");
+        this.app?.set("views", GlobalMethods.rPath("views"));
+    }
+
+    /**
+     * Setup routes
+     */
+    public async setupRoutes() {
+        this.app?.get(
+            "/",
+            (
+                req: Express.Request,
+                res: Express.Response,
+                next: NextFunction
+            ) => {
+                res.render("home.pug");
+            }
+        );
     }
 
     /**

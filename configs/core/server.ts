@@ -1,8 +1,8 @@
 import { ExpressConfigType } from "core/helpers/express-helper";
 
-export default {
+export const config = {
     proto: process.env.PROTO || "http",
-    serverUrl: process.env.URL || "http://localhost:8585",
+    serverUrl: process.env.URL || "http://localhost:8085",
     host: process.env.HOST || "localhost",
     port: parseInt(process.env.PORT || "8585"),
 } as ExpressConfigType;

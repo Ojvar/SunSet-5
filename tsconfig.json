@@ -4,10 +4,24 @@
         "rootDir": "./",
         "baseUrl": "./",
         "paths": {
+            /* App */
             "@APP/*": ["app/*"],
             "@CONTROLLERS/*": ["app/controllers/*"],
             "@TYPES/*": ["types/*"],
-            "@CONFIGS/*": ["configs/*"]
+            "@CONFIGS/*": ["configs/*"],
+
+            /* Global */
+            "@Lib/*": ["lib/*"],
+
+            /* Front end */
+            "@VueC/*": ["resources/scripts/components/*"],
+            "@Scripts/*": ["resources/scripts/*"],
+            "@Styles/*": ["resources/styles/*"],
+            "@Fonts/*": ["resources/fonts/*"],
+            "@Images/*": ["resources/images/*"],
+
+            /* Root */
+            "@/*": ["./*"]
         },
 
         "target": "ESNext",

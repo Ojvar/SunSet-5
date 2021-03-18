@@ -1,4 +1,5 @@
 import { ExpressHelper } from "core/helpers/express-helper";
+import { GlobalData } from "core/helpers/global-data-helper";
 import { CoreModule } from "./core-module-interface";
 
 /**
@@ -6,6 +7,13 @@ import { CoreModule } from "./core-module-interface";
  */
 export default class ExpressModule extends CoreModule {
     private expressHelper?: ExpressHelper;
+
+    /**
+     * Express instance
+     */
+    public get app(): ExpressHelper {
+        return this.expressHelper as ExpressHelper;
+    }
 
     /**
      * Ctr
@@ -34,6 +42,9 @@ export default class ExpressModule extends CoreModule {
 
         await this.expressHelper.init();
         await this.expressHelper.listen();
+
+        /* Store in Global-data */
+        GlobalData.express = this;
 
         this.logger.log("Boot Module: Express");
         return this;

@@ -1,48 +1,4 @@
-import Express from "express";
-import { Hash } from "@TYPES/hash-type";
-
-/**
- * RouteHelper class
- */
-export class RouteHelper {
-    private logger: Console = console;
-    private router?: Express.Router;
-    private routesMap: Hash<RouteItem> = {};
-
-    /**
-     * Ctr
-     * @param router Router
-     */
-    constructor(logger: Console, router: Express.Router) {
-        this.logger = logger;
-        this.router = router;
-    }
-
-    /**
-     * Include routes
-     * @param routesMap Hash<any>
-     */
-    public include(routes: RouteItem[]) {
-        console.log(routes);
-    }
-
-    /**
-     * Register "GET" routes
-     * @param url string
-     * @param alias string?
-     */
-    public get(
-        url: string,
-        handlers: Express.RequestHandler | Express.RequestHandler[],
-        alias?: string
-    ) {
-        this.router?.get(url, handlers);
-
-        if (alias) {
-            this.logger.debug("GET " + url + " " + alias);
-        }
-    }
-}
+import { RequestHandler } from "express";
 
 /**
  * Router-Itme type
@@ -51,7 +7,7 @@ export class RouteItem {
     public routeType: string = "";
     public path: string = "";
     public alias?: string;
-    public handler: Express.RequestHandler | Express.RequestHandler[];
+    public handler: RequestHandler | RequestHandler[];
 
     /**
      * Ctr
@@ -63,7 +19,7 @@ export class RouteItem {
     constructor(
         rType: string,
         path: string,
-        handler: Express.RequestHandler | Express.RequestHandler[],
+        handler: RequestHandler | RequestHandler[],
         alias?: string
     ) {
         this.routeType = rType;
@@ -81,7 +37,7 @@ export class RouteItem {
     public static route(
         rType: string,
         path: string,
-        handler: Express.RequestHandler | Express.RequestHandler[],
+        handler: RequestHandler | RequestHandler[],
         alias?: string
     ) {
         return new RouteItem(rType, path, handler, alias);
@@ -95,7 +51,7 @@ export class RouteItem {
      */
     public static get(
         path: string,
-        handler: Express.RequestHandler | Express.RequestHandler[],
+        handler: RequestHandler | RequestHandler[],
         alias?: string
     ) {
         return this.route("get", path, handler, alias);
@@ -109,7 +65,7 @@ export class RouteItem {
      */
     public static head(
         path: string,
-        handler: Express.RequestHandler | Express.RequestHandler[],
+        handler: RequestHandler | RequestHandler[],
         alias?: string
     ) {
         return this.route("head", path, handler, alias);
@@ -123,7 +79,7 @@ export class RouteItem {
      */
     public static post(
         path: string,
-        handler: Express.RequestHandler | Express.RequestHandler[],
+        handler: RequestHandler | RequestHandler[],
         alias?: string
     ) {
         return this.route("post", path, handler, alias);
@@ -137,7 +93,7 @@ export class RouteItem {
      */
     public static patch(
         path: string,
-        handler: Express.RequestHandler | Express.RequestHandler[],
+        handler: RequestHandler | RequestHandler[],
         alias?: string
     ) {
         return this.route("patch", path, handler, alias);
@@ -151,7 +107,7 @@ export class RouteItem {
      */
     public static put(
         path: string,
-        handler: Express.RequestHandler | Express.RequestHandler[],
+        handler: RequestHandler | RequestHandler[],
         alias?: string
     ) {
         return this.route("put", path, handler, alias);
@@ -165,7 +121,7 @@ export class RouteItem {
      */
     public static delete(
         path: string,
-        handler: Express.RequestHandler | Express.RequestHandler[],
+        handler: RequestHandler | RequestHandler[],
         alias?: string
     ) {
         return this.route("delete", path, handler, alias);
@@ -179,7 +135,7 @@ export class RouteItem {
      */
     public static option(
         path: string,
-        handler: Express.RequestHandler | Express.RequestHandler[],
+        handler: RequestHandler | RequestHandler[],
         alias?: string
     ) {
         return this.route("option", path, handler, alias);

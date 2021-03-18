@@ -1,7 +1,10 @@
+import Glob from "glob";
 import { Request } from "express";
 import { resolve, basename, extname } from "path";
-import Glob from "glob";
 
+/**
+ * Global methods
+ */
 export class GlobalMethods {
     /**
      * Check for RequestType
@@ -34,6 +37,16 @@ export class GlobalMethods {
         pattern = path + "/" + pattern;
 
         return Glob.sync(pattern);
+    }
+
+    /**
+     * Import an specified file
+     * @param path string
+     */
+    public static async importFile(path: string): Promise<any> {
+        path = this.rPath(path);
+
+        return await import(path);
     }
 
     /**

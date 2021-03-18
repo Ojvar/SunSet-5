@@ -1,8 +1,10 @@
-import Express from "express";
-import ServerConfig from "@CONFIGS/core/server";
-import Http from "http";
+import Express, { NextFunction, Request, Response } from "express";
+
 import { GlobalMethods } from "./global-methods-helper";
+import Http from "http";
 import { RouteManager } from "./route-manager";
+import { config as ServerConfig } from "@CONFIGS/core/server";
+import { lstatSync } from "fs";
 
 /**
  * Express helper
@@ -13,6 +15,13 @@ export class ExpressHelper {
     private server?: Http.Server;
     private config: ExpressConfigType = ServerConfig;
     private routeManager?: RouteManager;
+
+    /**
+     * Get logger
+     */
+    public get Logger(): Console {
+        return this.logger;
+    }
 
     /**
      * Get app instance
@@ -56,121 +65,15 @@ export class ExpressHelper {
      */
     public async init(payload?: any): Promise<void> {
         this.app = Express();
-        await this.setupStaticFolders();
-        await this.setupViewEngine();
 
-        await this.setupMiddlewares();
+        /* Pre-core middlewares */
+        await this.setupCustomMiddlewares("core/middlewares/pre-core");
 
-        await this.setupRoutes();
-    }
+        /* Core middlewares */
+        await this.setupCustomMiddlewares("core/middlewares/core");
 
-    /**
-     * Setup static folder
-     */
-    public async setupStaticFolders() {
-        this.app?.use(Express.static(GlobalMethods.rPath("dist/public")));
-    }
-
-    /**
-     * Setup view engine
-     */
-    public async setupViewEngine() {
-        this.app?.set("view engine", "pug");
-        this.app?.set("views", GlobalMethods.rPath("views"));
-    }
-
-    /**
-     * Setup middlewares
-     */
-    public async setupMiddlewares() {
-        this.setupBodyParser();
-        this.setupCookieParser();
-        this.setupGZip();
-    }
-
-    /**
-     * Setup routes
-     */
-    public async setupRoutes() {
-        await this.routeManager?.loadRoutes();
-        await this.routeManager?.applyRoutes(this.app as Express.Application);
-
-        /* Route handler */
-        this.app?.use(
-            (
-                req: Express.Request,
-                res: Express.Response,
-                next: Express.NextFunction
-            ): void => {
-                switch (GlobalMethods.getRequestType(req)) {
-                    case "html":
-                        res.render("errors/404.pug");
-                        break;
-
-                    case "xhr":
-                        res.status(404)
-                            .send({
-                                success: false,
-                                data: "Route not found",
-                            })
-                            .end();
-                        break;
-
-                    default:
-                        res.status(404)
-                            .send("Bad Request")
-                            .end();
-                        break;
-                }
-            }
-        );
-
-        /* Err handler */
-        this.app?.use(
-            async (
-                error: Error,
-                req: Express.Request,
-                res: Express.Response,
-                next: Express.NextFunction
-            ) => {
-                if (res.headersSent) {
-                    return next(error);
-                }
-
-                let errorData = {
-                    text: "Server Internal Error!",
-                    error: null,
-                } as { text: string; error: any };
-
-                if (!GlobalMethods.isProductionMode()) {
-                    errorData.error = JSON.stringify(error);
-                }
-
-                /* Log error */
-                this.logger.error(JSON.stringify(errorData), error);
-
-                /* Send to client */
-                switch (GlobalMethods.getRequestType(req)) {
-                    case "html":
-                        res.render("errors/500.pug", {
-                            data: errorData,
-                        });
-                        break;
-
-                    case "xhr":
-                        res.status(500)
-                            .send(errorData)
-                            .end();
-                        break;
-
-                    default:
-                        res.status(500)
-                            .send("BAD REQUEST")
-                            .end();
-                        break;
-                }
-            }
-        );
+        /* Post-core middlewares */
+        await this.setupCustomMiddlewares("core/middlewares/post-core");
     }
 
     /**
@@ -228,43 +131,31 @@ Server started successfully
     }
 
     /**
-     * Setup body-parser
+     * SetupvCustomvMiddlewares
+     * @param basePath {string} GroupName
      */
-    public async setupBodyParser() {
-        const BodyParser = await import("body-parser");
-
-        /* TODO: READ LIMIT VALUE FROM CONFIG FILE */
-
-        // parse application/x-www-form-urlencoded
-        this.app?.use(
-            BodyParser.urlencoded({
-                extended: false,
-                limit: "5M",
-            })
+    public async setupCustomMiddlewares(basePath: string): Promise<void> {
+        const files: Array<string> = GlobalMethods.files(basePath).filter(
+            (file: string) => !lstatSync(file).isDirectory()
         );
 
-        // parse application/json
-        this.app?.use(BodyParser.json());
-    }
+        for (let i = 0; i < files.length; ++i) {
+            const file: string = files[i];
 
-    /**
-     * Setup cookie-parser
-     */
-    public async setupCookieParser() {
-        const CookieParser = (await import("cookie-parser")).default;
+            const Middleware = (await import(file)).default;
+            const middleware: MiddlewareInterface = new Middleware(
+                this
+            ) as MiddlewareInterface;
 
-        /* TODO: READ CONFIG FILE */
+            /* Setup middleware */
+            await middleware.setup(this);
 
-        this.app?.use(CookieParser());
-    }
+            /* Add to middlewares */
+            await middleware.check();
 
-    /**
-     * Setup GZip
-     */
-    public async setupGZip() {
-        const Comporession = (await import("compression")).default;
-
-        this.app?.use(Comporession());
+            /* Log */
+            this.logger.info(`Middleware ${file} loaded successfully`);
+        }
     }
 }
 
@@ -277,3 +168,11 @@ export type ExpressConfigType = {
     host: string;
     serverUrl: string;
 };
+
+/**
+ * Middleware interface
+ */
+export interface MiddlewareInterface {
+    setup(payload?: any): Promise<void>;
+    check(payload?: any): Promise<void>;
+}

@@ -1,5 +1,8 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 
+/**
+ * Home controller
+ */
 export class HomeController {
     /**
      * Index function
@@ -8,6 +11,6 @@ export class HomeController {
      * @param next
      */
     public index(req: Request, res: Response, next: NextFunction) {
-        res.render("home.pug");
+        res.render("pages/home.pug");
     }
 }

@@ -1,0 +1,79 @@
+
+h1 {
+    color: red;
+}
+
+svg .svg-elem-1 {
+    stroke-dashoffset: 630.8416748046875px;
+    stroke-dasharray: 630.8416748046875px;
+    fill: transparent;
+    -webkit-transition: stroke-dashoffset 1s cubic-bezier(0.47, 0, 0.745, 0.715)
+            0s,
+        fill 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.5s;
+    transition: stroke-dashoffset 1s cubic-bezier(0.47, 0, 0.745, 0.715) 0s,
+        fill 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.5s;
+}
+
+svg.active .svg-elem-1 {
+    stroke-dashoffset: 0;
+    fill: rgb(199, 6, 0);
+}
+
+svg .svg-elem-2 {
+    stroke-dashoffset: 217.65098571777344px;
+    stroke-dasharray: 217.65098571777344px;
+    fill: transparent;
+    -webkit-transition: stroke-dashoffset 1s cubic-bezier(0.47, 0, 0.745, 0.715)
+            0.12s,
+        fill 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.6s;
+    transition: stroke-dashoffset 1s cubic-bezier(0.47, 0, 0.745, 0.715) 0.12s,
+        fill 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.6s;
+}
+
+svg.active .svg-elem-2 {
+    stroke-dashoffset: 0;
+    fill: rgb(199, 6, 0);
+}
+
+svg .svg-elem-3 {
+    stroke-dashoffset: 217.47738647460938px;
+    stroke-dasharray: 217.47738647460938px;
+    fill: transparent;
+    -webkit-transition: stroke-dashoffset 1s cubic-bezier(0.47, 0, 0.745, 0.715)
+            0.24s,
+        fill 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.7s;
+    transition: stroke-dashoffset 1s cubic-bezier(0.47, 0, 0.745, 0.715) 0.24s,
+        fill 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.7s;
+}
+
+svg.active .svg-elem-3 {
+    stroke-dashoffset: 0;
+    fill: rgb(199, 6, 0);
+}
+
+svg .svg-elem-4 {
+    stroke-dashoffset: 217.57791137695312px;
+    stroke-dasharray: 217.57791137695312px;
+    fill: transparent;
+    -webkit-transition: stroke-dashoffset 1s cubic-bezier(0.47, 0, 0.745, 0.715)
+            0.36s,
+        fill 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.8s;
+    transition: stroke-dashoffset 1s cubic-bezier(0.47, 0, 0.745, 0.715) 0.36s,
+        fill 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) 1.8s;
+}
+
+svg.active .svg-elem-4 {
+    stroke-dashoffset: 0;
+    fill: rgb(199, 6, 0);
+}
+
+.st0 {
+    fill: #c70600;
+    stroke: #c70600;
+    stroke-miterlimit: 10;
+}
+
+#logo {
+    width: 105px;
+    height: 85px;
+}

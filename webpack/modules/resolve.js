@@ -1,5 +1,4 @@
 const Path = require("path");
-// const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 module.exports = (entries) => ({
     extensions: [
@@ -14,15 +13,20 @@ module.exports = (entries) => ({
         ".css",
     ],
 
-    // plugins: [
-    //     new TsconfigPathsPlugin({
-    //         configFile: Path.resolve("webpack/tsconfig.webpack.json"),
-    //     }),
-    // ],
-
     alias: {
         vue$: "vue/dist/vue.esm.js",
 
-        "@VueC": Path.resolve("resources/scripts/components"),
+        /* App */
+        "@APP": Path.resolve("./app"),
+        "@CONTROLLERS": Path.resolve("./app/controllers"),
+        "@TYPES": Path.resolve("./types"),
+        "@CONFIGS": Path.resolve("./configs"),
+
+        /* Frontend */
+        "@VueC": Path.resolve("./resources/scripts/components"),
+        "@Scripts": Path.resolve("./resources/scripts"),
+        "@Styles": Path.resolve("./resources/styles"),
+        "@Fonts": Path.resolve("./resources/fonts"),
+        "@Images": Path.resolve("./resources/images"),
     },
 });

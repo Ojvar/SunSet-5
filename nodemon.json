@@ -1,6 +1,6 @@
 {
-    "watch": ["core", "resources"],
+    "watch": ["core", "app", "lib", "routes", "types"],
     "ext": "ts",
-    "ignore": ["dist/", "README", "**/*/.spec.ts"],
+    "ignore": ["dist/", "resources/", "README", "**/*/.spec.ts"],
     "exec": "ts-node-dev -P tsconfig.json -r tsconfig-paths/register core/server.ts"
 }

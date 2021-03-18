@@ -18,6 +18,7 @@ export class Server {
      */
     public async start(): Promise<void> {
         await this.initModule("dotenv");
+        await this.initModule("database");
         await this.initModule("express");
     }
 

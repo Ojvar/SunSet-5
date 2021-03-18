@@ -1,4 +1,6 @@
 import Express from "express";
+import { lstatSync } from "fs";
+import { config as ServerConfig } from "@CONFIGS/core/server";
 import { Hash } from "@TYPES/hash-type";
 import { GlobalMethods } from "./global-methods-helper";
 import { RouteItem } from "./route-helper";
@@ -6,7 +8,14 @@ import { RouteItem } from "./route-helper";
 export class RouteManager {
     private logger: Console = console;
     private routeFiles: Hash<any> = {};
-    private routesMap: Hash<any> = {};
+    private _routesMap: Hash<RouteItemType> = {};
+
+    /**
+     * Get routes map
+     */
+    public get routesMap(): Hash<RouteItemType> {
+        return this._routesMap;
+    }
 
     /**
      * Ctr
@@ -26,10 +35,13 @@ export class RouteManager {
 
         for (let i = 0; i < routeFiles.length; ++i) {
             const routeFilePath: string = routeFiles[i];
-            const routeFile: RouteFileType = await import(routeFilePath);
-            GlobalMethods.baseName(routeFilePath);
 
-            this.routeFiles[routeFile.routeBase] = routeFile.routes;
+            if (!lstatSync(routeFilePath).isDirectory()) {
+                const routeFile: RouteFileType = await import(routeFilePath);
+                GlobalMethods.baseName(routeFilePath);
+
+                this.routeFiles[routeFile.routeBase] = routeFile.routes;
+            }
         }
     }
 
@@ -53,6 +65,10 @@ export class RouteManager {
 
                     case "head":
                         router.head(route.path, route.handler);
+                        break;
+
+                    case "post":
+                        router.post(route.path, route.handler);
                         break;
 
                     case "put":
@@ -81,15 +97,35 @@ export class RouteManager {
                         fullRouteName = fullRouteName.replace("//", "/");
                     }
 
-                    this.routesMap[fullRouteName] = newRoute;
+                    /* Convert to full-server-url */
+                    fullRouteName = ServerConfig.serverUrl + fullRouteName;
+
+                    this._routesMap[route.alias] = {
+                        path: fullRouteName,
+                        route: newRoute,
+                    } as RouteItemType;
                 }
 
                 /* Add to app instance */
                 app.use(key, router);
-
-                this.logger.info(`Loading route ${key} finished successfully`);
             });
+
+            this.logger.info(`Loading route: ${key}`);
         }
+    }
+
+    /**
+     * Get route data
+     */
+    public routeData(alias: string): RouteItemType {
+        return this.routesMap[alias];
+    }
+
+    /**
+     * Get route path
+     */
+    public routePath(alias: string, data?: any): string {
+        return this.routeData(alias).path;
     }
 }
 
@@ -99,4 +135,12 @@ export class RouteManager {
 export type RouteFileType = {
     routeBase: string;
     routes: RouteItem[];
+};
+
+/**
+ * RouteItemType
+ */
+export type RouteItemType = {
+    path: string;
+    route: any;
 };

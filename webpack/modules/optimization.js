@@ -2,6 +2,8 @@ const Global = require("../helpers/global");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = () => ({
+    removeEmptyChunks: true,
+
     minimize: !Global.devMode,
     minimizer: [
         new TerserPlugin({
@@ -10,41 +12,38 @@ module.exports = () => ({
     ],
 
     splitChunks: {
-        chunks: "async",
-        minSize: 20000,
-        minRemainingSize: 0,
-        maxSize: 300000,
-        minChunks: 1,
-        maxAsyncRequests: 30,
-        maxInitialRequests: 30,
-        enforceSizeThreshold: 50000,
+        chunks: "all",
+
         cacheGroups: {
             vue: {
                 test: /[\\/]node_modules[\\/]vue/i,
-                name(module, chunks, cacheGroupKey) {
-                    const moduleFileName = module
-                        .identifier()
-                        .split("/")
-                        .reduceRight((item) => item)
-                        .replace(".js", "");
-
-                    return `chunks/${moduleFileName}`;
-                },
+                name: "chunks/vue",
                 chunks: "all",
-                reuseExistingChunk: true,
+                priority: 100,
+            },
+            buefy: {
+                test: /[\\/]node_modules[\\/]buefy/i,
+                name: "chunks/buefy",
+                chunks: "all",
+                priority: 90,
+            },
+            validatorjs: {
+                test: /[\\/]node_modules[\\/]validatorjs/i,
+                name: "chunks/validatorjs",
+                chunks: "all",
+                priority: 80,
+            },
+            axios: {
+                test: /[\\/]node_modules[\\/]axios/i,
+                name: "chunks/axios",
+                chunks: "all",
+                priority: 70,
             },
 
-            // defaultVendors: {
-            //     test: /[\\/]node_modules[\\/]/,
-            //     priority: -10,
-            //     reuseExistingChunk: true,
-            // },
-
-            // default: {
-            //     minChunks: 2,
-            //     priority: -20,
-            //     reuseExistingChunk: true,
-            // },
+            default: {
+                test: /[\\/]node_modules[\\/]/i,
+                priority: -100,
+            },
         },
     },
 });

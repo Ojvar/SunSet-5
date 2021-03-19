@@ -5,9 +5,9 @@ import { VueRouterMixin } from "@Scripts/vue-mixins/vue-router-mixin";
 import { routes } from "./routes";
 
 /**
- * HomePage class
+ * LoginPage class
  */
-export class HomePage {
+export class LoginPage {
     /**
      * Ctr
      */
@@ -28,8 +28,17 @@ export class HomePage {
 
             mixins: [VueRouterMixin(), LoadingMixin()],
             router,
+
+            /**
+             * Created
+             */
+            created() {
+                this.changePage({
+                    name: "auth.login",
+                });
+            },
         });
     }
 }
 
-new HomePage();
+new LoginPage();

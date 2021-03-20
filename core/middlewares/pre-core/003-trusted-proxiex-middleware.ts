@@ -4,12 +4,11 @@ import {
 } from "core/helpers/express-helper";
 
 import Express from "express";
-import { GlobalMethods } from "core/helpers/global-methods-helper";
 
 /**
  * Defualt export
  */
-export default class StaticsMiddleware implements MiddlewareInterface {
+export default class ViewEngineMiddleware implements MiddlewareInterface {
     private _expressHelper?: ExpressHelper;
 
     /**
@@ -28,6 +27,9 @@ export default class StaticsMiddleware implements MiddlewareInterface {
         const app: Express.Application = this._expressHelper
             ?.App as Express.Application;
 
-        app.use(Express.static(GlobalMethods.rPath("dist/public")));
+        if (app.get("env") === "production") {
+            /* Trust first proxy */
+            app.set("trust proxy", 1);
+        }
     }
 }

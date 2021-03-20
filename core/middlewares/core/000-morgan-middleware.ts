@@ -4,7 +4,6 @@ import {
 } from "core/helpers/express-helper";
 
 import Express from "express";
-import { GlobalMethods } from "core/helpers/global-methods-helper";
 
 /**
  * Defualt export
@@ -28,6 +27,7 @@ export default class StaticsMiddleware implements MiddlewareInterface {
         const app: Express.Application = this._expressHelper
             ?.App as Express.Application;
 
-        app.use(Express.static(GlobalMethods.rPath("dist/public")));
+        const Morgan = (await import("morgan")).default;
+        app.use(Morgan("combined"));
     }
 }

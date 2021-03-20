@@ -1,10 +1,11 @@
+import { NextFunction, Request, Response } from "express";
 import ValidatorJs, {
-    Validator,
     AttributeNames,
-    Rules,
     ErrorMessages,
+    Rules,
+    Validator,
 } from "validatorjs";
-import { Request, Response, NextFunction } from "express";
+
 import { ActionResultType } from "@Lib/types/global/action-result-type";
 import { ValidatorErrorType } from "@Scripts/validators/base-validator";
 
@@ -26,7 +27,10 @@ export class BaseValidator {
     /**
      * Validate data
      */
-    public validateData<T>(validator: IValidator, data: any): ActionResultType {
+    public validateData<T>(
+        validator: BaseValidatorInterface,
+        data: any
+    ): ActionResultType {
         const result: ActionResultType = {} as ActionResultType;
 
         /* Preparation */
@@ -55,7 +59,7 @@ export class BaseValidator {
      */
     public static validate<T>(
         dataCollector: (req: Request) => Promise<T> | T,
-        validator: IValidator
+        validator: BaseValidatorInterface
     ): ValidatorMiddlewareResultType {
         return async (
             req: Request,
@@ -64,6 +68,7 @@ export class BaseValidator {
         ): Promise<void> => {
             let documentData: T;
 
+            /* Collect data */
             try {
                 documentData = (await dataCollector(req)) as T;
                 req.payload = documentData;
@@ -73,7 +78,7 @@ export class BaseValidator {
                 return;
             }
 
-            /* Validation */
+            /* Validate data */
             const validationResult: ActionResultType = validator.validate(
                 documentData
             );
@@ -99,36 +104,42 @@ export class BaseValidator {
 /**
  * Validator interface
  */
-export interface IValidator {
+export abstract class BaseValidatorInterface extends BaseValidator {
     /**
      * Post setup method
      * @param validator Validator<T>
      */
-    setup<T>(validator: Validator<T>): void;
+    setup<T>(validator: Validator<T>): void {}
 
     /**
      * Get rules
      * @param data T data
      */
-    getRules<T>(data?: T): Rules;
+    getRules<T>(data?: T): Rules {
+        return {};
+    }
 
     /**
      * Get Attributes
      * @param data T data
      */
-    getAttributes<T>(data?: T): AttributeNames;
+    getAttributes<T>(data?: T): AttributeNames {
+        return {};
+    }
 
     /**
      * Get Custom messages
      * @param data T data
      */
-    getMessages<T>(data?: T): ErrorMessages;
+    getMessages<T>(data?: T): ErrorMessages {
+        return {};
+    }
 
     /**
      * Validate
      * @param data T data
      */
-    validate(data: any): ActionResultType;
+    abstract validate(data: any): ActionResultType;
 }
 
 /**

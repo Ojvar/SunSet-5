@@ -12,4 +12,11 @@ export class GlobalData {
 
     public static express?: ExpressModule;
     public static pugHelper?: PugHelper;
+
+    /**
+     * Getter of express
+     */
+    public static get Express(): ExpressModule {
+        return this.express as ExpressModule;
+    }
 }

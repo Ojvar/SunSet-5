@@ -18,31 +18,39 @@ export class LocalLoginStrategy {
      * Setup
      */
     public async setup() {
-        Passport.use(new Strategy(this.authenticationFunc));
+        Passport.use(
+            new Strategy(
+                {
+                    usernameField: "email",
+                    passwordField: "pwd",
+                    session: true,
+                },
+                this.authenticationFunc
+            )
+        );
     }
 
     /**
      * Check username/password
-     * @param username {string} Username
-     * @param password {string} Password
+     * @param email {string} Username
+     * @param pwd {string} Password
      * @param done {Function} Done function
      */
     private async authenticationFunc(
-        username: string,
-        password: string,
+        email: string,
+        pwd: string,
         done: Function
     ) {
         try {
             const user: IUserDocument | null = await userModel.findOne({
-                username,
-                pwd: password,
+                email,
+                pwd,
             });
 
             if (null == user) {
-                done(null, false);
-            } else {
-                done(null, user);
+                throw Error("User not found");
             }
+            done(null, user);
         } catch (err) {
             done(err);
         }

@@ -33,20 +33,6 @@ export class GoogleOAuthStrategy {
         }
 
         const configG: StrategyOptions = config.google;
-
-        /* Setup serialization and deserialization */
-        Passport.serializeUser((user: any, done: Function) => {
-            done(null, user.id);
-        });
-
-        Passport.deserializeUser(async (id: any, done: Function) => {
-            const user: IUserDocument | null = await User.findById(id);
-
-            if (user) {
-                done(null, user);
-            }
-        });
-
         Passport.use(new GoogleStrategy(configG, this.googleOAuthCallback));
     }
 
@@ -57,21 +43,25 @@ export class GoogleOAuthStrategy {
      * @param profile
      * @param done
      */
-    public async googleOAuthCallback(
+    private async googleOAuthCallback(
         accessToken: string,
         refreshToken: string,
         profile: Profile,
         done: Function
     ) {
-        let currentUser: IUserDocument | null = await User.findOne({
-            "profile.google.id": profile.id,
-        });
+        try {
+            let currentUser: IUserDocument | null = await User.findOne({
+                "profile.google.id": profile.id,
+            });
 
-        /* If user not registered yet */
-        if (!currentUser) {
-            currentUser = await User.registerByGoogleProfile(profile);
+            /* If user not registered yet */
+            if (!currentUser) {
+                currentUser = await User.registerByGoogleProfile(profile);
+            }
+
+            done(null, currentUser);
+        } catch (err) {
+            err;
         }
-
-        done(null, currentUser);
     }
 }

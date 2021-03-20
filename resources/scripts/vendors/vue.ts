@@ -1,7 +1,8 @@
-import Vue from "vue";
-import Vuex from "vuex";
 import VueRouter, { RawLocation, RouteConfig } from "vue-router";
+import Vuex, { Store } from "vuex";
+
 import Buefy from "buefy";
+import Vue from "vue";
 
 /* TODO: JUST FOR DEBUG PURPOSE */
 Vue.config.devtools = true;
@@ -12,4 +13,7 @@ Vue.use(Buefy, {
     defaultIconPack: "fas",
 });
 
-export { Vue, VueRouter, Vuex, Buefy, RawLocation, RouteConfig };
+export { Vue, VueRouter };
+export { Buefy };
+export { RawLocation, RouteConfig };
+export { Vuex, Store };

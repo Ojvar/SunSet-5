@@ -1,8 +1,10 @@
-import Express from "express";
 import {
     ExpressHelper,
     MiddlewareInterface,
 } from "core/helpers/express-helper";
+
+import Express from "express";
+import ExpressSession from "express-session";
 
 /**
  * Defualt export
@@ -27,14 +29,14 @@ export default class CookieSession implements MiddlewareInterface {
             ?.App as Express.Application;
 
         /* TODO: READ CONFIG FILE */
-        const CookieSession = (await import("cookie-session")).default;
+        const ExpressSession = await (await import("express-session")).default;
+        const expressSession = ExpressSession({
+            secret: "@SunS37V5@@SECRETkey__##",
+            resave: false,
+            saveUninitialized: true,
+            cookie: { secure: app.get("env") === "production" },
+        });
 
-        app.use(
-            CookieSession({
-                /* 1Hour */
-                maxAge: 1 * 60 * 60 * 1000,
-                keys: ["key1****!!@##!@#!2222", "key296++9*//89655-SDFxxS"],
-            })
-        );
+        app.use(expressSession);
     }
 }

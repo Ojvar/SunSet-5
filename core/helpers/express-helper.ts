@@ -1,5 +1,4 @@
-import Express, { NextFunction, Request, Response } from "express";
-
+import Express from "express";
 import { GlobalMethods } from "./global-methods-helper";
 import Http from "http";
 import { RouteManager } from "./route-manager";
@@ -175,4 +174,15 @@ export type ExpressConfigType = {
 export interface MiddlewareInterface {
     setup(payload?: any): Promise<void>;
     check(payload?: any): Promise<void>;
+}
+
+/**
+ * Extends express request
+ */
+declare global {
+    namespace Express {
+        interface Request {
+            payload: any;
+        }
+    }
 }

@@ -8,7 +8,7 @@ import Express from "express";
 /**
  * Defualt export
  */
-export default class GZipMiddleware implements MiddlewareInterface {
+export default class CookieSession implements MiddlewareInterface {
     private _expressHelper?: ExpressHelper;
 
     /**
@@ -28,8 +28,17 @@ export default class GZipMiddleware implements MiddlewareInterface {
             ?.App as Express.Application;
 
         /* TODO: READ CONFIG FILE */
-        const Comporession = (await import("compression")).default;
-
-        app.use(Comporession());
+        const ExpressSession = (await import("express-session")).default;
+        app.use(
+            ExpressSession({
+                secret: "MySecretCode_Comes_here",
+                resave: false,
+                saveUninitialized: false,
+                cookie: {
+                    secure: app.get("env") === "production",
+                    maxAge: 1 * 60 * 60 * 1000 /* 1Hour */,
+                },
+            })
+        );
     }
 }

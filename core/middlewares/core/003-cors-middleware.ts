@@ -1,8 +1,10 @@
-import Express, { Request, Response, NextFunction } from "express";
 import {
     ExpressHelper,
     MiddlewareInterface,
 } from "core/helpers/express-helper";
+
+import Express from "express";
+import { config } from "@CONFIGS/core/server";
 
 /**
  * Defualt export
@@ -28,6 +30,10 @@ export default class CORSMiddleware implements MiddlewareInterface {
 
         const CORS = (await import("cors")).default;
 
-        app.use(CORS());
+        app.use(
+            CORS({
+                origin: [config.serverUrl],
+            })
+        );
     }
 }

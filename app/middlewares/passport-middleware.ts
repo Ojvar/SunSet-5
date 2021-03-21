@@ -5,63 +5,73 @@ import { authenticate } from "passport";
 import { config } from "@CONFIGS/core/passport";
 
 /**
- * redirectToHomePage middleware
+ * Passport middleware
  */
-export const redirectToHomePage = (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
-    res.redirect(
-        GlobalData.express?.app.RouteManager.routePath("home.index") || ""
-    );
-};
-
-/**
- * Logout middleware
- */
-export const logout = (req: Request, res: Response, next: NextFunction) => {
-    req.logout();
-    next();
-};
-
-/**
- * IsLogged in
- */
-export const isLoggedin = (req: Request, res: Response, next: NextFunction) => {
-    if (undefined == req.user) {
-        return res.redirect(
-            GlobalData.express?.app.RouteManager.routePath("auth.login") || ""
+export class PassportMiddleware {
+    /**
+     * Redirect to HomePage middleware
+     */
+    public static redirectToHomePage(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) {
+        res.redirect(
+            GlobalData.express?.app.RouteManager.routePath("home.index") || ""
         );
     }
 
-    next();
-};
+    /**
+     * Logout middleware
+     */
+    public static logout(req: Request, res: Response, next: NextFunction) {
+        req.logout();
+        next();
+    }
 
-/**
- * Local auth middleware
- */
-export const localAuth = () =>
-    authenticate("local", {
-        failureRedirect: GlobalData.express?.app.RouteManager.routePath(
-            "auth.login"
-        ),
-    });
+    /**
+     * IsLogged in
+     */
+    public static isLoggedin() {
+        return (req: Request, res: Response, next: NextFunction) => {
+            console.log("IS LOGGED IN", req.user, req.payload);
 
-/**
- * Google OAuth login middleware
- */
-export const googleOAuthLogin = () =>
-    authenticate("google", {
-        scope: config.google?.scope,
-    });
+            if (undefined == req.user) {
+                res.redirect(
+                    GlobalData.express?.app.RouteManager.routePath(
+                        "auth.login"
+                    ) || ""
+                );
+            } else {
+                next();
+            }
+        };
+    }
 
-/**
- * Google OAuth auth middleware
- */
-export const googleOAuth = () =>
-    authenticate("google", {
-        failureRedirect: GlobalData.express?.app.RouteManager.routePath(
-            "auth.login"
-        ),
-    });
+    /**
+     * Local auth middleware
+     */
+    public static localAuth() {
+        return authenticate("local");
+    }
+
+    /**
+     * Google OAuth login middleware
+     */
+    public static googleOAuthLogin() {
+        return authenticate("google", {
+            scope: config.google?.scope,
+        });
+    }
+
+    /**
+     * Google OAuth auth middleware
+     */
+    public static googleOAuth() {
+        return authenticate("google", {
+            failureRedirect: GlobalData.express?.app.RouteManager.routePath(
+                "auth.login"
+            ),
+        });
+    }
+}

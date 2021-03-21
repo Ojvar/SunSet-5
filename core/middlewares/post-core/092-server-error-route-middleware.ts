@@ -1,8 +1,9 @@
-import Express, { Request, Response, NextFunction } from "express";
+import Express, { NextFunction, Request, Response } from "express";
 import {
     ExpressHelper,
     MiddlewareInterface,
 } from "core/helpers/express-helper";
+
 import { GlobalMethods } from "core/helpers/global-methods-helper";
 
 /**
@@ -27,46 +28,13 @@ export default class RouterMiddleware implements MiddlewareInterface {
         const app: Express.Application = this._expressHelper
             ?.App as Express.Application;
 
-        await this._expressHelper?.RouteManager.loadRoutes();
-        await this._expressHelper?.RouteManager.applyRoutes(app);
-
-        /* Route handler */
-        app.use(
-            (
-                req: Express.Request,
-                res: Express.Response,
-                next: Express.NextFunction
-            ): void => {
-                switch (GlobalMethods.getRequestType(req)) {
-                    case "html":
-                        res.render("errors/404.pug");
-                        break;
-
-                    case "xhr":
-                        res.status(404)
-                            .send({
-                                success: false,
-                                data: "Route not found",
-                            })
-                            .end();
-                        break;
-
-                    default:
-                        res.status(404)
-                            .send("Bad Request")
-                            .end();
-                        break;
-                }
-            }
-        );
-
         /* Err handler */
         app.use(
             async (
                 error: Error,
-                req: Express.Request,
-                res: Express.Response,
-                next: Express.NextFunction
+                req: Request,
+                res: Response,
+                next: NextFunction
             ) => {
                 if (res.headersSent) {
                     return next(error);

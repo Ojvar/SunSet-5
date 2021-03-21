@@ -19,6 +19,10 @@ export class PassportHelper {
             await GlobalMethods.importFile("./configs/core/passport")
         ).config;
 
+        /* Setup all available strategies */
+        // await GoogleOAuthStrategy.initGoogleStrategy(config);
+        await LocalLoginStrategy.initLocalLoginStrategy();
+
         /* Setup serialization and deserialization */
         Passport.serializeUser((user: any, done: Function) => {
             done(null, user._id || user.id);
@@ -26,23 +30,20 @@ export class PassportHelper {
 
         Passport.deserializeUser(async (id: any, done: Function) => {
             try {
+                console.log("DESER ID: ", id);
                 const user: IUserDocument | null = await User.findById(id);
 
-                if (user) {
+                if (null != user) {
                     done(null, user);
                 } else {
-                    throw "User not found";
+                    throw Error("User not found");
                 }
             } catch (err) {
+                console.error(err);
+
                 done(err);
             }
         });
-
-        /* Setup all available strategies */
-        await Promise.all([
-            await GoogleOAuthStrategy.initGoogleStrategy(config),
-            await LocalLoginStrategy.initLocalLoginStrategy(),
-        ]);
 
         /* Setup passport middlewares */
         app.use(Passport.initialize());

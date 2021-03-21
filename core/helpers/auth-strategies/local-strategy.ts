@@ -32,25 +32,26 @@ export class LocalLoginStrategy {
 
     /**
      * Check username/password
-     * @param email {string} Username
-     * @param pwd {string} Password
+     * @param username {string} Username
+     * @param password {string} Password
      * @param done {Function} Done function
      */
     private async authenticationFunc(
-        email: string,
-        pwd: string,
+        username: string,
+        password: string,
         done: Function
     ) {
         try {
             const user: IUserDocument | null = await userModel.findOne({
-                email,
-                pwd,
+                email: username,
+                pwd: password,
             });
 
             if (null == user) {
-                throw Error("User not found");
+                done(null, false);
+            } else {
+                done(null, user);
             }
-            done(null, user);
         } catch (err) {
             done(err);
         }

@@ -4,12 +4,11 @@ import {
 } from "core/helpers/express-helper";
 
 import Express from "express";
-import ExpressSession from "express-session";
 
 /**
  * Defualt export
  */
-export default class CookieSession implements MiddlewareInterface {
+export default class RouterMiddleware implements MiddlewareInterface {
     private _expressHelper?: ExpressHelper;
 
     /**
@@ -28,15 +27,7 @@ export default class CookieSession implements MiddlewareInterface {
         const app: Express.Application = this._expressHelper
             ?.App as Express.Application;
 
-        /* TODO: READ CONFIG FILE */
-        const ExpressSession = await (await import("express-session")).default;
-        const expressSession = ExpressSession({
-            secret: "@SunS37V5@@SECRETkey__##",
-            resave: false,
-            saveUninitialized: true,
-            cookie: { secure: app.get("env") === "production" },
-        });
-
-        app.use(expressSession);
+        await this._expressHelper?.RouteManager.loadRoutes();
+        await this._expressHelper?.RouteManager.applyRoutes(app);
     }
 }

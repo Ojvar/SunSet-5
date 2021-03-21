@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 
-import { AttempToLoginValidator } from "@APP/validators/auth/attempt-to-login-validator";
 import { GlobalData } from "@/core/helpers/global-data-helper";
 
 /**
@@ -24,8 +23,6 @@ export class AuthController {
      * @param next
      */
     public attempToLogin(req: Request, res: Response, next: NextFunction) {
-        const data: AttempToLoginValidator = req.payload;
-
         res.send({
             success: true,
             data: GlobalData.express?.app.RouteManager.routePath("home.index"),

@@ -23,8 +23,6 @@ export class AuthController {
      * @param next
      */
     public logout(req: Request, res: Response, next: NextFunction) {
-        req.logout();
-
         res.redirect(
             GlobalData.Express.app.RouteManager.routePath("auth.login")
         );

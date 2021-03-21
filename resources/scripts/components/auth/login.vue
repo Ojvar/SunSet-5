@@ -23,6 +23,9 @@
                     .contorol
                         a.button.is-primary(@click.prevent="login")
                             | Login
+                    .contorol
+                        a.button.is-default(@click.prevent="loginByGoogle")
+                            | Login By GOOGLE
 </template>
 
 <script lang="ts">
@@ -50,6 +53,18 @@ export default Vue.extend({
     },
 
     methods: {
+        /**
+         * LoginByGoogle
+         */
+        async loginByGoogle() {
+            try {
+                this.$store.dispatch("loginByGoogle");
+            } catch (err) {
+                console.error(err);
+                alert("Send request fialed");
+            }
+        },
+
         /**
          * Login to system
          */

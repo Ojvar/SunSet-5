@@ -1,11 +1,22 @@
+import { basename, extname, resolve } from "path";
+
 import Glob from "glob";
 import { Request } from "express";
-import { resolve, basename, extname } from "path";
 
 /**
  * Global methods
  */
 export class GlobalMethods {
+    private logger: Console = console;
+
+    /**
+     * Constructor
+     * @param logger {Console} logger
+     */
+    constructor(logger: Console) {
+        this.logger = logger;
+    }
+
     /**
      * Check for RequestType
      * @param req Express.Request The request

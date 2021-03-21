@@ -1,4 +1,5 @@
 import { ICoreModule } from "./modules/core-module-interface";
+import { ServerInitClass } from "@APP/server-init";
 
 /**
  * Server class
@@ -20,6 +21,9 @@ export class Server {
         await this.initModule("dotenv");
         await this.initModule("database");
         await this.initModule("express");
+
+        /* Run server-init class */
+        await new ServerInitClass().onServerInitialized(this);
     }
 
     /**

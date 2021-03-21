@@ -1,9 +1,10 @@
+import Express, { Request, Response } from "express";
 import {
     ExpressHelper,
     MiddlewareInterface,
 } from "core/helpers/express-helper";
 
-import Express from "express";
+import { GlobalMethods } from "@/core/helpers/global-methods-helper";
 
 /**
  * Defualt export
@@ -28,6 +29,12 @@ export default class StaticsMiddleware implements MiddlewareInterface {
             ?.App as Express.Application;
 
         const Morgan = (await import("morgan")).default;
-        app.use(Morgan("combined"));
+
+        /* Load config file */
+        const { config } = await GlobalMethods.importFile(
+            "./configs/core/morgan"
+        );
+
+        app.use(Morgan(config.formatFuction, config));
     }
 }

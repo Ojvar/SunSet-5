@@ -1,9 +1,9 @@
 # Sunset ignores
+logs/*
 dist/
 dist/public/
 public/
 .env
-private/ssl/*.pem
 
 # Logs
 logs

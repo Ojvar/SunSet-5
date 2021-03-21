@@ -2,8 +2,8 @@ import User, { IUserDocument } from "models/user-model";
 
 import { Application } from "express";
 import { GlobalMethods } from "./global-methods-helper";
-import { GoogleOAuthStrategy } from "./auth-strategies/google-oauth-strategy";
-import { LocalLoginStrategy } from "./auth-strategies/local-strategy";
+import { GoogleOAuthStrategy } from "../auth-strategies/google-oauth-strategy";
+import { LocalLoginStrategy } from "../auth-strategies/local-strategy";
 import Passport from "passport";
 import { PassportConfigType } from "@CONFIGS/core/passport";
 
@@ -20,8 +20,10 @@ export class PassportHelper {
         ).config;
 
         /* Setup all available strategies */
-        // await GoogleOAuthStrategy.initGoogleStrategy(config);
-        await LocalLoginStrategy.initLocalLoginStrategy();
+        await Promise.all([
+            GoogleOAuthStrategy.initGoogleStrategy(config),
+            LocalLoginStrategy.initLocalLoginStrategy(),
+        ]);
 
         /* Setup serialization and deserialization */
         Passport.serializeUser((user: any, done: Function) => {

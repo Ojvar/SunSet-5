@@ -11,14 +11,13 @@ export class PassportMiddleware {
     /**
      * Redirect to HomePage middleware
      */
-    public static redirectToHomePage(
-        req: Request,
-        res: Response,
-        next: NextFunction
-    ) {
-        res.redirect(
-            GlobalData.express?.app.RouteManager.routePath("home.index") || ""
-        );
+    public static redirectToHomePage() {
+        return (req: Request, res: Response, next: NextFunction) => {
+            res.redirect(
+                GlobalData.express?.app.RouteManager.routePath("home.index") ||
+                    ""
+            );
+        };
     }
 
     /**

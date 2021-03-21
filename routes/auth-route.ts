@@ -24,7 +24,7 @@ export const routes: RouteItem[] = [
         "/google/callback",
         [
             PassportMiddleware.googleOAuth(),
-            PassportMiddleware.redirectToHomePage,
+            PassportMiddleware.redirectToHomePage(),
         ],
         "auth.google.callback"
     ),

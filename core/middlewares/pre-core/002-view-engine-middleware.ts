@@ -1,14 +1,15 @@
-import Express, { Request, Response, NextFunction } from "express";
+import Express, { NextFunction, Request, Response } from "express";
 import {
     ExpressHelper,
     MiddlewareInterface,
 } from "core/helpers/express-helper";
+
 import { GlobalData } from "core/helpers/global-data-helper";
-import { PugHelper } from "core/helpers/pug-helper";
 import { GlobalMethods } from "core/helpers/global-methods-helper";
+import { PugHelper } from "core/helpers/pug-helper";
 
 /**
- * Defualt export
+ * Default export
  */
 export default class ViewEngineMiddleware implements MiddlewareInterface {
     private _expressHelper?: ExpressHelper;

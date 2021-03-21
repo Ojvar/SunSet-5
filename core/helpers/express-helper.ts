@@ -1,8 +1,12 @@
+import {
+    ExpressConfigType,
+    config as ServerConfig,
+} from "@CONFIGS/core/server";
+
 import Express from "express";
 import { GlobalMethods } from "./global-methods-helper";
 import Http from "http";
 import { RouteManager } from "./route-manager";
-import { config as ServerConfig } from "@CONFIGS/core/server";
 import { lstatSync } from "fs";
 
 /**
@@ -157,16 +161,6 @@ Server started successfully
         }
     }
 }
-
-/**
- * Express config type
- */
-export type ExpressConfigType = {
-    proto: string;
-    port: number;
-    host: string;
-    serverUrl: string;
-};
 
 /**
  * Middleware interface

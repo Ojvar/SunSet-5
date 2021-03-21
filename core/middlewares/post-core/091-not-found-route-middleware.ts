@@ -7,7 +7,7 @@ import {
 import { GlobalMethods } from "core/helpers/global-methods-helper";
 
 /**
- * Defualt export
+ * Default export
  */
 export default class RouterMiddleware implements MiddlewareInterface {
     private _expressHelper?: ExpressHelper;

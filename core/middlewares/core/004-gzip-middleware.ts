@@ -6,7 +6,7 @@ import {
 import Express from "express";
 
 /**
- * Defualt export
+ * Default export
  */
 export default class GZipMiddleware implements MiddlewareInterface {
     private _expressHelper?: ExpressHelper;

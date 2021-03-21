@@ -7,7 +7,7 @@ import { Application } from "express";
 import { PassportHelper } from "../../helpers/passport-helper";
 
 /**
- * Defualt export
+ * Default export
  */
 export default class PassportMiddleware implements MiddlewareInterface {
     private _expressHelper?: ExpressHelper;

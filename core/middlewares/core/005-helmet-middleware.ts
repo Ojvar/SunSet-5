@@ -4,12 +4,12 @@ import {
 } from "core/helpers/express-helper";
 
 import Express from "express";
-import { config } from "@CONFIGS/core/server";
+import { HelmetHelper } from "@/core/helpers/helmet-helper";
 
 /**
  * Default export
  */
-export default class CORSMiddleware implements MiddlewareInterface {
+export default class HelmetMiddleware implements MiddlewareInterface {
     private _expressHelper?: ExpressHelper;
 
     /**
@@ -28,12 +28,7 @@ export default class CORSMiddleware implements MiddlewareInterface {
         const app: Express.Application = this._expressHelper
             ?.App as Express.Application;
 
-        const CORS = (await import("cors")).default;
-
-        app.use(
-            CORS({
-                origin: [config.serverUrl],
-            })
-        );
+        /* TODO: READ CONFIG FILE */
+        await new HelmetHelper().init(app);
     }
 }

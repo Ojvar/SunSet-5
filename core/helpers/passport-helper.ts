@@ -30,7 +30,6 @@ export class PassportHelper {
 
         Passport.deserializeUser(async (id: any, done: Function) => {
             try {
-                console.log("DESER ID: ", id);
                 const user: IUserDocument | null = await User.findById(id);
 
                 if (null != user) {
@@ -39,8 +38,6 @@ export class PassportHelper {
                     throw Error("User not found");
                 }
             } catch (err) {
-                console.error(err);
-
                 done(err);
             }
         });

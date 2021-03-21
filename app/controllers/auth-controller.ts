@@ -13,7 +13,21 @@ export class AuthController {
      * @param next
      */
     public login(req: Request, res: Response, next: NextFunction) {
-        res.render("pages/auth/login.pug");
+        res.render("pages/auth/login.pug", { user: req.user });
+    }
+
+    /**
+     * Logout function
+     * @param req
+     * @param res
+     * @param next
+     */
+    public logout(req: Request, res: Response, next: NextFunction) {
+        req.logout();
+
+        res.redirect(
+            GlobalData.Express.app.RouteManager.routePath("auth.login")
+        );
     }
 
     /**

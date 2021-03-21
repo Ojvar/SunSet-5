@@ -44,9 +44,11 @@ html(lang="en")
                     .navbar-end
                         .navbar-item
                             .buttons
-                                a.button.is-primary
-                                    strong Sign up
-                                a.button.is-light
-                                    | Log in
+                                if (! user)
+                                    a.button.is-primary(href=Helper.url("auth.login"))
+                                        strong Login
+                                else
+                                    a.button.is-light(href=Helper.url("auth.logout"))
+                                        | Log out
 
             block content

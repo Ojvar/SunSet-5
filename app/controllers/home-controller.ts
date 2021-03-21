@@ -11,7 +11,7 @@ export class HomeController {
      * @param next
      */
     public index(req: Request, res: Response, next: NextFunction) {
-        res.render("pages/home/index.pug");
+        res.render("pages/home/index.pug", { user: req.user });
     }
 
     /**
@@ -21,7 +21,7 @@ export class HomeController {
      * @param next
      */
     public about(req: Request, res: Response, next: NextFunction) {
-        res.render("pages/home/about.pug");
+        res.render("pages/home/about.pug", { user: req.user });
     }
 
     /**
@@ -31,7 +31,7 @@ export class HomeController {
      * @param next
      */
     public reportIssue(req: Request, res: Response, next: NextFunction) {
-        res.render("pages/home/report-issue.pug");
+        res.render("pages/home/report-issue.pug", { user: req.user });
     }
 
     /**
@@ -41,6 +41,6 @@ export class HomeController {
      * @param next
      */
     public privatePage(req: Request, res: Response, next: NextFunction) {
-        res.render("pages/home/private-page.pug");
+        res.render("pages/home/private-page.pug", { user: req.user });
     }
 }

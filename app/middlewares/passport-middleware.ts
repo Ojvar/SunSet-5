@@ -34,8 +34,6 @@ export class PassportMiddleware {
      */
     public static isLoggedin() {
         return (req: Request, res: Response, next: NextFunction) => {
-            console.log("IS LOGGED IN", req.user, req.payload);
-
             if (undefined == req.user) {
                 res.redirect(
                     GlobalData.express?.app.RouteManager.routePath(

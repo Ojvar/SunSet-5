@@ -8,9 +8,7 @@ const controller: AuthController = new AuthController();
 export const routeBase: string = "/auth";
 export const routes: RouteItem[] = [
     RouteItem.get("/login", controller.login.bind(controller), "auth.login"),
-    RouteItem.get("/test", (req, res, next) => {
-        res.send(req.user);
-    }),
+    RouteItem.get("/logout", controller.logout.bind(controller), "auth.logout"),
 
     RouteItem.post(
         "/login",

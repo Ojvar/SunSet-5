@@ -1,6 +1,6 @@
-import { Hash } from "@TYPES/hash-type";
 import { GlobalData } from "./global-data-helper";
 import { GlobalMethods } from "./global-methods-helper";
+import { Hash } from "@TYPES/hash-type";
 import { RouteItemType } from "./route-manager";
 
 /**

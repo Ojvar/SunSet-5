@@ -1,6 +1,7 @@
 import { AxiosHelper, AxiosResponse } from "@Scripts/helpers/axios-helepr";
 
 import { ActionResultType } from "@Lib/types/global/action-result-type";
+import { PageHelper } from "@Scripts/helpers/page-helper";
 import { Vuex } from "@Scripts/vendors/vue";
 import { routes } from "@Scripts/helpers/route-helper";
 
@@ -28,6 +29,13 @@ export function LoginStore() {
         },
 
         actions: {
+            /**
+             * Login by google
+             */
+            async loginByGoogle(){
+                PageHelper.redirect(routes["auth.google"]);
+            },
+
             /**
              * Attempt to login
              * @param context {any} Context object

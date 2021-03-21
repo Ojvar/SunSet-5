@@ -1,7 +1,5 @@
 import { Callback, ClientOpts, RedisClient, createClient } from "redis";
 
-import { GlobalData } from "./global-data-helper";
-
 /**
  * Redis-client helper class
  */

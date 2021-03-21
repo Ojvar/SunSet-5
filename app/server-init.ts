@@ -9,7 +9,7 @@ export class ServerInitClass {
      * @param payload {any} Payload data
      */
     public async onServerInitialized(payload?: any) {
-        /* Do whatever you need immediatly to do after server initilized successfully */
+        /* Write whatever you want to do immediatly after server initilized successfully */
         GlobalData.logger.info("Server initalized successfully");
     }
 }

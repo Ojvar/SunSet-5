@@ -10,7 +10,7 @@ export const routes: RouteItem[] = [
     RouteItem.get("/login", controller.login.bind(controller), "auth.login"),
     RouteItem.get(
         "/logout",
-        [PassportMiddleware.logout, controller.logout.bind(controller)],
+        [PassportMiddleware.logout(), controller.logout.bind(controller)],
         "auth.logout"
     ),
 

@@ -18,7 +18,7 @@ export const routes: RouteItem[] = [
     RouteItem.get(
         "/privatePage",
         [
-            PassportMiddleware.isLoggedin(),
+            PassportMiddleware.isLoggedIn(),
             controller.privatePage.bind(controller),
         ],
         "home.private-page"

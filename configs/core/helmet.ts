@@ -10,21 +10,24 @@ import { XPermittedCrossDomainPoliciesOptions } from "helmet/dist/middlewares/x-
  * Export config
  */
 export const config = {
-    contentSecurityPolicy: {
+    contentSecurityPolicy: (nonce: any): ContentSecurityPolicyOptions => ({
         directives: {
             defaultSrc: [
                 "'self'",
                 "data: blob: filesystem: about: ws: wss: 'unsafe-inline' 'unsafe-eval'",
             ],
-            scriptSrc: ["'self'", "data: blob: 'unsafe-inline' 'unsafe-eval'"],
+            scriptSrc: [
+                "'self'",
+                "data: blob: 'unsafe-inline' 'unsafe-eval'",
+                `'nonce-${nonce}'`,
+            ],
             connectSrc: ["'self'", "data: blob: 'unsafe-inline'"],
             imgSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
             frameSrc: ["'self'", " data: blob:"],
             styleSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
             fontSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
         },
-        //  reportOnly: true,
-    },
+    }),
 
     dnsPrefetchControl: {},
 
@@ -53,7 +56,7 @@ export const config = {
  * Helmet config type
  */
 export type HelmetConfigType = {
-    contentSecurityPolicy?: ContentSecurityPolicyOptions;
+    contentSecurityPolicy?: (nonce: any) => ContentSecurityPolicyOptions;
     dnsPrefetchControl?: XDnsPrefetchControlOptions;
     expectCt: ExpectCtOptions;
     frameguard: XFrameOptionsOptions;

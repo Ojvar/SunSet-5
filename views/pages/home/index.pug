@@ -5,6 +5,18 @@ block content
         .columns
             .column.has-text-centered
                 h1.title.is-1.has-text-primary Welcome to Sunset V5
+        p.content.has-text-centered
+            strong NOTE
+            br
+            p.has-text-centered
+                | To Use inline javascript snippets, add <strong>'nonce=nonce'</strong> attribute to script tag 
+                | Like this: 
+            pre
+                | (PUG)
+                | script(nonce=nonce).
+                |   console.log(alert("Hello Sunset"));
 
 block scripts
     script(defer, async, src=Helper.mix("scripts/pages/home/index.js")) 
+    script(nonce=nonce).
+        console.log("To Use inline javascript snippets, add 'nonce=nonce' attribute to script tag ");

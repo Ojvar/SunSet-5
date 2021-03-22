@@ -23,15 +23,17 @@ export class PassportMiddleware {
     /**
      * Logout middleware
      */
-    public static logout(req: Request, res: Response, next: NextFunction) {
-        req.logout();
-        next();
+    public static logout() {
+        return (req: Request, res: Response, next: NextFunction) => {
+            req.logout();
+            next();
+        };
     }
 
     /**
      * IsLogged in
      */
-    public static isLoggedin() {
+    public static isLoggedIn() {
         return (req: Request, res: Response, next: NextFunction) => {
             if (undefined == req.user) {
                 res.redirect(

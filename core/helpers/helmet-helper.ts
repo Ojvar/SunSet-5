@@ -1,6 +1,9 @@
-import { Application } from "express";
+import { Application, NextFunction, Request, Response } from "express";
+
 import Helmet from "helmet";
 import { config } from "@CONFIGS/core/helmet";
+import { isNamedExportBindings } from "typescript";
+import { randomBytes } from "crypto";
 
 /**
  * HelmetHelper class
@@ -10,7 +13,17 @@ export class HelmetHelper {
      * Initialize
      */
     public async init(app: Application) {
-        app.use(Helmet.contentSecurityPolicy(config.contentSecurityPolicy));
+        app.use((req: Request, res: Response, next: NextFunction) => {
+            res.locals.nonce = randomBytes(32).toString("hex");
+
+            if (config.contentSecurityPolicy) {
+                const cspConfig = config.contentSecurityPolicy(
+                    res.locals.nonce
+                );
+
+                return Helmet.contentSecurityPolicy(cspConfig)(req, res, next);
+            }
+        });
 
         app.use(Helmet.dnsPrefetchControl(config.dnsPrefetchControl));
 

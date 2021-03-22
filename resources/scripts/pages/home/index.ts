@@ -1,8 +1,5 @@
-import { Vue, VueRouter } from "@Scripts/vendors/vue";
-
 import { LoadingMixin } from "@Scripts/vue-mixins/loading-mixin";
-import { VueRouterMixin } from "@Scripts/vue-mixins/vue-router-mixin";
-import { routes } from "./routes";
+import { Vue } from "@Scripts/vendors/vue";
 
 /**
  * HomePage class
@@ -19,15 +16,10 @@ export class HomePage {
      * Init Vue
      */
     private initVue() {
-        const router = new VueRouter({
-            routes,
-        });
-
         new Vue({
             el: "#app",
 
-            mixins: [VueRouterMixin(), LoadingMixin()],
-            router,
+            mixins: [LoadingMixin()],
         });
     }
 }

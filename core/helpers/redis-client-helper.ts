@@ -10,11 +10,12 @@ export default class RedisClientHelper {
 
     /**
      * Ctr
-     * @param logger Console
+     * @param logger {Console}
+     * @param options {ClientOpts}
      */
-    constructor(logger: Console, options?: ClientOpts) {
+    constructor(logger: Console, options: ClientOpts = {}) {
         this.logger = logger;
-        this.clientOptions = options || ({} as ClientOpts);
+        this.clientOptions = options as ClientOpts;
     }
 
     /**
@@ -22,7 +23,7 @@ export default class RedisClientHelper {
      * @returns RedisClient redis client
      */
     get client(): RedisClient {
-        if (null == this._client) {
+        if (undefined == this._client) {
             throw new Error("Client is undefined");
         }
 

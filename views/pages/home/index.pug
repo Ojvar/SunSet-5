@@ -6,15 +6,36 @@ block content
             .column.has-text-centered
                 h1.title.is-1.has-text-primary Welcome to Sunset V5
         p.content.has-text-centered
-            strong NOTE
-            br
-            p.has-text-centered
-                | To Use inline javascript snippets, add <strong>'nonce=nonce'</strong> attribute to script tag 
-                | Like this: 
-            pre
-                | (PUG)
-                | script(nonce=nonce).
-                |   console.log(alert("Hello Sunset"));
+            p
+                strong NOTE (How define a structure for session)
+                p.has-text-centered
+                    | Current visits count (comes from session) : <strong>#{session.views}</strong>
+                    br
+                    | You can declare session strucure in app/server-init.ts module
+                    | like this
+                    pre
+                        | /**
+                        | * Session interface
+                        | */
+                        | declare module "express-session" {
+                        |     /* Define your session structure here */
+                        |     interface SessionData {
+                        |         views: number;
+                        |     }
+                        | }
+
+
+            p
+                strong NOTE (How to use inine scripts)
+                p.has-text-centered
+                    | To Use inline javascript snippets, add <strong>'nonce=nonce'</strong> attribute to script tag 
+                    br
+                    | Open Developer console and view the output of approved javascript snippet result
+                    | Like this: 
+                pre
+                    | (PUG)
+                    | script(nonce=nonce).
+                    |   console.log(alert("Hello Sunset"));
 
 block scripts
     script(defer, async, src=Helper.mix("scripts/pages/home/index.js")) 

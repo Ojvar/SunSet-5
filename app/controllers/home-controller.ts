@@ -11,7 +11,12 @@ export class HomeController {
      * @param next
      */
     public index(req: Request, res: Response, next: NextFunction) {
-        res.render("pages/home/index.pug", { user: req.user });
+        req.session.views = (req.session.views || 0) + 1;
+
+        res.render("pages/home/index.pug", {
+            user: req.user,
+            session: req.session,
+        });
     }
 
     /**

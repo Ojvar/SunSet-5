@@ -1,7 +1,4 @@
-import {
-    ExpressConfigType,
-    config as ServerConfig,
-} from "@CONFIGS/core/server";
+import { config as ServerConfig, ServerConfigType } from "@CONFIGS/core/server";
 
 import Express from "express";
 import { GlobalMethods } from "./global-methods-helper";
@@ -16,7 +13,7 @@ export class ExpressHelper {
     private logger: Console = console;
     private app?: Express.Application;
     private server?: Http.Server;
-    private config: ExpressConfigType = ServerConfig;
+    private config: ServerConfigType = ServerConfig;
     private routeManager?: RouteManager;
 
     /**

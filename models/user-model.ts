@@ -1,6 +1,18 @@
 import { Document, Model, Schema, model } from "mongoose";
 
 /**
+ * UserDocument interface
+ */
+export interface IUserModelType {
+    activated_at: Date;
+    created_at: Date;
+    email: string;
+    nick_name: string;
+    pwd?: string;
+    updated_at: Date;
+}
+
+/**
  * User Schema
  */
 export const UserSchema = new Schema<IUserDocument, IUserModel>(
@@ -18,10 +30,7 @@ export const UserSchema = new Schema<IUserDocument, IUserModel>(
             trim: true,
         },
 
-        pwd: {
-            type: String,
-            required: true,
-        },
+        pwd: String,
 
         activated_at: {
             type: Date,
@@ -36,23 +45,24 @@ export const UserSchema = new Schema<IUserDocument, IUserModel>(
     }
 );
 
+/* Register by google profile */
+UserSchema.statics.registerByGoogleProfile = async function(
+    this: IUserModel,
+    profile: any
+): Promise<IUserDocument> {
+    return this.create({
+        nick_name: profile.display_name,
+        profile: {
+            google: profile,
+        },
+    });
+};
+
 /**
  * UserModel interface
  */
 export interface IUserModel extends Model<IUserDocument> {
     registerByGoogleProfile(profile: any): Promise<IUserDocument>;
-}
-
-/**
- * UserDocument interface
- */
-export interface IUserModelType {
-    activated_at: Date;
-    created_at: Date;
-    email: string;
-    nick_name: string;
-    pwd: string;
-    updated_at: Date;
 }
 
 /**

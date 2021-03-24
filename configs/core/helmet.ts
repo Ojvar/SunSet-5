@@ -18,14 +18,18 @@ export const config = {
             ],
             scriptSrc: [
                 "'self'",
-                "data: blob: 'unsafe-inline' 'unsafe-eval'",
+                "data: blob: https://*.google.com 'unsafe-inline' 'unsafe-eval'",
                 `'nonce-${nonce}'`,
             ],
             connectSrc: ["'self'", "data: blob: 'unsafe-inline'"],
             imgSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
             frameSrc: ["'self'", " data: blob:"],
             styleSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
-            fontSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
+            fontSrc: [
+                "*",
+                "'self'",
+                "data: blob: https://*.google.com 'unsafe-inline'",
+            ],
         },
     }),
 

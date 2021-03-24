@@ -4,6 +4,7 @@ dist/
 dist/public/
 public/
 .env
+dump.rdb
 
 # Logs
 logs

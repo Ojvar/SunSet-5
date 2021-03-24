@@ -6,14 +6,16 @@ export const config = {
     serverUrl: process.env.URL || "http://localhost:8085",
     host: process.env.HOST || "localhost",
     port: parseInt(process.env.PORT || "8585"),
-} as ExpressConfigType;
+    sessionStore: process.env.SESSION_DRIVER || "memory",
+} as ServerConfigType;
 
 /**
  * Express config type
  */
-export type ExpressConfigType = {
+export type ServerConfigType = {
     proto: string;
     port: number;
     host: string;
     serverUrl: string;
+    sessionStore: "redis" | "memory" | null;
 };

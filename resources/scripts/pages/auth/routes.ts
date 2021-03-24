@@ -13,4 +13,14 @@ export const routes: Array<RouteConfig> = [
                 "@VueC/auth/login.vue"
             ),
     },
+
+    {
+        path: "*",
+        name: "not-found",
+        component: () =>
+            import(
+                /* webpackChunkName: "@VueC/global/route-not-found.vue" */
+                "@VueC/global/route-not-found.vue"
+            ),
+    },
 ];

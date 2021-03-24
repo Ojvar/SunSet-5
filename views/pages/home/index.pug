@@ -7,7 +7,7 @@ block content
                 h1.title.is-1.has-text-primary Welcome to Sunset V5
         p.content.has-text-centered
             p
-                strong NOTE (How define a structure for session)
+                strong NOTE (How to define a structure for session)
                 p.has-text-centered
                     | Current visits count (comes from session) : <strong>#{session.views}</strong>
                     br
@@ -40,4 +40,6 @@ block content
 block scripts
     script(defer, async, src=Helper.mix("scripts/pages/home/index.js")) 
     script(nonce=nonce).
-        console.log("To Use inline javascript snippets, add 'nonce=nonce' attribute to script tag ");
+        console.log("To Use inline javascript snippets, add 'nonce=nonce' attribute to script tag");
+    script().
+        console.log("This should not be printed");

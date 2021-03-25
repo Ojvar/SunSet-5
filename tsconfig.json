@@ -1,44 +1,46 @@
 {
     "exclude": ["node_modules", "webpack", "dist"],
-    "include": ["app", "configs", "core", "lib", "models", "routes", "types"],
 
     "compilerOptions": {
-        "outDir": "./dist/",
-        "rootDir": "./",
-        "baseUrl": "./",
-        "paths": {
-            /* App */
-            "@APP/*": ["app/*"],
-            "@CONTROLLERS/*": ["app/controllers/*"],
-            "@TYPES/*": ["types/*"],
-            "@CONFIGS/*": ["configs/*"],
-
-            /* Global */
-            "@Lib/*": ["lib/*"],
-
-            /* Front end */
-            "@VueC/*": ["resources/scripts/components/*"],
-            "@Scripts/*": ["resources/scripts/*"],
-            "@Styles/*": ["resources/styles/*"],
-            "@Fonts/*": ["resources/fonts/*"],
-            "@Images/*": ["resources/images/*"],
-
-            /* Root */
-            "@/*": ["./*"]
-        },
-
         "target": "ESNext",
         "module": "CommonJS",
         "moduleResolution": "Node",
         "jsx": "preserve",
 
-        // "incremental": true,
         "checkJs": true,
         "strict": true,
         "allowJs": true,
         "removeComments": true,
         "noImplicitAny": true,
         "esModuleInterop": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+
+        "plugins": [
+            { "transform": "typescript-transform-paths" },
+            {
+                "transform": "typescript-transform-paths",
+                "afterDeclarations": true
+            }
+        ],
+
+        "outDir": "./dist/",
+        "rootDir": "./",
+        "baseUrl": "./",
+        "paths": {
+            "@APP/*": ["app/*"],
+            "@CONTROLLERS/*": ["app/controllers/*"],
+            "@TYPES/*": ["types/*"],
+            "@CONFIGS/*": ["configs/*"],
+
+            "@Lib/*": ["lib/*"],
+
+            "@VueC/*": ["resources/scripts/components/*"],
+            "@Scripts/*": ["resources/scripts/*"],
+            "@Styles/*": ["resources/styles/*"],
+            "@Fonts/*": ["resources/fonts/*"],
+            "@Images/*": ["resources/images/*"],
+
+            "@/*": ["./*"]
+        }
     }
 }

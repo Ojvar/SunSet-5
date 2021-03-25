@@ -1,6 +1,5 @@
 {
     "exclude": ["node_modules", "webpack", "dist"],
-    "include": ["resources"],
 
     "compilerOptions": {
         "outDir": "./dist/",
@@ -22,23 +21,19 @@
 
         "baseUrl": "./",
         "paths": {
-            /* App */
             "@APP/*": ["app/*"],
             "@CONTROLLERS/*": ["app/controllers/*"],
             "@TYPES/*": ["types/*"],
             "@CONFIGS/*": ["configs/*"],
 
-            /* Global */
             "@Lib/*": ["lib/*"],
 
-            /* Front end */
             "@VueC/*": ["resources/scripts/components/*"],
             "@Scripts/*": ["resources/scripts/*"],
             "@Styles/*": ["resources/styles/*"],
             "@Fonts/*": ["resources/fonts/*"],
             "@Images/*": ["resources/images/*"],
 
-            /* Root */
             "@/*": ["./*"]
         }
     }

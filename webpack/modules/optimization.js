@@ -42,6 +42,8 @@ module.exports = () => ({
 
             default: {
                 test: /[\\/]node_modules[\\/]/i,
+                // name: "chunks/axios",
+                chunks: "all",
                 priority: -100,
             },
         },

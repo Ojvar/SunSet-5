@@ -1,34 +1,27 @@
 {
-    "name": "trade-master-ui",
-    "version": "1.0.0",
-    "description": "",
-    "main": "",
-    "_moduleAliases": {
-        "@APP": "./app",
-        "@CONTROLLERS": "./app/controllers",
-        "@TYPES": "./types",
-        "@CONFIGS": "./configs",
-        "@Lib": "./lib",
-        "@VueC": "./resources/scripts/components",
-        "@Scripts": "./resources/scripts",
-        "@Styles": "./resources/styles",
-        "@Fonts": "./resources/fonts",
-        "@Images": "./resources/images",
-        "@": "./"
-    },
+    "name": "@ojvar/sunset",
+    "version": "5.0.0",
+    "description": "Sunset mini-framework",
+    "main": "./dist/core/server.js",
     "scripts": {
+        "clean": "rimraf ./dist",
         "build": "cross-env NODE_ENV=production webpack --config=webpack/webpack.config.js",
         "dev": "cross-env NODE_ENV=development webpack --config=webpack/webpack.config.js",
         "watch": "cross-env NODE_ENV=development webpack --config=webpack/webpack.config.js --watch",
         "s-watch": "nodemon",
-        "s-dev": "ts-node core/server.ts",
-        "s-run": "node dist/core/server.js"
+        "s-dev": "ts-node-dev -P tsconfig.json -r tsconfig-paths/register core/server.ts",
+        "s-run": "ts-node -P tsconfig.json -r tsconfig-paths/register core/server.ts",
+        "s-build": "ttsc -P tsconfig.json"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/rg2taak/tradeMaster.git"
+        "url": "git+https://github.com/ojvar/sunset5.git"
     },
-    "keywords": [],
+    "keywords": [
+        "sunset",
+        "framework",
+        "mini-framework"
+    ],
     "author": "",
     "license": "ISC",
     "bugs": {
@@ -57,6 +50,7 @@
         "@types/webpack": "^4.41.26",
         "@types/webpack-assets-manifest": "^3.0.1",
         "babel-loader": "^8.2.2",
+        "cross-env": "^7.0.3",
         "eliminate-empty-chunk-file-webpack-plugin": "^1.3.2",
         "file-loader": "^6.2.0",
         "less-loader": "^8.0.0",
@@ -68,9 +62,9 @@
         "terser-webpack-plugin": "^5.1.1",
         "ts-loader": "^8.0.15",
         "tsconfig-paths": "^3.9.0",
-        "tsconfig-paths-webpack-plugin": "^3.3.0",
         "ttypescript": "^1.5.12",
         "typescript": "^4.1.3",
+        "typescript-transform-paths": "^2.2.3",
         "vue-loader": "^15.9.6",
         "vue-template-compiler": "^2.6.12",
         "webpack": "^5.28.0",
@@ -87,7 +81,6 @@
         "connect-redis": "^5.1.0",
         "cookie-parser": "^1.4.5",
         "cors": "^2.8.5",
-        "cross-env": "^7.0.3",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "express-session": "^1.17.1",

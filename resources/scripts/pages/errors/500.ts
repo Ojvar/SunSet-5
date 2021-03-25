@@ -1,27 +1,40 @@
-const stackContainer = document.querySelector(".stack-container");
-const cardNodes = document.querySelectorAll(".card-container");
-const perspecNodes = document.querySelectorAll(".perspec");
-const perspec = document.querySelector(".perspec");
-const card = document.querySelector(".card");
+const stackContainer: HTMLElement = document.querySelector(
+    ".stack-container"
+) as HTMLElement;
+const cardNodes: NodeListOf<Element> = document.querySelectorAll(
+    ".card-container"
+);
+const perspecNodes: NodeListOf<Element> = document.querySelectorAll(".perspec");
+const perspec: Element = document.querySelector(".perspec") as Element;
+const card: Element = document.querySelector(".card") as Element;
 
 let counter = stackContainer.children.length;
 
-//function to generate random number
-function randomIntFromInterval(min, max) {
+/**
+ * Function to generate random number
+ * @param min {number}
+ * @param max {number}
+ * @returns {number}
+ */
+function randomIntFromInterval(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-//after tilt animation, fire the explode animation
+/**
+ * After tilt animation, fire the explode animation
+ */
 card.addEventListener("animationend", function() {
     perspecNodes.forEach(function(elem, index) {
         elem.classList.add("explode");
     });
 });
 
-//after explode animation do a bunch of stuff
-perspec.addEventListener("animationend", function(e) {
+/**
+ * After explode animation do a bunch of stuff
+ */
+perspec.addEventListener("animationend", function(e: any) {
     if (e.animationName === "explode") {
-        cardNodes.forEach(function(elem, index) {
+        cardNodes.forEach(function(elem: any, index: number) {
             //add hover animation class
             elem.classList.add("pokeup");
 
@@ -30,10 +43,12 @@ perspec.addEventListener("animationend", function(e) {
                 let updown = [800, -800];
                 let randomY = updown[Math.floor(Math.random() * updown.length)];
                 let randomX = Math.floor(Math.random() * 1000) - 1000;
+
                 elem.style.transform = `translate(${randomX}px, ${randomY}px) rotate(-540deg)`;
                 elem.style.transition = "transform 1s ease, opacity 2s";
                 elem.style.opacity = "0";
                 counter--;
+
                 if (counter === 0) {
                     stackContainer.style.width = "0";
                     stackContainer.style.height = "0";
@@ -63,7 +78,7 @@ perspec.addEventListener("animationend", function(e) {
                 } else {
                     elem.querySelector(
                         ".code ul .node-" + (index - 1)
-                    ).addEventListener("animationend", function(e) {
+                    ).addEventListener("animationend", function(e: any) {
                         elem.querySelector(
                             ".code ul .node-" + index
                         ).classList.add("writeLine");

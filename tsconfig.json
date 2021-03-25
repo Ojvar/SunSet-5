@@ -1,4 +1,7 @@
 {
+    "exclude": ["node_modules", "webpack", "dist"],
+    "include": ["app", "configs", "core", "lib", "models", "routes", "types"],
+
     "compilerOptions": {
         "outDir": "./dist/",
         "rootDir": "./",
@@ -33,6 +36,7 @@
         "checkJs": true,
         "strict": true,
         "allowJs": true,
+        "removeComments": true,
         "noImplicitAny": true,
         "esModuleInterop": true,
         "skipLibCheck": true

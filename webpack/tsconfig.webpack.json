@@ -1,4 +1,7 @@
 {
+    "exclude": ["node_modules", "webpack", "dist"],
+    "include": ["resources"],
+
     "compilerOptions": {
         "outDir": "./dist/",
         "rootDir": "./",
@@ -10,6 +13,7 @@
 
         "strict": true,
         "allowJs": true,
+        "removeComments": true,
         "noImplicitAny": true,
         "esModuleInterop": true,
 
@@ -37,7 +41,5 @@
             /* Root */
             "@/*": ["./*"]
         }
-    },
-
-    "exclude": ["node_modules"]
+    }
 }

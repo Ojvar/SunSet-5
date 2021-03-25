@@ -1,9 +1,10 @@
+import { config as ServerConfig, config } from "@CONFIGS/core/server";
+
 import Express from "express";
-import { lstatSync } from "fs";
-import { config as ServerConfig } from "@CONFIGS/core/server";
-import { Hash } from "@TYPES/hash-type";
 import { GlobalMethods } from "./global-methods-helper";
+import { Hash } from "@TYPES/hash-type";
 import { RouteItem } from "./route-helper";
+import { lstatSync } from "fs";
 
 export class RouteManager {
     private logger: Console = console;
@@ -29,9 +30,10 @@ export class RouteManager {
      * Load routes
      */
     public async loadRoutes() {
-        const routeFiles: string[] = GlobalMethods.files(
-            GlobalMethods.rPath("routes")
-        );
+        const routeFiles: string[] = GlobalMethods.files([
+            config.basePath,
+            "routes",
+        ]);
 
         for (let i = 0; i < routeFiles.length; ++i) {
             const routeFilePath: string = routeFiles[i];

@@ -1,4 +1,8 @@
-import { config as ServerConfig, ServerConfigType } from "@CONFIGS/core/server";
+import {
+    config as ServerConfig,
+    ServerConfigType,
+    config,
+} from "@CONFIGS/core/server";
 
 import Express from "express";
 import { GlobalMethods } from "./global-methods-helper";
@@ -103,6 +107,8 @@ Server started successfully
         let server: Http.Server;
 
         if (useHttps) {
+            /* TODO: IMPLEMENT HTTPS SERVER */
+
             // const  Https = await import( "https");
             //   const serverPKeyPath: string = GlobalMethods.rPath(
             //     this.config.sslServerKey,
@@ -135,14 +141,15 @@ Server started successfully
      * @param basePath {string} GroupName
      */
     public async setupCustomMiddlewares(basePath: string): Promise<void> {
-        const files: Array<string> = GlobalMethods.files(basePath).filter(
-            (file: string) => !lstatSync(file).isDirectory()
-        );
+        const files: Array<string> = GlobalMethods.files([
+            config.basePath,
+            basePath,
+        ]).filter((file: string) => !lstatSync(file).isDirectory());
 
         for (let i = 0; i < files.length; ++i) {
             const file: string = files[i];
 
-            const Middleware = (await import(file)).default;
+            const Middleware = (await GlobalMethods.importFile(file)).default;
             const middleware: MiddlewareInterface = new Middleware(
                 this
             ) as MiddlewareInterface;

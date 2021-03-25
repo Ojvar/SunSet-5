@@ -1,5 +1,5 @@
 {
-    "exclude": ["node_modules", "webpack", "dist"],
+    "exclude": ["node_modules", "webpack*", "webpack/", "dist"],
 
     "compilerOptions": {
         "outDir": "./dist/",

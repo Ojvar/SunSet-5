@@ -7,6 +7,11 @@ export const config = {
     host: process.env.HOST || "localhost",
     port: parseInt(process.env.PORT || "8585"),
     sessionStore: process.env.SESSION_DRIVER || "memory",
+    publicPath: process.env.PUBLIC_PATH || "dist",
+    basePath:
+        process.env.NODE_ENV == "production"
+            ? process.env.PUBLIC_PATH || "dist"
+            : "",
 } as ServerConfigType;
 
 /**
@@ -18,4 +23,6 @@ export type ServerConfigType = {
     host: string;
     serverUrl: string;
     sessionStore: "redis" | "memory" | null;
+    publicPath: string;
+    basePath: string;
 };

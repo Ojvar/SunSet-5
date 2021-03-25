@@ -1,13 +1,17 @@
 import { basename, extname, resolve } from "path";
 
 import Glob from "glob";
+import { GlobalData } from "./global-data-helper";
 import { Request } from "express";
+import { join } from "path";
+import { config as serverConfig } from "@CONFIGS/core/server";
 
 /**
  * Global methods
  */
 export class GlobalMethods {
     private logger: Console = console;
+    // private static serverConfig: ServerConfigType;
 
     /**
      * Constructor
@@ -44,7 +48,15 @@ export class GlobalMethods {
      * Return files list of a directory
      * @param path string[]
      */
-    public static files(path: string, pattern: string = "**/*"): string[] {
+    public static files(
+        path: string | Array<string>,
+        pattern: string = "**/*"
+    ): string[] {
+        if (Array.isArray(path)) {
+            path = join(...path);
+        }
+
+        path = this.rPath(path);
         pattern = path + "/" + pattern;
 
         return Glob.sync(pattern);
@@ -55,7 +67,7 @@ export class GlobalMethods {
      * @param path string
      */
     public static async importFile(path: string): Promise<any> {
-        path = this.rPath(path);
+        path = this.rPath(serverConfig.basePath, path);
 
         return await import(path);
     }

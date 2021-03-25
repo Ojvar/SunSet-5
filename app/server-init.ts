@@ -13,13 +13,3 @@ export class ServerInitClass {
         GlobalData.logger.info("Server initalized successfully");
     }
 }
-
-/**
- * Session interface
- */
-declare module "express-session" {
-    /* Define your session structure here */
-    interface SessionData {
-        views: number;
-    }
-}

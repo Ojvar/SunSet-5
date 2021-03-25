@@ -2,6 +2,7 @@ import { GlobalData } from "./global-data-helper";
 import { GlobalMethods } from "./global-methods-helper";
 import { Hash } from "@TYPES/hash-type";
 import { RouteItemType } from "./route-manager";
+import { config } from "@CONFIGS/core/server";
 
 /**
  * PugHelper class
@@ -26,8 +27,9 @@ export class PugHelper {
 
         try {
             const filePath: string = GlobalMethods.rPath(
-                "./dist/public/assets-manifest.json"
+                `./${config.publicPath}/public/assets-manifest.json`
             );
+
             this.assetsList = (await import(filePath)).default;
         } catch (err) {
             return err;

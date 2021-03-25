@@ -1,5 +1,5 @@
 {
-    "exclude": ["node_modules", "webpack", "dist", "resources"],
+    "exclude": ["node_modules", "webpack*", "webpack/", "dist", "resources"],
 
     "compilerOptions": {
         "target": "ESNext",

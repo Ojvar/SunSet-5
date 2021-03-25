@@ -9,9 +9,10 @@
         "dev": "cross-env NODE_ENV=development webpack --config=webpack/webpack.config.js",
         "watch": "cross-env NODE_ENV=development webpack --config=webpack/webpack.config.js --watch",
         "s-watch": "nodemon",
-        "s-dev": "ts-node-dev -P tsconfig.json -r tsconfig-paths/register core/server.ts",
-        "s-run": "ts-node -P tsconfig.json -r tsconfig-paths/register core/server.ts",
-        "s-build": "ttsc -P tsconfig.json"
+        "s-dev": "cross-env NODE_ENV=development ts-node-dev -P tsconfig.json -r tsconfig-paths/register core/server.ts",
+        "s-run": "cross-env NODE_ENV=development ts-node -P tsconfig.json -r tsconfig-paths/register core/server.ts",
+        "s-build": "cross-env NODE_ENV=production ttsc -P tsconfig.json",
+        "d-run": "cross-env NODE_ENV=production node dist/core/server.js"
     },
     "repository": {
         "type": "git",

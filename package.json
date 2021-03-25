@@ -5,14 +5,14 @@
     "main": "./dist/core/server.js",
     "scripts": {
         "clean": "rimraf ./dist",
-        "build": "cross-env NODE_ENV=production webpack --config=webpack/webpack.config.js",
-        "dev": "cross-env NODE_ENV=development webpack --config=webpack/webpack.config.js",
-        "watch": "cross-env NODE_ENV=development webpack --config=webpack/webpack.config.js --watch",
-        "s-watch": "nodemon",
-        "s-dev": "cross-env NODE_ENV=development ts-node-dev -P tsconfig.json -r tsconfig-paths/register core/server.ts",
-        "s-run": "cross-env NODE_ENV=development ts-node -P tsconfig.json -r tsconfig-paths/register core/server.ts",
-        "s-build": "cross-env NODE_ENV=production ttsc -P tsconfig.json",
-        "d-run": "cross-env NODE_ENV=production node dist/core/server.js"
+        "build": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production webpack --config=webpack/webpack.config.js",
+        "dev": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development webpack --config=webpack/webpack.config.js",
+        "watch": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development webpack --config=webpack/webpack.config.js --watch",
+        "s-watch": "node_modules/nodemon/bin/nodemon.js",
+        "s-dev": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development ts-node-dev -P tsconfig.json -r tsconfig-paths/register core/server.ts",
+        "s-run": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development ts-node -P tsconfig.json -r tsconfig-paths/register core/server.ts",
+        "s-build": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production ttsc -P tsconfig.json",
+        "d-run": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production node dist/core/server.js"
     },
     "repository": {
         "type": "git",
@@ -57,6 +57,7 @@
         "less-loader": "^8.0.0",
         "mini-css-extract-plugin": "^1.3.6",
         "node-sass": "^5.0.0",
+        "nodemon": "^2.0.7",
         "pug-plain-loader": "^1.1.0",
         "raw-loader": "^4.0.2",
         "sass-loader": "^11.0.1",

@@ -1,5 +1,5 @@
 {
-    "exclude": ["node_modules", "webpack", "dist"],
+    "exclude": ["node_modules", "webpack", "dist", "resources"],
 
     "compilerOptions": {
         "target": "ESNext",
@@ -8,6 +8,7 @@
         "jsx": "preserve",
 
         "checkJs": true,
+
         "strict": true,
         "allowJs": true,
         "removeComments": true,

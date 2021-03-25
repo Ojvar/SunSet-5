@@ -4,37 +4,39 @@ import { Vue } from "@Scripts/vendors/vue";
  * LoadingMixinDataType
  */
 export type LoadingMixinDataType = {
-    loadingFlag: Boolean;
+    loadingFlag: boolean;
 };
 
 /**
  * LoadingMixinDataType mixin
  */
-export const LoadingMixin = () => ({
-    data: () =>
-        ({
-            loadingFlag: false,
-        } as LoadingMixinDataType),
+export const LoadingMixin = () => {
+    return Vue.extend({
+        data: () =>
+            ({
+                loadingFlag: false,
+            } as LoadingMixinDataType),
 
-    computed: {
-        isLoading(): boolean {
-            return this.loadingFlag;
-        },
-    },
-
-    methods: {
-        /**
-         * Show loading
-         */
-        showLoading(): void {
-            Vue.set(this, "loadingFlag", true);
+        computed: {
+            isLoading(): boolean {
+                return this.loadingFlag;
+            },
         },
 
-        /**
-         * Hide loading
-         */
-        hideLoading(): void {
-            Vue.set(this, "loadingFlag", false);
+        methods: {
+            /**
+             * Show loading
+             */
+            showLoading(): void {
+                Vue.set(this, "loadingFlag", true);
+            },
+
+            /**
+             * Hide loading
+             */
+            hideLoading(): void {
+                Vue.set(this, "loadingFlag", false);
+            },
         },
-    },
-});
+    });
+};

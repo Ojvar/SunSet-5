@@ -1,5 +1,5 @@
 import VueRouter, { RawLocation, RouteConfig } from "vue-router";
-import Vuex, { Store } from "vuex";
+import Vuex, { Store, StoreOptions } from "vuex";
 
 import Buefy from "buefy";
 import Vue from "vue";
@@ -16,4 +16,4 @@ Vue.use(Buefy, {
 export { Vue, VueRouter };
 export { Buefy };
 export { RawLocation, RouteConfig };
-export { Vuex, Store };
+export { Vuex, Store, StoreOptions };

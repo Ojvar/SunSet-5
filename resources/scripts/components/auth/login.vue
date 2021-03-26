@@ -42,7 +42,7 @@ export default Vue.extend({
      * Set store
      */
     async beforeCreate() {
-        this.$store = new LoginStore();
+        this.$store = LoginStore();
         await this.$store.dispatch("init");
     },
 

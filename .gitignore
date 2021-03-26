@@ -1,4 +1,5 @@
 # Sunset ignores
+package-lock.json
 logs/*
 dist/
 dist/public/

@@ -25,15 +25,12 @@
             "@CONTROLLERS/*": ["app/controllers/*"],
             "@TYPES/*": ["types/*"],
             "@CONFIGS/*": ["configs/*"],
-
             "@Lib/*": ["lib/*"],
-
             "@VueC/*": ["resources/scripts/components/*"],
             "@Scripts/*": ["resources/scripts/*"],
             "@Styles/*": ["resources/styles/*"],
             "@Fonts/*": ["resources/fonts/*"],
             "@Images/*": ["resources/images/*"],
-
             "@/*": ["./*"]
         }
     }

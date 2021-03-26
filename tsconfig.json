@@ -2,19 +2,18 @@
     "exclude": ["node_modules", "webpack*", "webpack/", "dist", "resources"],
 
     "compilerOptions": {
-        "target": "ESNext",
+        "jsx": "preserve",
         "module": "CommonJS",
         "moduleResolution": "Node",
-        "jsx": "preserve",
+        "target": "ESNext",
 
-        "checkJs": true,
-
-        "strict": true,
         "allowJs": true,
-        "removeComments": true,
-        "noImplicitAny": true,
+        "checkJs": true,
         "esModuleInterop": true,
+        "noImplicitAny": true,
+        "removeComments": true,
         "skipLibCheck": true,
+        "strict": true,
 
         "plugins": [
             { "transform": "typescript-transform-paths" },

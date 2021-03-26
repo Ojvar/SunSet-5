@@ -5,6 +5,7 @@ dist/public/
 public/
 .env
 dump.rdb
+private/ssl/*.pem
 
 # Logs
 logs

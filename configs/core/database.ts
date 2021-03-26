@@ -5,6 +5,9 @@ export const config = {
     driver: process.env.DB_DRIVER || "none",
     mongoose: {
         useNewUrlParser: true,
+        useFindAndModify: false,
+        useCreateIndex: true,
+
         connection: {
             dbHost: process.env.DB_HOST || "127.0.0.1",
             dbName: process.env.DB_NAME || "sunset_db",

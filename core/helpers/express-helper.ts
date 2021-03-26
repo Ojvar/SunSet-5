@@ -3,12 +3,13 @@ import {
     ServerConfigType,
     config,
 } from "@CONFIGS/core/server";
+import { lstatSync, readFileSync } from "fs";
 
 import Express from "express";
 import { GlobalMethods } from "./global-methods-helper";
 import Http from "http";
+import Https from "https";
 import { RouteManager } from "./route-manager";
-import { lstatSync } from "fs";
 
 /**
  * Express helper
@@ -102,38 +103,27 @@ Server started successfully
      * @param useHttps boolean Use https
      */
     private async createServer(): Promise<Http.Server> {
-        const useHttps: boolean = this.config.proto == "https";
+        if ("https" == this.config.proto) {
+            const serverPKeyPath: string = GlobalMethods.rPath(
+                this.config.basePath,
+                this.config.ssl.serverKey
+            );
 
-        let server: Http.Server;
+            const serverCertPath: string = GlobalMethods.rPath(
+                this.config.basePath,
+                this.config.ssl.serverCert
+            );
 
-        if (useHttps) {
-            /* TODO: IMPLEMENT HTTPS SERVER */
+            /* Setup server */
+            let options: Http.ServerOptions = {
+                key: readFileSync(serverPKeyPath).toString(),
+                cert: readFileSync(serverCertPath).toString(),
+            } as Http.ServerOptions;
 
-            // const  Https = await import( "https");
-            //   const serverPKeyPath: string = GlobalMethods.rPath(
-            //     this.config.sslServerKey,
-            //   );
-            //   const serverCertPath: string = GlobalMethods.rPath(
-            //     this.config.sslServerCert,
-            //   );
-
-            //   const privateKey: string = readFileSync(serverPKeyPath).toString();
-            //   const certificate: string = readFileSync(serverCertPath).toString();
-
-            //   /* Setup server */
-            //   let options: Http.ServerOptions = {
-            //     key: privateKey,
-            //     cert: certificate,
-            //   } as Http.ServerOptions;
-
-            //   server = Https.createServer(options, this.app);
-
-            server = Http.createServer(this.app);
+            return Https.createServer(options, this.app);
         } else {
-            server = Http.createServer(this.app);
+            return Http.createServer(this.app);
         }
-
-        return server;
     }
 
     /**

@@ -3,6 +3,7 @@ import "winston-daily-rotate-file";
 import { basename, extname } from "path";
 
 import { GlobalMethods } from "./global-methods-helper";
+import { LoggerType } from "./global-data-helper";
 import { default as Winston } from "winston";
 import { default as _ } from "lodash";
 import { config } from "@CONFIGS/core/logger";
@@ -11,14 +12,14 @@ import { config } from "@CONFIGS/core/logger";
  * Logger helper class
  */
 export class LoggerHelper {
-    private logger: Console = console;
+    private logger: LoggerType = console;
 
     /**
      * Ctr
-     * @param logger {Console}
+     * @param logger {LoggerType}
      * @param options {ClientOpts}
      */
-    constructor(logger: Console) {
+    constructor(logger: LoggerType) {
         this.logger = logger;
     }
 
@@ -60,7 +61,7 @@ export class LoggerHelper {
                             config.logFolder,
                             "error-" + logFileName
                         ),
-                        level: "errors",
+                        level: "error",
                     })
                 )
             );

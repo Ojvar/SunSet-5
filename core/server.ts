@@ -1,16 +1,17 @@
 import { ICoreModule } from "./modules/core-module-interface";
+import { LoggerType } from "./helpers/global-data-helper";
 import { ServerInitClass } from "@APP/server-init";
 
 /**
  * Server class
  */
 export class Server {
-    private logger: Console = console;
+    private logger: LoggerType = console;
 
     /**
      * Ctr
      */
-    constructor(logger: Console) {
+    constructor(logger: LoggerType) {
         this.logger = logger;
     }
 

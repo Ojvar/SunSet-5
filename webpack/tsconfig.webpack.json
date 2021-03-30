@@ -12,7 +12,7 @@
 
         "strict": true,
         "allowJs": true,
-        "removeComments": true,
+        "removeComments": false,
         "noImplicitAny": true,
         "esModuleInterop": true,
 

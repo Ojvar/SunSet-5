@@ -3,11 +3,12 @@ import { config as ServerConfig, config } from "@CONFIGS/core/server";
 import Express from "express";
 import { GlobalMethods } from "./global-methods-helper";
 import { Hash } from "@TYPES/hash-type";
+import { LoggerType } from "./global-data-helper";
 import { RouteItem } from "./route-helper";
 import { lstatSync } from "fs";
 
 export class RouteManager {
-    private logger: Console = console;
+    private logger: LoggerType = console;
     private routeFiles: Hash<any> = {};
     private _routesMap: Hash<RouteItemType> = {};
 
@@ -20,9 +21,9 @@ export class RouteManager {
 
     /**
      * Ctr
-     * @param logger Console
+     * @param logger LoggerType
      */
-    constructor(logger: Console) {
+    constructor(logger: LoggerType) {
         this.logger = logger;
     }
 

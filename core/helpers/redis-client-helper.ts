@@ -1,10 +1,12 @@
 import { Callback, ClientOpts, RedisClient, createClient } from "redis";
 
+import { LoggerType } from "./global-data-helper";
+
 /**
  * Redis-client helper class
  */
 export class RedisClientHelper {
-    private logger: Console = console;
+    private logger: LoggerType = console;
     private _client?: RedisClient = undefined;
     private clientOptions: ClientOpts = {};
 
@@ -13,7 +15,7 @@ export class RedisClientHelper {
      * @param logger {Console}
      * @param options {ClientOpts}
      */
-    constructor(logger: Console, options: ClientOpts = {}) {
+    constructor(logger: LoggerType, options: ClientOpts = {}) {
         this.logger = logger;
         this.clientOptions = options as ClientOpts;
     }

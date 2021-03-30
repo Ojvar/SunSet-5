@@ -9,13 +9,14 @@ import Express from "express";
 import { GlobalMethods } from "./global-methods-helper";
 import Http from "http";
 import Https from "https";
+import { LoggerType } from "./global-data-helper";
 import { RouteManager } from "./route-manager";
 
 /**
  * Express helper
  */
 export class ExpressHelper {
-    private logger: Console = console;
+    private logger: LoggerType = console;
     private app?: Express.Application;
     private server?: Http.Server;
     private config: ServerConfigType = ServerConfig;
@@ -24,7 +25,7 @@ export class ExpressHelper {
     /**
      * Get logger
      */
-    public get Logger(): Console {
+    public get Logger(): LoggerType {
         return this.logger;
     }
 

@@ -1,6 +1,7 @@
 import { basename, extname, resolve } from "path";
 
 import Glob from "glob";
+import { LoggerType } from "./global-data-helper";
 import { Request } from "express";
 import { join } from "path";
 import { config as serverConfig } from "@CONFIGS/core/server";
@@ -9,14 +10,14 @@ import { config as serverConfig } from "@CONFIGS/core/server";
  * Global methods
  */
 export class GlobalMethods {
-    private logger: Console = console;
+    private logger: LoggerType = console;
     // private static serverConfig: ServerConfigType;
 
     /**
      * Constructor
      * @param logger {Console} logger
      */
-    constructor(logger: Console) {
+    constructor(logger: LoggerType) {
         this.logger = logger;
     }
 

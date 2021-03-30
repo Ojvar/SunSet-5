@@ -3,7 +3,7 @@ import { Callback, ClientOpts, RedisClient, createClient } from "redis";
 /**
  * Redis-client helper class
  */
-export default class RedisClientHelper {
+export class RedisClientHelper {
     private logger: Console = console;
     private _client?: RedisClient = undefined;
     private clientOptions: ClientOpts = {};

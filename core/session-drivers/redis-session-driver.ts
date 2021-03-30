@@ -2,7 +2,7 @@ import ConnectRedis from "connect-redis";
 import ExpressSession from "express-session";
 import { GlobalData } from "../helpers/global-data-helper";
 import { ISessionDriver } from "../middlewares/core/002-express-session-middleware";
-import RedisClientHelper from "../helpers/redis-client-helper";
+import { RedisClientHelper } from "../helpers/redis-client-helper";
 import { Store } from "express-session";
 
 /**

@@ -1,7 +1,6 @@
 import { basename, extname, resolve } from "path";
 
 import Glob from "glob";
-import { GlobalData } from "./global-data-helper";
 import { Request } from "express";
 import { join } from "path";
 import { config as serverConfig } from "@CONFIGS/core/server";

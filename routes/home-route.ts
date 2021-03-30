@@ -1,3 +1,4 @@
+import { GlobalData } from "@/core/helpers/global-data-helper";
 import { HomeController } from "@CONTROLLERS/home-controller";
 import { PassportMiddleware } from "./../app/middlewares/passport-middleware";
 import { RouteItem } from "core/helpers/route-helper";

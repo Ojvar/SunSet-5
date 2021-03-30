@@ -13,9 +13,11 @@ export const config = {
             ? process.env.PUBLIC_PATH || "dist"
             : "",
     ssl: {
-        serverCert: process.env.SSL_SERVER_CERT || "private/ssl/server-cert.pem",
+        serverCert:
+            process.env.SSL_SERVER_CERT || "private/ssl/server-cert.pem",
         serverKey: process.env.SSL_SERVER_KEY || "private/ssl/server-key.pem",
     },
+    storage: process.env.STORAGE || "storage",
 } as ServerConfigType;
 
 /**
@@ -33,4 +35,5 @@ export type ServerConfigType = {
         serverCert: string;
         serverKey: string;
     };
+    storage: string;
 };

@@ -1,6 +1,6 @@
 import { MemoryStore, Store } from "express-session";
 
-import { ISessionDriver } from "../middlewares/core/002-express-session-middleware";
+import { ISessionDriver } from "../middlewares/core/003-express-session-middleware";
 
 /**
  * Memory session driver

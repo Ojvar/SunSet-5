@@ -1,5 +1,6 @@
 import { default as ExpressModule } from "core/modules/express-module";
 import { IDatabaseDriver } from "core/modules/database-module";
+import { Multer } from "multer";
 import { PugHelper } from "./pug-helper";
 
 /**
@@ -10,6 +11,7 @@ export class GlobalData {
 
     public static db?: IDatabaseDriver;
 
+    public static upload?: Multer;
     public static express?: ExpressModule;
     public static pugHelper?: PugHelper;
 
@@ -18,5 +20,12 @@ export class GlobalData {
      */
     public static get Express(): ExpressModule {
         return this.express as ExpressModule;
+    }
+
+    /**
+     * Getter of upload
+     */
+    public static get Upload(): Multer {
+        return this.upload as Multer;
     }
 }

@@ -6,6 +6,7 @@ import { default as Multer, StorageEngine, diskStorage } from "multer";
 
 import { GlobalData } from "@/core/helpers/global-data-helper";
 import { GlobalMethods } from "@/core/helpers/global-methods-helper";
+import { default as MKDirP } from "mkdirp";
 import MimeTypes from "mime-types";
 import { Request } from "express";
 import { config } from "@CONFIGS/core/server";
@@ -32,7 +33,16 @@ export default class HelmetMiddleware implements MiddlewareInterface {
     public async check(payload?: any): Promise<void> {
         const storage: StorageEngine = diskStorage({
             destination: (req: Request, file: any, callback: Function) => {
-                callback(null, GlobalMethods.rPath(config.storage, "uploads"));
+                const path: string = GlobalMethods.rPath(
+                    config.storage,
+                    "uploads"
+                );
+
+                try {
+                    MKDirP(path);
+                } catch (err) {}
+
+                callback(null, path);
             },
 
             filename: (req: Request, file: any, callback: Function) => {

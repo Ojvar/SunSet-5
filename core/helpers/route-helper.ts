@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 
 /**
- * Router-Itme type
+ * Router-Itme class
  */
 export class RouteItem {
     public routeType: string = "";
@@ -11,16 +11,24 @@ export class RouteItem {
 
     /**
      * Ctr
-     * @param rType
-     * @param path
-     * @param handler
-     * @param alias
+     * @param rType {RequestType}
+     * @param path {string}
+     * @param handler {RequestHandler | RequestHandler[]}
+     * @param alias {string?}
      */
     constructor(
-        rType: string,
+        rType: RequestType,
         path: string,
         handler: RequestHandler | RequestHandler[],
-        alias?: string
+        alias?:
+            | string
+            | "HEAD"
+            | "GET"
+            | "POST"
+            | "PUT"
+            | "PATCH"
+            | "DELETE"
+            | "OPTION"
     ) {
         this.routeType = rType;
         this.path = path;
@@ -30,12 +38,13 @@ export class RouteItem {
 
     /**
      * Generate a routeItem
-     * @param rType
-     * @param handler
-     * @param alias
+     * @param rType {RequestType}
+     * @param path {string}
+     * @param handler {RequestHandler | RequestHandler[]}
+     * @param alias {string?}
      */
     public static route(
-        rType: string,
+        rType: RequestType,
         path: string,
         handler: RequestHandler | RequestHandler[],
         alias?: string
@@ -45,9 +54,9 @@ export class RouteItem {
 
     /**
      * Generate a routeItem
-     * @param rType
-     * @param handler
-     * @param alias
+     * @param path {string}
+     * @param handler {RequestHandler | RequestHandler[]}
+     * @param alias {string?}
      */
     public static get(
         path: string,
@@ -59,9 +68,9 @@ export class RouteItem {
 
     /**
      * Generate a routeItem
-     * @param rType
-     * @param handler
-     * @param alias
+     * @param path {string}
+     * @param handler {RequestHandler | RequestHandler[]}
+     * @param alias {string?}
      */
     public static head(
         path: string,
@@ -73,9 +82,9 @@ export class RouteItem {
 
     /**
      * Generate a routeItem
-     * @param rType
-     * @param handler
-     * @param alias
+     * @param path {string}
+     * @param handler {RequestHandler | RequestHandler[]}
+     * @param alias {string?}
      */
     public static post(
         path: string,
@@ -87,9 +96,9 @@ export class RouteItem {
 
     /**
      * Generate a routeItem
-     * @param rType
-     * @param handler
-     * @param alias
+     * @param path {string}
+     * @param handler {RequestHandler | RequestHandler[]}
+     * @param alias {string?}
      */
     public static patch(
         path: string,
@@ -101,9 +110,9 @@ export class RouteItem {
 
     /**
      * Generate a routeItem
-     * @param rType
-     * @param handler
-     * @param alias
+     * @param path {string}
+     * @param handler {RequestHandler | RequestHandler[]}
+     * @param alias {string?}
      */
     public static put(
         path: string,
@@ -115,9 +124,9 @@ export class RouteItem {
 
     /**
      * Generate a routeItem
-     * @param rType
-     * @param handler
-     * @param alias
+     * @param path {string}
+     * @param handler {RequestHandler | RequestHandler[]}
+     * @param alias {string?}
      */
     public static delete(
         path: string,
@@ -129,9 +138,9 @@ export class RouteItem {
 
     /**
      * Generate a routeItem
-     * @param rType
-     * @param handler
-     * @param alias
+     * @param path {string}
+     * @param handler {RequestHandler | RequestHandler[]}
+     * @param alias {string?}
      */
     public static option(
         path: string,
@@ -141,3 +150,12 @@ export class RouteItem {
         return this.route("option", path, handler, alias);
     }
 }
+
+export type RequestType =
+    | "head"
+    | "get"
+    | "post"
+    | "put"
+    | "patch"
+    | "delete"
+    | "option";

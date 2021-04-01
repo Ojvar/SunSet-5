@@ -151,3 +151,27 @@ export type RequestType =
     | "patch"
     | "delete"
     | "option";
+
+/**
+ * Apply arguments on url path
+ * @param url {string}
+ * @param args {any}
+ */
+export function applyArguments(url: string, args: any = {}): string {
+    /* Extract tokens */
+    const tokens: RegExpMatchArray | null = url.match(/\:\b(?!\d)\w*\b/g);
+
+    let result = url;
+
+    if (tokens) {
+        tokens.forEach((key) => {
+            const field = key.replace(/[:?]/g, "");
+            const regexStr = `${key}\\??`;
+            const regex = new RegExp(regexStr, "g");
+
+            result = result.replace(regex, args[field] ? args[field] : "");
+        });
+    }
+
+    return result;
+}

@@ -1,11 +1,10 @@
+import { RouteItem, applyArguments } from "./route-helper";
 import { config as ServerConfig, config } from "@CONFIGS/core/server";
 
-import { ConsoleTransportOptions } from "winston/lib/winston/transports";
 import Express from "express";
 import { GlobalMethods } from "./global-methods-helper";
 import { Hash } from "@TYPES/hash-type";
 import { LoggerType } from "./global-data-helper";
-import { RouteItem } from "./route-helper";
 import { lstatSync } from "fs";
 
 export class RouteManager {
@@ -132,31 +131,7 @@ export class RouteManager {
      * @param data {any}
      */
     public routePath(alias: string, data: any = {}): string {
-        return RouteManager.applyArguments(this.routeData(alias).path, data);
-    }
-
-    /**
-     * Apply arguments on url path
-     * @param url {string}
-     * @param args {any}
-     */
-    public static applyArguments(url: string, args: any = {}): string {
-        /* Extract tokens */
-        const tokens: RegExpMatchArray | null = url.match(/\:\b(?!\d)\w*\b/g);
-
-        let result = url;
-
-        if (tokens) {
-            tokens.forEach((key) => {
-                const field = key.replace(/[:?]/g, "");
-                const regexStr = `${key}\\??`;
-                const regex = new RegExp(regexStr, "g");
-
-                result = result.replace(regex, args[field] ? args[field] : "");
-            });
-        }
-
-        return result;
+        return applyArguments(this.routeData(alias).path, data);
     }
 }
 

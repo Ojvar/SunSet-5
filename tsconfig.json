@@ -27,6 +27,8 @@
         "rootDir": "./",
         "baseUrl": "./",
         "paths": {
+            "@CORE/*": ["core/*"],
+            
             "@APP/*": ["app/*"],
             "@CONTROLLERS/*": ["app/controllers/*"],
             "@TYPES/*": ["types/*"],

@@ -1,3 +1,4 @@
+import { applyArguments } from "@CORE/helpers/route-helper";
 export const BASE_ROUTE = `http://localhost:8085`;
 
 /**
@@ -12,3 +13,12 @@ export const routes = {
     /* POST */
     "auth.attempt-to-login": `${BASE_ROUTE}/auth/login`,
 };
+
+/**
+ * Get route with applied args
+ * @param name {string} Route name
+ * @param args {any} Arguments
+ */
+export function getRoute(name: string, args: any = {}) {
+    return applyArguments(routes[name], args);
+}

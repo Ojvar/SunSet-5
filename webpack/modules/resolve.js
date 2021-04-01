@@ -16,6 +16,9 @@ module.exports = (entries) => ({
     alias: {
         vue$: "vue/dist/vue.esm.js",
 
+        /* Core */
+        "@CORE": Path.resolve("./core"),
+
         /* App */
         "@APP": Path.resolve("./app"),
         "@CONTROLLERS": Path.resolve("./app/controllers"),

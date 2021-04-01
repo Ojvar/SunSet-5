@@ -2,6 +2,7 @@ import { GlobalData } from "./global-data-helper";
 import { GlobalMethods } from "./global-methods-helper";
 import { Hash } from "@TYPES/hash-type";
 import { RouteItemType } from "./route-manager";
+import { applyArguments } from "./route-helper";
 import { config } from "@CONFIGS/core/server";
 
 /**
@@ -59,7 +60,9 @@ export class PugHelper {
      * Get route path
      * @param path name
      */
-    public url(route: string): string | undefined {
-        return GlobalData.express?.app.RouteManager.routeData(route).path;
+    public url(route: string, args: any = {}): string | undefined {
+        route = "" + this.route(route)?.path;
+
+        return applyArguments(route, args);
     }
 }

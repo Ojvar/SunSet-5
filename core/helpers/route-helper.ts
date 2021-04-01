@@ -20,15 +20,7 @@ export class RouteItem {
         rType: RequestType,
         path: string,
         handler: RequestHandler | RequestHandler[],
-        alias?:
-            | string
-            | "HEAD"
-            | "GET"
-            | "POST"
-            | "PUT"
-            | "PATCH"
-            | "DELETE"
-            | "OPTION"
+        alias?: string
     ) {
         this.routeType = rType;
         this.path = path;

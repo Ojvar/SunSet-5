@@ -1,5 +1,6 @@
 import { config as ServerConfig, config } from "@CONFIGS/core/server";
 
+import { ConsoleTransportOptions } from "winston/lib/winston/transports";
 import Express from "express";
 import { GlobalMethods } from "./global-methods-helper";
 import { Hash } from "@TYPES/hash-type";
@@ -128,29 +129,32 @@ export class RouteManager {
     /**
      * Get route path
      * @param alias {string}
-     * @param data {any?}
+     * @param data {any}
      */
-    public routePath(alias: string, data?: any): string {
+    public routePath(alias: string, data: any = {}): string {
         return RouteManager.applyArguments(this.routeData(alias).path, data);
     }
 
     /**
      * Apply arguments on url path
      * @param url {string}
-     * @param args {any?}
+     * @param args {any}
      */
-    public static applyArguments(url: string, args?: any): string {
+    public static applyArguments(url: string, args: any = {}): string {
         /* Extract tokens */
-        const tokens: RegExpMatchArray = url.match(/\:\b\w*\b/g) || [];
+        const tokens: RegExpMatchArray | null = url.match(/\:\b(?!\d)\w*\b/g);
 
         let result = url;
-        tokens.forEach((key) => {
-            const field = key.replace(/[:?]/g, "");
-            const regexStr = `${key}\\??`;
-            const regex = new RegExp(regexStr, "g");
 
-            result = result.replace(regex, args[field] ? args[field] : "");
-        });
+        if (tokens) {
+            tokens.forEach((key) => {
+                const field = key.replace(/[:?]/g, "");
+                const regexStr = `${key}\\??`;
+                const regex = new RegExp(regexStr, "g");
+
+                result = result.replace(regex, args[field] ? args[field] : "");
+            });
+        }
 
         return result;
     }

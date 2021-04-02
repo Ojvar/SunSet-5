@@ -8,9 +8,9 @@ import { RouteManager } from "@/core/helpers/route-manager";
 export class HomeController {
     /**
      * Index function
-     * @param req
-     * @param res
-     * @param next
+     * @param req {Request}
+     * @param res {Response}
+     * @param next {NextFunction}
      */
     public index(req: Request, res: Response, next: NextFunction) {
         req.session.views = (req.session.views || 0) + 1;
@@ -23,9 +23,9 @@ export class HomeController {
 
     /**
      * About function
-     * @param req
-     * @param res
-     * @param next
+     * @param req {Request}
+     * @param res {Response}
+     * @param next {NextFunction}
      */
     public about(req: Request, res: Response, next: NextFunction) {
         res.render("pages/home/about.pug", { user: req.user });
@@ -33,9 +33,9 @@ export class HomeController {
 
     /**
      * ReportIssue function
-     * @param req
-     * @param res
-     * @param next
+     * @param req {Request}
+     * @param res {Response}
+     * @param next {NextFunction}
      */
     public reportIssue(req: Request, res: Response, next: NextFunction) {
         res.render("pages/home/report-issue.pug", { user: req.user });
@@ -43,9 +43,9 @@ export class HomeController {
 
     /**
      * PrivatePage function
-     * @param req
-     * @param res
-     * @param next
+     * @param req {Request}
+     * @param res {Response}
+     * @param next {NextFunction}
      */
     public privatePage(req: Request, res: Response, next: NextFunction) {
         res.render("pages/home/private-page.pug", { user: req.user });

@@ -2,6 +2,7 @@
  * Export config
  */
 export const config = {
+    appName: process.env.APP_NAME || "SUNSET",
     proto: process.env.PROTO || "http",
     serverUrl: process.env.URL || "http://localhost:8085",
     host: process.env.HOST || "localhost",
@@ -24,6 +25,7 @@ export const config = {
  * Express config type
  */
 export type ServerConfigType = {
+    appName: string;
     proto: string;
     port: number;
     host: string;

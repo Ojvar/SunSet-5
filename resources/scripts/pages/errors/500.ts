@@ -1,12 +1,14 @@
 const stackContainer: HTMLElement = document.querySelector(
     ".stack-container"
 ) as HTMLElement;
-const cardNodes: NodeListOf<Element> = document.querySelectorAll(
+const cardNodes: NodeListOf<HTMLElement> = document.querySelectorAll(
     ".card-container"
 );
-const perspecNodes: NodeListOf<Element> = document.querySelectorAll(".perspec");
-const perspec: Element = document.querySelector(".perspec") as Element;
-const card: Element = document.querySelector(".card") as Element;
+const perspecNodes: NodeListOf<HTMLElement> = document.querySelectorAll(
+    ".perspec"
+);
+const perspec: HTMLElement = document.querySelector(".perspec") as HTMLElement;
+const card: HTMLElement = document.querySelector(".card") as HTMLElement;
 
 let counter = stackContainer.children.length;
 
@@ -24,7 +26,7 @@ function randomIntFromInterval(min: number, max: number): number {
  * After tilt animation, fire the explode animation
  */
 card.addEventListener("animationend", function() {
-    perspecNodes.forEach(function(elem, index) {
+    perspecNodes.forEach(function(elem: Element, index: number) {
         elem.classList.add("explode");
     });
 });

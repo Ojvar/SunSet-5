@@ -1,40 +1,14 @@
 import { AxiosHelper, AxiosResponse } from "@Scripts/helpers/axios-helepr";
-import { Store, StoreOptions, Vuex } from "@Scripts/vendors/vue";
 
 import { ActionResultType } from "@Lib/types/global/action-result-type";
 import { PageHelper } from "@Scripts/helpers/page-helper";
+import { Vuex } from "@Scripts/vendors/vue";
 import { routes } from "@Scripts/helpers/route-helper";
-
-// /**
-//  * ILoginStore
-//  */
-// export interface ILoginStore {
-//     state: UserLoginDataType;
-
-//     getters: {
-//         userLoginData(state: any): UserLoginDataType;
-//     };
-
-//     actions: {
-//         loginByGoogle(context: any): Promise<void>;
-//         attemptToLogin(context: any): Promise<ActionResultType>;
-//         init(context: any): Promise<void>;
-//     };
-
-//     mutations?: {};
-// }
-
-/**
- * Login store type
- */
-// export type LoginStoreType = Store<ILoginStore>;
 
 /**
  * Login store
  */
-// export function LoginStore(): LoginStoreType {
 export function LoginStore() {
-    // return new Vuex.Store<ILoginStore>({
     return new Vuex.Store({
         state: {
             userLoginData: {
@@ -45,11 +19,11 @@ export function LoginStore() {
 
         getters: {
             /**
-             *
+             * User login data
              * @param state {any} State data
              * @returns {UserLoginDataType}
              */
-            userLoginData(state) {
+            userLoginData(state): UserLoginDataType {
                 return state.userLoginData;
             },
         },

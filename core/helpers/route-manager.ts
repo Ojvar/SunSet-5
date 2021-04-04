@@ -3,7 +3,7 @@ import { config as ServerConfig, config } from "@CONFIGS/core/server";
 
 import Express from "express";
 import { GlobalMethods } from "./global-methods-helper";
-import { Hash } from "@TYPES/hash-type";
+import { Hash } from "@Lib/types/hash-type";
 import { LoggerType } from "./global-data-helper";
 import { lstatSync } from "fs";
 

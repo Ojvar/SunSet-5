@@ -5,35 +5,37 @@ import { ActionResultType } from "@Lib/types/global/action-result-type";
 import { PageHelper } from "@Scripts/helpers/page-helper";
 import { routes } from "@Scripts/helpers/route-helper";
 
-/**
- * ILoginStore
- */
-export interface ILoginStore extends StoreOptions {
-    state: UserLoginDataType;
+// /**
+//  * ILoginStore
+//  */
+// export interface ILoginStore {
+//     state: UserLoginDataType;
 
-    getters: {
-        userLoginData(state);
-    };
+//     getters: {
+//         userLoginData(state: any): UserLoginDataType;
+//     };
 
-    actions: {
-        loginByGoogle(context: any): Promise<void>;
-        attemptToLogin(context: any): Promise<ActionResultType>;
-        init(context: any): Promise<void>;
-    };
+//     actions: {
+//         loginByGoogle(context: any): Promise<void>;
+//         attemptToLogin(context: any): Promise<ActionResultType>;
+//         init(context: any): Promise<void>;
+//     };
 
-    mutations?: {};
-}
+//     mutations?: {};
+// }
 
 /**
  * Login store type
  */
-export type LoginStoreType = Store<ILoginStore>;
+// export type LoginStoreType = Store<ILoginStore>;
 
 /**
  * Login store
  */
-export function LoginStore(): LoginStoreType {
-    return new Vuex.Store<ILoginStore>({
+// export function LoginStore(): LoginStoreType {
+export function LoginStore() {
+    // return new Vuex.Store<ILoginStore>({
+    return new Vuex.Store({
         state: {
             userLoginData: {
                 email: "",

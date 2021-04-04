@@ -1,4 +1,4 @@
-import { Hash } from "@TYPES/hash-type";
+import { Hash } from "@Lib/types/hash-type";
 
 /**
  * Convert numbers Type

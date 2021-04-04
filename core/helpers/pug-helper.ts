@@ -1,6 +1,6 @@
 import { GlobalData } from "./global-data-helper";
 import { GlobalMethods } from "./global-methods-helper";
-import { Hash } from "@TYPES/hash-type";
+import { Hash } from "@Lib/types/hash-type";
 import { RouteItemType } from "./route-manager";
 import { applyArguments } from "./route-helper";
 import { config } from "@CONFIGS/core/server";

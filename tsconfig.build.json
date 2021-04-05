@@ -1,14 +1,4 @@
 {
-    "extends": "./configs/base",
-    "overrides": [
-        {
-            "exclude": [
-                "node_modules",
-                "webpack*",
-                "webpack/",
-                "dist",
-                "resources"
-            ]
-        }
-    ]
+    "extends": "./tsconfig.json",
+    "exclude": ["node_modules", "webpack*", "webpack/", "dist/", "resources/"]
 }

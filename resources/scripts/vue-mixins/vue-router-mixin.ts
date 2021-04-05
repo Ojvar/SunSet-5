@@ -10,7 +10,7 @@ export const VueRouterMixin = () => {
              * Change Page
              * @param pathData string | RawLocation
              */
-            changePage(pathData: string | RawLocation){
+            changePage(pathData: string | RawLocation) {
                 if (!this.$route) {
                     return;
                 }

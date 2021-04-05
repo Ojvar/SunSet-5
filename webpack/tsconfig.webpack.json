@@ -1,9 +1,10 @@
 {
     "extends": "../tsconfig.json",
-
+    "include": ["../resources/**/*"],
     "overrides": [
         {
             "exclude": ["node_modules", "webpack*", "webpack/", "dist"],
+            "include": ["./resources/**/*.ts"],
 
             "compilerOptions": {
                 "target": "ESNext",

@@ -1,4 +1,14 @@
 {
     "extends": "./configs/base",
-    "exclude": ["node_modules", "webpack*", "webpack/", "dist", "resources"]
+    "overrides": [
+        {
+            "exclude": [
+                "node_modules",
+                "webpack*",
+                "webpack/",
+                "dist",
+                "resources"
+            ]
+        }
+    ]
 }

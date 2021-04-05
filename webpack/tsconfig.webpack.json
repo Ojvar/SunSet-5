@@ -1,11 +1,15 @@
 {
     "extends": "../tsconfig.json",
 
-    "exclude": ["node_modules", "webpack*", "webpack/", "dist"],
+    "overrides": [
+        {
+            "exclude": ["node_modules", "webpack*", "webpack/", "dist"],
 
-    "compilerOptions": {
-        "target": "ESNext",
-        "module": "ESNext",
-        "moduleResolution": "Node"
-    }
+            "compilerOptions": {
+                "target": "ESNext",
+                "module": "ESNext",
+                "moduleResolution": "Node"
+            }
+        }
+    ]
 }

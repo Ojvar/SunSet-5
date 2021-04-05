@@ -7,7 +7,6 @@ import ValidatorJs, {
 } from "validatorjs";
 
 import { ActionResultType } from "@Lib/types/global/action-result-type";
-import { ValidatorErrorType } from "@Scripts/validators/base-validator";
 
 /**
  * Base validator
@@ -150,3 +149,11 @@ export type ValidatorMiddlewareResultType = (
     res: Response,
     next: NextFunction
 ) => Promise<void>;
+
+/**
+ * ValidatorError type
+ */
+export type ValidatorErrorType = {
+    validator: Validator.Validator<any>;
+    errors: string;
+};

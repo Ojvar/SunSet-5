@@ -8,14 +8,6 @@ export const UserInputMixin = () => {
     return Vue.extend({
         methods: {
             /**
-             * Focus on an element
-             * @param name {string} Element REF
-             */
-            focusElement(name: string) {
-                ((this.$refs as any)[name] as HTMLElement)?.focus();
-            },
-            
-            /**
              * Get input string regex
              */
             getStringRegex(type: string): string {

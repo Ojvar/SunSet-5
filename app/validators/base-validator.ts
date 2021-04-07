@@ -53,52 +53,55 @@ export class BaseValidator {
 
         return result;
     }
+}
 
-    /**
-     * Validate middleware
-     */
-    public static validate<T>(
-        dataCollector: (req: Request) => Promise<T> | T,
-        validator: BaseValidatorInterface
-    ): ValidatorMiddlewareResultType {
-        return async (
-            req: Request,
-            res: Response,
-            next: NextFunction
-        ): Promise<void> => {
-            let documentData: T;
+/**
+ * Validation middleware
+ * @param dataCollector {(req: Request) => Promise<T> | T} Data collector function
+ * @param validator {BaseValidatorInterface}
+ * @returns {ValidatorMiddlewareResultType}
+ */
+export function validate<T>(
+    dataCollector: (req: Request) => Promise<T> | T,
+    validator: BaseValidatorInterface
+): ValidatorMiddlewareResultType {
+    return async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void> => {
+        let documentData: T;
 
-            /* Collect data */
-            try {
-                documentData = (await dataCollector(req)) as T;
-                req.payload = documentData;
-            } catch (err) {
-                next("Invalid arguments");
+        /* Collect data */
+        try {
+            documentData = (await dataCollector(req)) as T;
+            req.payload = documentData;
+        } catch (err) {
+            next("Invalid arguments");
 
-                return;
-            }
+            return;
+        }
 
-            /* Validate data */
-            const validationResult: ActionResultType = validator.validate(
-                documentData
-            );
+        /* Validate data */
+        const validationResult: ActionResultType = validator.validate(
+            documentData
+        );
 
-            if (!validationResult.success) {
-                const error: ValidatorErrorType = validationResult.data as ValidatorErrorType;
+        if (!validationResult.success) {
+            const error: ValidatorErrorType = validationResult.data as ValidatorErrorType;
 
-                res.status(406)
-                    .send({
-                        success: false,
-                        data: error.errors,
-                    } as ActionResultType)
-                    .end();
+            res.status(406)
+                .send({
+                    success: false,
+                    data: error.errors,
+                } as ActionResultType)
+                .end();
 
-                return;
-            }
+            return;
+        }
 
-            next();
-        };
-    }
+        next();
+    };
 }
 
 /**

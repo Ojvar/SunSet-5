@@ -1,14 +1,9 @@
 import { AttributeNames, Rules } from "validatorjs";
-import {
-    BaseValidatorInterface,
-    ValidatorMiddlewareResultType,
-    validate,
-} from "./../base-validator";
-import { EMailRule, MaxRule, MinRule, RequiredRule } from "../validation-rules";
 
 import { ActionResultType } from "@Lib/types/global/action-result-type";
 import { AttempToLoginType } from "@APP/controllers/auth-controller";
-import { Request } from "express";
+import { BaseValidatorInterface } from "./../base-validator";
+import { RequiredRule } from "../base-validator";
 
 /**
  * Validator class
@@ -51,19 +46,5 @@ export class AttempToLoginValidator extends BaseValidatorInterface {
                 data: err,
             };
         }
-    }
-
-    /**
-     * Validate middleware
-     */
-    public static validate(): ValidatorMiddlewareResultType {
-        return validate<AttempToLoginType>(
-            (req: Request): AttempToLoginType =>
-                ({
-                    email: req.body.email,
-                    pwd: req.body.pwd,
-                } as AttempToLoginType),
-            new AttempToLoginValidator()
-        );
     }
 }

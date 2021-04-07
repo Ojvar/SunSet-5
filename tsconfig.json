@@ -1,5 +1,5 @@
 {
-    "exclude": ["node_modules", "webpack*", "webpack/", "dist", "resources"],
+    "exclude": ["node_modules", "webpack*", "webpack/", "dist",],
 
     "compilerOptions": {
         "jsx": "preserve",

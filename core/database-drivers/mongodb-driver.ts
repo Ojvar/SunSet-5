@@ -1,9 +1,10 @@
 import Mongoose, { ConnectOptions } from "mongoose";
-import { GlobalMethods } from "core/helpers/global-methods-helper";
+
 import { CoreModule } from "../modules/core-module-interface";
 import { DatabaseConfigType } from "@CONFIGS/core/database";
+import { GlobalMethods } from "core/helpers/global-methods-helper";
+import { Hash } from "@Lib/types/hash-type";
 import { IDatabaseDriver } from "core/modules/database-module";
-import { Hash } from "@TYPES/hash-type";
 
 /**
  * MongoDB Driver module

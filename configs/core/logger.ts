@@ -1,5 +1,5 @@
-import DailyRotateFile from "winston-daily-rotate-file";
-import { Hash } from "@TYPES/hash-type";
+import { default as DailyRotateFile } from "winston-daily-rotate-file";
+import { Hash } from "@Lib/types/hash-type";
 
 const isProduction = process.env.NODE_ENV == "production";
 

@@ -7,7 +7,6 @@ import ValidatorJs, {
 } from "validatorjs";
 
 import { ActionResultType } from "@Lib/types/global/action-result-type";
-import { ValidatorErrorType } from "@Scripts/validators/base-validator";
 
 /**
  * Base validator
@@ -19,9 +18,8 @@ export class BaseValidator {
      */
     public generateErrorString(errors: ValidatorJs.ValidationErrors): string {
         const errorValues: Array<any> = Object.values(errors);
-        const result = errorValues.map((err) => err.join("\n")).join("\n");
 
-        return result;
+        return errorValues.map((err) => err.join("\n")).join("\n");
     }
 
     /**
@@ -153,3 +151,11 @@ export type ValidatorMiddlewareResultType = (
     res: Response,
     next: NextFunction
 ) => Promise<void>;
+
+/**
+ * ValidatorError type
+ */
+export type ValidatorErrorType = {
+    validator: Validator.Validator<any>;
+    errors: string;
+};

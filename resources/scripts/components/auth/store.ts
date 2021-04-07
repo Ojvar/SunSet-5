@@ -1,39 +1,17 @@
 import { AxiosHelper, AxiosResponse } from "@Scripts/helpers/axios-helepr";
-import { Store, StoreOptions, Vuex } from "@Scripts/vendors/vue";
 
 import { ActionResultType } from "@Lib/types/global/action-result-type";
+import { LoginFormValidator } from "@Scripts/validators/auth/login-from-validator";
 import { PageHelper } from "@Scripts/helpers/page-helper";
+import { ValidatorErrorType } from "@APP/validators/base-validator";
+import { Vuex } from "@Scripts/vendors/vue";
 import { routes } from "@Scripts/helpers/route-helper";
-
-/**
- * ILoginStore
- */
-export interface ILoginStore extends StoreOptions {
-    state: UserLoginDataType;
-
-    getters: {
-        userLoginData(state);
-    };
-
-    actions: {
-        loginByGoogle(context: any): Promise<void>;
-        attemptToLogin(context: any): Promise<ActionResultType>;
-        init(context: any): Promise<void>;
-    };
-
-    mutations?: {};
-}
-
-/**
- * Login store type
- */
-export type LoginStoreType = Store<ILoginStore>;
 
 /**
  * Login store
  */
-export function LoginStore(): LoginStoreType {
-    return new Vuex.Store<ILoginStore>({
+export function LoginStore() {
+    return new Vuex.Store({
         state: {
             userLoginData: {
                 email: "",
@@ -43,16 +21,36 @@ export function LoginStore(): LoginStoreType {
 
         getters: {
             /**
-             *
+             * User login data
              * @param state {any} State data
              * @returns {UserLoginDataType}
              */
-            userLoginData(state) {
+            userLoginData(state): UserLoginDataType {
                 return state.userLoginData;
             },
         },
 
+        mutations: {
+            /**
+             * Set user login data
+             * @param state {any} State object
+             * @param data {UserLoginDataType} New user login data
+             */
+            setUserData(state: any, data: UserLoginDataType) {
+                state.userLoginData = data;
+            },
+        },
+
         actions: {
+            /**
+             * Validate login data
+             */
+            validateLoginData(context: any, data: any): ActionResultType {
+                return new LoginFormValidator().validate(
+                    context.getters.userLoginData
+                );
+            },
+
             /**
              * Login by google
              */
@@ -66,6 +64,21 @@ export function LoginStore(): LoginStoreType {
              * @returns {ActionResultType}
              */
             async attemptToLogin(context: any): Promise<ActionResultType> {
+                /* Validate user login data */
+                const validationResult: ActionResultType = await context.dispatch(
+                    "validateLoginData"
+                );
+
+                if (!validationResult.success) {
+                    const errorData: ValidatorErrorType = validationResult.data;
+
+                    return {
+                        success: false,
+                        data: errorData.errors,
+                    };
+                }
+
+                /* Try to login */
                 let data: ActionResultType;
 
                 try {
@@ -74,7 +87,6 @@ export function LoginStore(): LoginStoreType {
                         url,
                         context.getters.userLoginData
                     );
-
                     data = result.data;
                 } catch (err) {
                     data = {

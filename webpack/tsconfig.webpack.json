@@ -1,38 +1,11 @@
 {
+    "extends": "../tsconfig.json",
     "exclude": ["node_modules", "webpack*", "webpack/", "dist"],
+    // "include": ["./resources/**/*.ts"],
 
     "compilerOptions": {
-        "outDir": "./dist/",
-        "rootDir": "./",
-
-        "jsx": "react",
         "target": "ESNext",
         "module": "ESNext",
-        "moduleResolution": "Node",
-
-        "strict": true,
-        "allowJs": true,
-        "removeComments": false,
-        "noImplicitAny": true,
-        "esModuleInterop": true,
-
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-
-        "baseUrl": "./",
-        "paths": {
-            "@CORE/*": ["core/*"],
-            "@APP/*": ["app/*"],
-            "@CONTROLLERS/*": ["app/controllers/*"],
-            "@TYPES/*": ["types/*"],
-            "@CONFIGS/*": ["configs/*"],
-            "@Lib/*": ["lib/*"],
-            "@VueC/*": ["resources/scripts/components/*"],
-            "@Scripts/*": ["resources/scripts/*"],
-            "@Styles/*": ["resources/styles/*"],
-            "@Fonts/*": ["resources/fonts/*"],
-            "@Images/*": ["resources/images/*"],
-            "@/*": ["./*"]
-        }
+        "moduleResolution": "Node"
     }
 }

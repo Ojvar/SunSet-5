@@ -1,5 +1,5 @@
 {
-    "exclude": ["node_modules", "webpack*", "webpack/", "dist",],
+    "exclude": ["node_modules", "webpack*", "webpack/", "dist"],
 
     "compilerOptions": {
         "jsx": "preserve",
@@ -28,20 +28,16 @@
         "baseUrl": "./",
         "paths": {
             "@CORE/*": ["core/*"],
-            
             "@APP/*": ["app/*"],
             "@CONTROLLERS/*": ["app/controllers/*"],
-            "@TYPES/*": ["types/*"],
+            "@TYPES/*": ["lib/types/*"],
             "@CONFIGS/*": ["configs/*"],
-
             "@Lib/*": ["lib/*"],
-
             "@VueC/*": ["resources/scripts/components/*"],
             "@Scripts/*": ["resources/scripts/*"],
             "@Styles/*": ["resources/styles/*"],
             "@Fonts/*": ["resources/fonts/*"],
             "@Images/*": ["resources/images/*"],
-
             "@/*": ["./*"]
         }
     }

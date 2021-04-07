@@ -25,7 +25,7 @@ export class AttempToLoginValidator extends BaseValidatorInterface {
     }
 
     /**
-     *
+     * Get attributes
      * @param data {T} Data type
      * @returns {Object} User-friendly attributes name
      */

@@ -1,14 +1,14 @@
 import { AttributeNames, Rules } from "validatorjs";
+import { EMailRule, MaxRule, MinRule, RequiredRule } from "../base-validator";
 
 import { ActionResultType } from "@Lib/types/global/action-result-type";
 import { AttempToLoginType } from "@APP/controllers/auth-controller";
 import { BaseValidatorInterface } from "./../base-validator";
-import { RequiredRule } from "../base-validator";
 
 /**
  * Validator class
  */
-export class AttempToLoginValidator extends BaseValidatorInterface {
+export class LoginFormValidator extends BaseValidatorInterface {
     /**
      * Get rules
      */
@@ -20,7 +20,7 @@ export class AttempToLoginValidator extends BaseValidatorInterface {
     }
 
     /**
-     *
+     * Get attributes
      * @param data {T} Data type
      * @returns {Object} User-friendly attributes name
      */

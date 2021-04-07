@@ -17,6 +17,7 @@ module.exports = (entries) => ({
         vue$: "vue/dist/vue.esm.js",
 
         /* Core */
+        "@": Path.resolve("./"),
         "@CORE": Path.resolve("./core"),
 
         /* App */
@@ -24,6 +25,7 @@ module.exports = (entries) => ({
         "@CONTROLLERS": Path.resolve("./app/controllers"),
         "@TYPES": Path.resolve("./types"),
         "@CONFIGS": Path.resolve("./configs"),
+        "@Lib": Path.resolve("./lib"),
 
         /* Frontend */
         "@VueC": Path.resolve("./resources/scripts/components"),

@@ -32,7 +32,7 @@
 import { Vue } from "@Scripts/vendors/vue";
 import { ActionResultType } from "@Lib/types/global/action-result-type";
 import { PageHelper } from "@Scripts/helpers/page-helper";
-import { LoginStore, UserLoginDataType } from "./login-store";
+import { LoginStore, UserLoginDataType } from "./store";
 
 /**
  * Extends Vue

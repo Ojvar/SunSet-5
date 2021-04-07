@@ -1,6 +1,6 @@
 {
     "name": "@ojvar/sunset",
-    "version": "5.0.0",
+    "version": "5.0.1",
     "description": "Sunset mini-framework",
     "main": "./dist/core/server.js",
     "scripts": {
@@ -8,10 +8,10 @@
         "build": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production webpack --config=webpack/webpack.config.js",
         "dev": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development webpack --config=webpack/webpack.config.js",
         "watch": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development webpack --config=webpack/webpack.config.js --watch",
-        "s-watch": "node_modules/nodemon/bin/nodemon.js",
-        "s-dev": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development ts-node-dev -P tsconfig.json -r tsconfig-paths/register core/server.ts",
-        "s-run": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development ts-node -P tsconfig.json -r tsconfig-paths/register core/server.ts",
-        "s-build": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production ttsc -P tsconfig.json",
+        "s-watch": "nodemon",
+        "s-dev": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development ts-node-dev -P tsconfig.build.json -r tsconfig-paths/register core/server.ts",
+        "s-run": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development ts-node -P tsconfig.build.json -r tsconfig-paths/register core/server.ts",
+        "s-build": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production ttsc -P tsconfig.build.json",
         "d-run": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production node dist/core/server.js"
     },
     "repository": {

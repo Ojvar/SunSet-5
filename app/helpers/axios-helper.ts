@@ -1,4 +1,4 @@
-import { Axios, AxiosResponse } from "@Scripts/vendors/axios";
+import { default as Axios, AxiosResponse } from "axios";
 
 /* Export axios items */
 export { Axios, AxiosResponse };

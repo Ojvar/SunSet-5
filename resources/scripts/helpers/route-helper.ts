@@ -1,10 +1,12 @@
+import { Hash } from "@Lib/types/hash-type";
 import { applyArguments } from "@CORE/helpers/route-helper";
-export const BASE_ROUTE = `http://localhost:8085`;
+
+const BASE_ROUTE = `http://localhost:8085`;
 
 /**
  * Export routes
  */
-export const routes = {
+export const routes: Hash<string> = {
     /* GET */
     "auth.login": `${BASE_ROUTE}/auth/login`,
     "auth.logout": `${BASE_ROUTE}/auth/logout`,
@@ -16,9 +18,9 @@ export const routes = {
 
 /**
  * Get route with applied args
- * @param name {string} Route name
+ * @param route {string} Route name
  * @param args {any} Arguments
  */
-export function getRoute(name: string, args: any = {}) {
-    return applyArguments(routes[name], args);
+export function getRoute(route: string, args: any = {}) {
+    return applyArguments(routes[route] || route, args);
 }

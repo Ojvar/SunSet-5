@@ -1,6 +1,12 @@
 {
-    "watch": ["core", "app", "lib", "routes", "types"],
+    "watch": [],
     "ext": "ts",
-    "ignore": ["dist/", "resources/", "README", "**/*/.spec.ts"],
-    "exec": "ts-node-dev -P tsconfig.json -r tsconfig-paths/register core/server.ts"
+    "ignore": [
+        "dist/**/*",
+        "webpack/**/*",
+        "resources/**/*",
+        "README",
+        "**/*/.spec.ts"
+    ],
+    "exec": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development ts-node-dev -P tsconfig.build.json -r tsconfig-paths/register core/server.ts --watch"
 }

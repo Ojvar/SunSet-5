@@ -21,6 +21,6 @@ export const routes: Hash<string> = {
  * @param route {string} Route name
  * @param args {any} Arguments
  */
-export function getRoute(route: string, args: any = {}) {
+export function getRoute(route: string, args: any = {}): string {
     return applyArguments(routes[route] || route, args);
 }

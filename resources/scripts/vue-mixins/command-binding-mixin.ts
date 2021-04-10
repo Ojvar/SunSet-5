@@ -19,6 +19,8 @@ export const CommandBindingMixin = () => {
         methods: {
             /**
              * Emit command
+             * @param command {any}
+             * @param data? {any}
              */
             emitCommand(command: any, data?: any): void {
                 this.$emit("on-command", {

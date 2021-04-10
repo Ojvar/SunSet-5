@@ -9,6 +9,7 @@ export const UserInputMixin = () => {
         methods: {
             /**
              * Get input string regex
+             * @param type {string}
              */
             getStringRegex(type: string): string {
                 return PersianHelper.getStringRegex(type);
@@ -16,23 +17,26 @@ export const UserInputMixin = () => {
 
             /**
              * Just Persian-chars KeyPress Handler
+             * @param event {any}
              */
-            justPersianKeyPressHandler($event: any): boolean {
-                return PersianHelper.justPersianKeyPressHandler($event);
+            justPersianKeyPressHandler(event: any): boolean {
+                return PersianHelper.justPersianKeyPressHandler(event);
             },
 
             /**
              * Just English-chars KeyPress Handler
+             * @param event {any}
              */
-            justEnglishKeyPressHandler($event: any): boolean {
-                return PersianHelper.justEnglishKeyPressHandler($event);
+            justEnglishKeyPressHandler(event: any): boolean {
+                return PersianHelper.justEnglishKeyPressHandler(event);
             },
 
             /**
              * Just Number KeyPress Handler
+             * @param event {any}
              */
-            justNumberKeyPressHandler($event: any): boolean {
-                return PersianHelper.justNumberKeyPressHandler($event);
+            justNumberKeyPressHandler(event: any): boolean {
+                return PersianHelper.justNumberKeyPressHandler(event);
             },
         },
     });

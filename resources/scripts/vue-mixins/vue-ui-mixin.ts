@@ -11,7 +11,7 @@ export const VueUIMixin = () => {
              * @param element {string}
              */
             focus(element: string) {
-                (this.refs[element] as HTMLElement)?.focus();
+                (this.$refs[element] as HTMLElement)?.focus();
             },
         },
     });

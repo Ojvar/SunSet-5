@@ -11,7 +11,6 @@ import { config as serverConfig } from "@CONFIGS/core/server";
  */
 export class GlobalMethods {
     private logger: LoggerType = console;
-    // private static serverConfig: ServerConfigType;
 
     /**
      * Constructor

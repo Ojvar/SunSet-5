@@ -17,7 +17,7 @@ export class RedisClientHelper {
      */
     constructor(logger: LoggerType, options: ClientOpts = {}) {
         this.logger = logger;
-        this.clientOptions = options as ClientOpts;
+        this.clientOptions = options;
     }
 
     /**

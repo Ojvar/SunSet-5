@@ -12,7 +12,7 @@
         "s-dev": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development ts-node-dev -P tsconfig.build.json -r tsconfig-paths/register core/server.ts",
         "s-run": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development ts-node -P tsconfig.build.json -r tsconfig-paths/register core/server.ts",
         "s-build": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production ttsc -P tsconfig.build.json",
-        "d-run": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production node dist/core/server.js"
+        "d-run": "node_modules/cross-env/src/bin/cross-env.js ENV_FILE=dist/.env NODE_ENV=production node dist/core/server.js"
     },
     "repository": {
         "type": "git",

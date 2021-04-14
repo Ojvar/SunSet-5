@@ -9,52 +9,44 @@ import { XPermittedCrossDomainPoliciesOptions } from "helmet/dist/middlewares/x-
 /**
  * Export config
  */
-export const config = {
-    contentSecurityPolicy: (nonce: any): ContentSecurityPolicyOptions => ({
-        directives: {
-            defaultSrc: [
-                "'self'",
-                "data: blob: filesystem: about: ws: wss: 'unsafe-inline' 'unsafe-eval'",
-            ],
-            scriptSrc: [
-                "'self'",
-                "data: blob: https://*.google.com 'unsafe-inline' 'unsafe-eval'",
-                `'nonce-${nonce}'`,
-            ],
-            connectSrc: ["'self'", "data: blob: 'unsafe-inline'"],
-            imgSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
-            frameSrc: ["'self'", " data: blob:"],
-            styleSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
-            fontSrc: [
-                "*",
-                "'self'",
-                "data: blob: https://*.google.com 'unsafe-inline'",
-            ],
+export const config = (): HelmetConfigType => {
+    return {
+        contentSecurityPolicy: (nonce: any): ContentSecurityPolicyOptions => ({
+            directives: {
+                defaultSrc: [
+                    "'self'",
+                    "data: blob: filesystem: about: ws: wss: 'unsafe-inline' 'unsafe-eval'",
+                ],
+                scriptSrc: [
+                    "'self'",
+                    "data: blob: https://*.google.com 'unsafe-inline' 'unsafe-eval'",
+                    `'nonce-${nonce}'`,
+                ],
+                connectSrc: ["'self'", "data: blob: 'unsafe-inline'"],
+                imgSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
+                frameSrc: ["'self'", " data: blob:"],
+                styleSrc: ["*", "'self'", "data: blob: 'unsafe-inline'"],
+                fontSrc: [
+                    "*",
+                    "'self'",
+                    "data: blob: https://*.google.com 'unsafe-inline'",
+                ],
+            },
+        }),
+        dnsPrefetchControl: {},
+        expectCt: {},
+        frameguard: {},
+        hidePoweredBy: {},
+        hsts: {},
+        ieNoOpen: {},
+        noSniff: {},
+        permittedCrossDomainPolicies: {},
+        referrerPolicy: {
+            policy: "no-referrer",
         },
-    }),
-
-    dnsPrefetchControl: {},
-
-    expectCt: {},
-
-    frameguard: {},
-
-    hidePoweredBy: {},
-
-    hsts: {},
-
-    ieNoOpen: {},
-
-    noSniff: {},
-
-    permittedCrossDomainPolicies: {},
-
-    referrerPolicy: {
-        policy: "no-referrer",
-    },
-
-    xssFilter: {},
-} as HelmetConfigType;
+        xssFilter: {},
+    } as HelmetConfigType;
+};
 
 /**
  * Helmet config type

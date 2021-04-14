@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 
 import { GlobalData } from "@/core/helpers/global-data-helper";
+import { config as PassportConfig } from "@CONFIGS/core/passport";
 import { authenticate } from "passport";
-import { config } from "@CONFIGS/core/passport";
 
 /**
  * Passport middleware
@@ -58,6 +58,8 @@ export class PassportMiddleware {
      * Google OAuth login middleware
      */
     public static googleOAuthLogin() {
+        const config = PassportConfig();
+
         return authenticate("google", {
             scope: config.google?.scope,
         });

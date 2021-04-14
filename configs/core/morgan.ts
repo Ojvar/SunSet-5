@@ -29,23 +29,25 @@ function getStreamFunction(): RotatingFileStream | null {
 /**
  * Export config
  */
-export const config: MorganConfigType = {
-    defaultFormat: process.env.MORGAN_FORMAT || "sunset-format",
-    stream: getStreamFunction(),
-    formatFuction:
-        process.env.MORGAN_FORMAT ||
-        (process.env.NODE_ENV == "production" ? "combined" : "dev"),
+export const config = (): MorganConfigType => {
+    return {
+        defaultFormat: process.env.MORGAN_FORMAT || "sunset-format",
+        stream: getStreamFunction(),
+        formatFuction:
+            process.env.MORGAN_FORMAT ||
+            (process.env.NODE_ENV == "production" ? "combined" : "dev"),
 
-    /* Skip function */
-    // skip: function (req, res) { return res.statusCode < 400 }
-} as MorganConfigType;
+        /* Skip function */
+        // skip: function (req, res) { return res.statusCode < 400 }
+    } as MorganConfigType;
+};
 
 /**
- * Export config
+ * Export config type
  */
 export type MorganConfigType = {
     defaultFormat: string;
-    stream: RotatingFileStream | null;
     formatFuction: string;
     skip: Function | null | undefined;
+    stream: RotatingFileStream | null;
 };

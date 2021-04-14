@@ -1,7 +1,7 @@
 import { Application, NextFunction, Request, Response } from "express";
+import { config as HelmetConfig, HelmetConfigType } from "@CONFIGS/core/helmet";
 
 import Helmet from "helmet";
-import { config } from "@CONFIGS/core/helmet";
 import { randomBytes } from "crypto";
 
 /**
@@ -12,6 +12,8 @@ export class HelmetHelper {
      * Initialize
      */
     public async init(app: Application) {
+        const config: HelmetConfigType = HelmetConfig();
+
         app.use((req: Request, res: Response, next: NextFunction) => {
             res.locals.nonce = randomBytes(32).toString("hex");
 

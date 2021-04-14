@@ -9,7 +9,7 @@ import { GlobalMethods } from "@/core/helpers/global-methods-helper";
 import { default as MKDirP } from "mkdirp";
 import MimeTypes from "mime-types";
 import { Request } from "express";
-import { config } from "@CONFIGS/core/server";
+import { config as ServerConfig } from "@CONFIGS/core/server";
 import { v4 as uuidV4 } from "uuid";
 
 /**
@@ -31,6 +31,8 @@ export default class HelmetMiddleware implements MiddlewareInterface {
      * @param payload {any} Payload data
      */
     public async check(payload?: any): Promise<void> {
+        const config = ServerConfig();
+
         const storage: StorageEngine = diskStorage({
             destination: (req: Request, file: any, callback: Function) => {
                 const path: string = GlobalMethods.rPath(

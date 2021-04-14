@@ -1,8 +1,8 @@
 /**
  * Export config
  */
-export const config =
-    (process.env.REDIS_ENABLE || "false") == "flase"
+export const config = (): any => {
+    return (process.env.REDIS_ENABLE || "false") == "flase"
         ? {}
         : {
               host: process.env.REDIS_HOST || "127.0.0.1",
@@ -10,6 +10,7 @@ export const config =
               db: parseInt(process.env.REDIS_DB || "0"),
               auth_pass: process.env.REDIS_AUTH,
           };
+};
 
 /* 
       NOTES

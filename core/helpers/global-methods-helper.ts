@@ -3,8 +3,8 @@ import { basename, extname, resolve } from "path";
 import Glob from "glob";
 import { LoggerType } from "./global-data-helper";
 import { Request } from "express";
+import { config as ServerConfig } from "@CONFIGS/core/server";
 import { join } from "path";
-import { config as serverConfig } from "@CONFIGS/core/server";
 
 /**
  * Global methods
@@ -66,7 +66,7 @@ export class GlobalMethods {
      * @param path string
      */
     public static async importFile(path: string): Promise<any> {
-        path = this.rPath(serverConfig.basePath, path);
+        path = this.rPath(ServerConfig().basePath, path);
 
         return await import(path);
     }

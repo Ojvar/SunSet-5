@@ -2,14 +2,12 @@
  * Export config
  */
 export const config = (): any => {
-    return (process.env.REDIS_ENABLE || "false") == "false"
-        ? {}
-        : {
-              host: process.env.REDIS_HOST || "127.0.0.1",
-              port: parseInt(process.env.REDIS_PORT || "6379"),
-              db: parseInt(process.env.REDIS_DB || "0"),
-              auth_pass: process.env.REDIS_AUTH,
-          };
+    return {
+        host: process.env.REDIS_HOST || "127.0.0.1",
+        port: parseInt(process.env.REDIS_PORT || "6379"),
+        db: parseInt(process.env.REDIS_DB || "0"),
+        auth_pass: process.env.REDIS_AUTH,
+    };
 };
 
 /* 

@@ -2,7 +2,7 @@
  * Export config
  */
 export const config = (): any => {
-    return (process.env.REDIS_ENABLE || "false") == "flase"
+    return (process.env.REDIS_ENABLE || "false") == "false"
         ? {}
         : {
               host: process.env.REDIS_HOST || "127.0.0.1",

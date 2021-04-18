@@ -3,10 +3,10 @@ import { Vue } from "@Scripts/vendors/vue";
 /**
  * CommandBinding payload Type
  */
-export type CommandBindingPayloadType = {
+export type CommandBindingPayloadType<T = any> = {
     sender: any;
     data: {
-        data: any;
+        data: T;
         command: string;
     };
 };

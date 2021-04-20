@@ -1,8 +1,4 @@
-import {
-    config as ServerConfig,
-    ServerConfigType,
-    config,
-} from "@CONFIGS/core/server";
+import { config as ServerConfig, ServerConfigType } from "@CONFIGS/core/server";
 import { lstatSync, readFileSync } from "fs";
 
 import Express from "express";
@@ -19,7 +15,7 @@ export class ExpressHelper {
     private logger: LoggerType = console;
     private app?: Express.Application;
     private server?: Http.Server;
-    private config: ServerConfigType = ServerConfig;
+    private config: ServerConfigType = ServerConfig();
     private routeManager?: RouteManager;
 
     /**
@@ -133,7 +129,7 @@ Server started successfully
      */
     public async setupCustomMiddlewares(basePath: string): Promise<void> {
         const files: Array<string> = GlobalMethods.files([
-            config.basePath,
+            ServerConfig().basePath,
             basePath,
         ]).filter((file: string) => !lstatSync(file).isDirectory());
 

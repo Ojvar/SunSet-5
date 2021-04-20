@@ -1,7 +1,7 @@
 /**
  * Action result type
  */
-export type ActionResultType = {
+export type ActionResultType<T = any> = {
     success: boolean;
-    data?: any;
+    data?: T;
 };

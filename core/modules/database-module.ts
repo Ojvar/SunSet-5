@@ -1,8 +1,12 @@
-import { DatabaseConfigType, DatabaseDriverType } from "@CONFIGS/core/database";
-import { GlobalData } from "core/helpers/global-data-helper";
-import { GlobalMethods } from "core/helpers/global-methods-helper";
-import { MongoDBDriver } from "../database-drivers/mongodb-driver";
+import {
+    config as DataBaseConfig,
+    DatabaseConfigType,
+    DatabaseDriverType,
+} from "@CONFIGS/core/database";
+
 import { CoreModule } from "./core-module-interface";
+import { GlobalData } from "core/helpers/global-data-helper";
+import { MongoDBDriver } from "../database-drivers/mongodb-driver";
 
 /**
  * Database module
@@ -32,10 +36,7 @@ export default class DatabaseModule extends CoreModule {
      */
     public async boot(payload?: any): Promise<any> {
         /* Read config file */
-        const { config } = await GlobalMethods.importFile(
-            "configs/core/database"
-        );
-
+        const config = DataBaseConfig();
         await this.setupDriver(payload, config);
 
         this.logger.log("Boot Module: Database");

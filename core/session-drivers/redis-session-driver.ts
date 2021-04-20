@@ -4,6 +4,7 @@ import { GlobalData } from "../helpers/global-data-helper";
 import { ISessionDriver } from "../middlewares/core/003-express-session-middleware";
 import { RedisClientHelper } from "../helpers/redis-client-helper";
 import { Store } from "express-session";
+import { config as RedisConfig } from "@CONFIGS/core/redis";
 
 /**
  * Redis session driver
@@ -14,9 +15,12 @@ export default class RedisSessionDriver implements ISessionDriver {
      * @param session {ExpressSession} Session
      */
     public async setup(payload: any): Promise<Store> {
+        const config = RedisConfig();
+
         /* Prepare redis-client */
         const redisClient: RedisClientHelper = new RedisClientHelper(
-            GlobalData.logger
+            GlobalData.logger,
+            config
         );
         await redisClient.connect();
 

@@ -1,5 +1,6 @@
 import { CoreModule } from "./core-module-interface";
 import DotEnv from "dotenv";
+import { GlobalMethods } from "@CORE/helpers/global-methods-helper";
 
 /**
  * DotEnv module
@@ -28,8 +29,13 @@ export default class DotEnvModule extends CoreModule {
      * @param payload any
      */
     public async boot(payload?: any): Promise<any> {
-        payload = payload || process.env.ENV_FILE;
-        DotEnv.config(payload);
+        payload = payload || process.env.ENV_FILE || ".env";
+        const config: DotEnv.DotenvConfigOptions = {
+            path: GlobalMethods.rPath(payload),
+            encoding: "utf-8",
+            debug: process.env.NODE_ENV != "production",
+        } as DotEnv.DotenvConfigOptions;
+        DotEnv.config(config);
 
         this.logger.log("Boot Module: DotEnv");
         return this;

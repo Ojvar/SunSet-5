@@ -2,9 +2,9 @@ import {
     ExpressHelper,
     MiddlewareInterface,
 } from "core/helpers/express-helper";
+import { config as ServerConfig, ServerConfigType } from "@CONFIGS/core/server";
 
 import Express from "express";
-import { config } from "@CONFIGS/core/server";
 
 /**
  * Default export
@@ -29,6 +29,7 @@ export default class CORSMiddleware implements MiddlewareInterface {
             ?.App as Express.Application;
 
         const CORS = (await import("cors")).default;
+        const config: ServerConfigType = ServerConfig();
 
         app.use(
             CORS({

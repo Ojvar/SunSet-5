@@ -2,10 +2,10 @@ import {
     ExpressHelper,
     MiddlewareInterface,
 } from "core/helpers/express-helper";
+import { config as ServerConfig, ServerConfigType } from "@CONFIGS/core/server";
 
 import Express from "express";
 import { GlobalMethods } from "@/core/helpers/global-methods-helper";
-import { ServerConfigType } from "@CONFIGS/core/server";
 import { Store } from "express-session";
 
 /**
@@ -53,8 +53,7 @@ export default class CookieSession implements MiddlewareInterface {
      * Get user selected store
      */
     private async getUserSelectedStore(): Promise<Store> {
-        const config = (await GlobalMethods.importFile("./configs/core/server"))
-            .config as ServerConfigType;
+        const config = ServerConfig();
 
         let sessionDriver: any = (
             await GlobalMethods.importFile(

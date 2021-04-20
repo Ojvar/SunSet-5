@@ -1,12 +1,13 @@
 import "winston-daily-rotate-file";
 
+import { config as LoggerConfig, LoggerConfigType } from "@CONFIGS/core/logger";
+import { config as ServerConfig, ServerConfigType } from "@CONFIGS/core/server";
+
 import { GlobalMethods } from "./global-methods-helper";
 import { LoggerType } from "./global-data-helper";
-import { config as ServerConfig } from "@CONFIGS/core/server";
 import { default as Winston } from "winston";
 import { default as _ } from "lodash";
 import { basename } from "path";
-import { config } from "@CONFIGS/core/logger";
 
 /**
  * Logger helper class
@@ -27,6 +28,9 @@ export class LoggerHelper {
      * Initialize logger
      */
     public async initLogger(): Promise<Winston.Logger> {
+        const serverConfigData: ServerConfigType = ServerConfig();
+        const loggerConfigData: LoggerConfigType = LoggerConfig();
+
         const transports = [];
 
         const logFormat: Winston.Logform.Format = Winston.format.printf(
@@ -40,7 +44,7 @@ export class LoggerHelper {
             }
         );
 
-        if (config.useConsole) {
+        if (loggerConfigData.useConsole) {
             transports.push(
                 new Winston.transports.Console({
                     format: Winston.format.combine(
@@ -51,16 +55,16 @@ export class LoggerHelper {
             );
         }
 
-        if (config.useFile) {
+        if (loggerConfigData.useFile) {
             const logFileName: string = basename(
-                config.rotateFile.filename || "logs.log"
+                loggerConfigData.rotateFile.filename || "logs.log"
             );
 
             transports.push(
                 new Winston.transports.DailyRotateFile(
-                    _.merge({}, config.rotateFile, {
+                    _.merge({}, loggerConfigData.rotateFile, {
                         filename: GlobalMethods.rPath(
-                            config.logFolder,
+                            loggerConfigData.logFolder,
                             logFileName
                         ),
                         level: "silly",
@@ -70,9 +74,9 @@ export class LoggerHelper {
 
             transports.push(
                 new Winston.transports.DailyRotateFile(
-                    _.merge({}, config.rotateFile, {
+                    _.merge({}, loggerConfigData.rotateFile, {
                         filename: GlobalMethods.rPath(
-                            config.logFolder,
+                            loggerConfigData.logFolder,
                             "error-" + logFileName
                         ),
                         level: "error",
@@ -85,7 +89,7 @@ export class LoggerHelper {
             level: process.env.NODE_ENV === "production" ? "info" : "silly",
             format: Winston.format.combine(
                 Winston.format.label({
-                    label: ServerConfig.appName,
+                    label: serverConfigData.appName,
                 }),
                 Winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
                 Winston.format.metadata({

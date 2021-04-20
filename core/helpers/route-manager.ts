@@ -1,5 +1,5 @@
 import { RouteItem, applyArguments } from "./route-helper";
-import { config as ServerConfig, config } from "@CONFIGS/core/server";
+import { config as ServerConfig, ServerConfigType } from "@CONFIGS/core/server";
 
 import Express from "express";
 import { GlobalMethods } from "./global-methods-helper";
@@ -11,6 +11,7 @@ export class RouteManager {
     private logger: LoggerType = console;
     private routeFiles: Hash<any> = {};
     private _routesMap: Hash<RouteItemType> = {};
+    private config: ServerConfigType = ServerConfig();
 
     /**
      * Get routes map
@@ -32,7 +33,7 @@ export class RouteManager {
      */
     public async loadRoutes() {
         const routeFiles: string[] = GlobalMethods.files([
-            config.basePath,
+            this.config.basePath,
             "routes",
         ]);
 
@@ -101,7 +102,7 @@ export class RouteManager {
                     }
 
                     /* Convert to full-server-url */
-                    fullRouteName = ServerConfig.serverUrl + fullRouteName;
+                    fullRouteName = this.config.serverUrl + fullRouteName;
 
                     this._routesMap[route.alias] = {
                         path: fullRouteName,

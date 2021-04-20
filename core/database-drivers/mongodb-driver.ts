@@ -1,7 +1,10 @@
+import {
+    config as DatabaseConfig,
+    DatabaseConfigType,
+} from "@CONFIGS/core/database";
 import Mongoose, { ConnectOptions } from "mongoose";
 
 import { CoreModule } from "../modules/core-module-interface";
-import { DatabaseConfigType } from "@CONFIGS/core/database";
 import { GlobalMethods } from "core/helpers/global-methods-helper";
 import { Hash } from "@Lib/types/hash-type";
 import { IDatabaseDriver } from "core/modules/database-module";
@@ -44,9 +47,7 @@ export class MongoDBDriver extends CoreModule implements IDatabaseDriver {
      */
     public async boot(payload?: any): Promise<any> {
         /* Read config file */
-        const { config } = await GlobalMethods.importFile(
-            "configs/core/database"
-        );
+        const config = DatabaseConfig();
 
         /* Try to connect */
         await this.connect(config);

@@ -23,7 +23,7 @@ module.exports = (entries) => ({
         /* App */
         "@APP": Path.resolve("./app"),
         "@CONTROLLERS": Path.resolve("./app/controllers"),
-        "@TYPES": Path.resolve("./types"),
+        "@TYPES": Path.resolve("./lib/types"),
         "@CONFIGS": Path.resolve("./configs"),
         "@Lib": Path.resolve("./lib"),
 

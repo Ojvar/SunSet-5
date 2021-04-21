@@ -1,4 +1,3 @@
 node_modules/
 private/ssl/*.pem
 dist/
-private/

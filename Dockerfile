@@ -1,7 +1,7 @@
 FROM    registry.hub.docker.com/library/node:alpine
 
 # Data
-LABEL   maintainer=MOjvar.AmirHossein@GMail.com
+LABEL   MAINTAINER=MOjvar.AmirHossein@GMail.com
 
 # Install required packages
 RUN     \
@@ -10,7 +10,7 @@ RUN     \
         rm -rf /var/cache/apk/*
 
 # Change Working directory
-WORKDIR /app/trade-master
+WORKDIR /app
 
 # Install npm packages
 COPY    package*.json ./ 
@@ -19,11 +19,11 @@ RUN     \
         npm i
 
 # Copy project files
-WORKDIR /app/trade-master
+WORKDIR /app
 COPY    . ./
 
 # Generate ssl files
-WORKDIR /app/trade-master/private/ssl
+WORKDIR /app/private/ssl
 RUN     chmod +x ./gen-cert.sh && \
         ./gen-cert.sh
 
@@ -31,7 +31,7 @@ RUN     chmod +x ./gen-cert.sh && \
 ENV     NODE_ENV=production
 
 # Npm install and build files
-WORKDIR /app/trade-master
+WORKDIR /app
 RUN     \
         npm run build && \
         npm run s-build && \

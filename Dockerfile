@@ -5,7 +5,7 @@ LABEL   maintainer=MOjvar.AmirHossein@GMail.com
 
 # Install required packages
 RUN     \
-        # apk upgrade --update-cache --available && \
+        apk upgrade --update-cache --available && \
         apk add openssl openssh  && \
         rm -rf /var/cache/apk/*
 
@@ -15,10 +15,8 @@ WORKDIR /app/trade-master
 # Install npm packages
 COPY    package*.json ./ 
 RUN     \
-        # npm i -g npm && \
-        npm i && \
-        npm i --save-dev cross-env ttypescript nodemon && \
-        npm i -g cross-env ttypescript nodemon
+        npm i -g npm && \
+        npm i
 
 # Copy project files
 WORKDIR /app/trade-master

@@ -1,12 +1,15 @@
+import { ClientOpts } from "redis";
+
 /**
  * Export config
  */
-export const config = (): any => {
+export const config = (): ClientOpts => {
     return {
         host: process.env.REDIS_HOST || "127.0.0.1",
         port: parseInt(process.env.REDIS_PORT || "6379"),
         db: parseInt(process.env.REDIS_DB || "0"),
         auth_pass: process.env.REDIS_AUTH,
+        password: process.env.REDIS_AUTH,
     };
 };
 

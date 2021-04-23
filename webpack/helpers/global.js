@@ -16,8 +16,17 @@ module.exports = {
      * Return webpack entries as a flat-object
      */
     getEntries: () => {
-        const Entries = require("../../webpack.entries");
+        const { files } = require("../../webpack.entries");
 
-        return Entries;
+        return files || {};
+    },
+
+    /**
+     * Return webpack entries to copy
+     */
+    getCopies: () => {
+        const { copy } = require("../../webpack.entries");
+
+        return copy || [];
     },
 };

@@ -20,7 +20,7 @@ module.exports = () => [
     }),
 
     new EliminateEmptyChunkFilePlugin({
-        scriptPattern: /^(?!scripts)[\\/].+\.m?js$/i,
+        scriptPattern: /^(?!scripts[\\/]).*\.m?js$/i,
     }),
 
     new WebpackAssetsManifest({}),

@@ -32,7 +32,11 @@ module.exports = () => ({
             test: /\.(png|jpe?g|gif|tiff?)$/i,
             loader: "file-loader",
             options: {
-                outputPath: "images",
+                outputPath: (url, resourcePath, context) => {
+                    let result = resourcePath.replace(context, "");
+
+                    return result;
+                },
                 name: `[name]${Global.devMode ? "" : ".[contenthash]"}.[ext]`,
             },
             include: [/images/],

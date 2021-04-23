@@ -10,7 +10,7 @@ export type CommandBindingPayloadType<T = any> = {
         command: string;
     };
 };
-                                      
+
 /**
  * Command binding mixin
  */

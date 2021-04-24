@@ -18,23 +18,23 @@ export interface IUserModelType {
 export const UserSchema = new Schema<IUserDocument, IUserModel>(
     {
         email: {
-            type: String,
             required: true,
             trim: true,
+            type: String,
             unique: true,
         },
 
         nick_name: {
-            type: String,
             required: true,
             trim: true,
+            type: String,
         },
 
         pwd: String,
 
         activated_at: {
-            type: Date,
             required: false,
+            type: Date,
         },
     },
     {
@@ -45,16 +45,35 @@ export const UserSchema = new Schema<IUserDocument, IUserModel>(
     }
 );
 
+/* Pre middleware */
+UserSchema.pre("save", function(next: Function) {
+    this.email = this.email ? this.email.toLowerCase() : this.email;
+    next();
+});
+
 /* Register by google profile */
 UserSchema.statics.registerByGoogleProfile = async function(
     this: IUserModel,
     profile: any
 ): Promise<IUserDocument> {
     return this.create({
+        email: profile.email,
         nick_name: profile.display_name,
         profile: {
             google: profile,
         },
+    });
+};
+
+/* Register by user data profile */
+UserSchema.statics.registerByUserData = async function(
+    this: IUserModel,
+    profile: any
+): Promise<IUserDocument> {
+    return this.create({
+        email: profile.email,
+        nick_name: profile.nickName,
+        pwd: profile.pwd,
     });
 };
 
@@ -63,6 +82,7 @@ UserSchema.statics.registerByGoogleProfile = async function(
  */
 export interface IUserModel extends Model<IUserDocument> {
     registerByGoogleProfile(profile: any): Promise<IUserDocument>;
+    registerByUserData(profile: any): Promise<IUserDocument>;
 }
 
 /**

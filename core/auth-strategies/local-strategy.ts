@@ -1,7 +1,7 @@
+import userModel from "@/models/user-model";
 import { IUserDocument } from "models/user-model";
 import Passport from "passport";
 import { Strategy } from "passport-local";
-import userModel from "@/models/user-model";
 
 /**
  * Local Login Strategy
@@ -43,7 +43,7 @@ export class LocalLoginStrategy {
     ) {
         try {
             const user: IUserDocument | null = await userModel.findOne({
-                email: username,
+                email: username.toLowerCase(),
                 pwd: password,
             });
 

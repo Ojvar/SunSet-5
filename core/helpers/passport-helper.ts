@@ -1,13 +1,12 @@
 import {
     config as PassportConfig,
-    PassportConfigType,
+    PassportConfigType
 } from "@CONFIGS/core/passport";
-import User, { IUserDocument } from "models/user-model";
-
 import { Application } from "express";
+import User, { IUserDocument } from "models/user-model";
+import Passport from "passport";
 import { GoogleOAuthStrategy } from "../auth-strategies/google-oauth-strategy";
 import { LocalLoginStrategy } from "../auth-strategies/local-strategy";
-import Passport from "passport";
 
 /**
  * PassportHelper class
@@ -37,7 +36,7 @@ export class PassportHelper {
                 if (null != user) {
                     done(null, user);
                 } else {
-                    throw Error("User not found");
+                    done("User not found");
                 }
             } catch (err) {
                 done(err);

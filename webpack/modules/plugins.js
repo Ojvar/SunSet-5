@@ -38,7 +38,7 @@ module.exports = () => {
 
     result.push(
         new EliminateEmptyChunkFilePlugin({
-            scriptPattern: /^(?!scripts[\\/]).*\.m?js$/i,
+            scriptPattern: /^(?!scripts|@VueC[\\/]).*\.m?js$/i,
         })
     );
 

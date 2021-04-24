@@ -33,7 +33,7 @@ module.exports = () => ({
             loader: "file-loader",
             options: {
                 outputPath: (url, resourcePath, context) => {
-                    let result = resourcePath.replace(context, "");
+                    let result = resourcePath.replace(context + "/", "");
 
                     return result;
                 },

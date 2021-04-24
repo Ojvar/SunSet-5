@@ -120,7 +120,7 @@ export class RouteItem {
      * @param handler {RequestHandler | RequestHandler[]}
      * @param alias {string?}
      */
-    public static delete(
+    public static del(
         path: string,
         handler: RequestHandler | RequestHandler[],
         alias?: string

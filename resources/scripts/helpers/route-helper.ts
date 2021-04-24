@@ -1,5 +1,5 @@
-import { Hash } from "@Lib/types/hash-type";
 import { applyArguments } from "@CORE/helpers/route-helper";
+import { Hash } from "@Lib/types/hash-type";
 
 const BASE_ROUTE = `http://localhost:8085`;
 

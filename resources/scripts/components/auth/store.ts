@@ -1,11 +1,10 @@
-import { AxiosHelper, AxiosResponse } from "@Scripts/helpers/axios-helepr";
-
-import { ActionResultType } from "@Lib/types/global/action-result-type";
-import { LoginFormValidator } from "@Scripts/validators/auth/login-from-validator";
-import { PageHelper } from "@Scripts/helpers/page-helper";
 import { ValidatorErrorType } from "@APP/validators/base-validator";
-import { Vuex } from "@Scripts/vendors/vue";
+import { ActionResultType } from "@Lib/types/global/action-result-type";
+import { AxiosHelper, AxiosResponse } from "@Scripts/helpers/axios-helepr";
+import { PageHelper } from "@Scripts/helpers/page-helper";
 import { routes } from "@Scripts/helpers/route-helper";
+import { LoginFormValidator } from "@Scripts/validators/auth/login-from-validator";
+import { Vuex } from "@Scripts/vendors/vue";
 
 /**
  * Login store

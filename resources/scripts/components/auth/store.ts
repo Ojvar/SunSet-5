@@ -1,6 +1,6 @@
 import { ValidatorErrorType } from "@APP/validators/base-validator";
 import { ActionResultType } from "@Lib/types/global/action-result-type";
-import { AxiosHelper, AxiosResponse } from "@Scripts/helpers/axios-helepr";
+import { AxiosHelper, AxiosResponse } from "@Scripts/helpers/axios-helper";
 import { PageHelper } from "@Scripts/helpers/page-helper";
 import { routes } from "@Scripts/helpers/route-helper";
 import { LoginFormValidator } from "@Scripts/validators/auth/login-from-validator";

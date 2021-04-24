@@ -3,7 +3,6 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = () => ({
     removeEmptyChunks: true,
-    runtimeChunk: true,
     minimize: !Global.devMode,
     minimizer: [
         new TerserPlugin({
@@ -12,7 +11,18 @@ module.exports = () => ({
     ],
     splitChunks: {
         chunks: "all",
-        name: false,
+        name(module) {
+            let packageName = module.context.match(
+                /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+            );
+
+            if ((packageName || []).length < 2) {
+                return null;
+            }
+            packageName = packageName[1];
+
+            return `chunks/${packageName.replace("@", "")}`;
+        },
         cacheGroups: {
             vue: {
                 test: /[\\/]node_modules[\\/]vue/i,
@@ -42,18 +52,18 @@ module.exports = () => ({
                 priority: 100,
             },
 
-            default: {
-                test: /[\\/]node_modules[\\/]/i,
-                name(module) {
-                    const packageName = module.context.match(
-                        /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-                    )[1];
+            //     default: {
+            //         test: /[\\/]node_modules[\\/]/i,
+            //         name(module) {
+            //             const packageName = module.context.match(
+            //                 /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+            //             )[1];
 
-                    return `chunks/${packageName.replace("@", "")}`;
-                },
+            //             return `chunks/${packageName.replace("@", "")}`;
+            //         },
 
-                ...groupsOptions,
-            },
+            //         ...groupsOptions,
+            //     },
         },
     },
 });

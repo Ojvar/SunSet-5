@@ -2,7 +2,7 @@ const Global = require("../helpers/global");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = () => ({
-    removeEmptyChunks: true,
+    removeEmptyChunks: false,
     minimize: !Global.devMode,
     minimizer: [
         new TerserPlugin({

@@ -1,10 +1,9 @@
-import Express, { NextFunction, Request, Response } from "express";
 import {
     ExpressHelper,
     MiddlewareInterface,
 } from "core/helpers/express-helper";
-
 import { GlobalMethods } from "core/helpers/global-methods-helper";
+import Express, { NextFunction, Request, Response } from "express";
 
 /**
  * Default export

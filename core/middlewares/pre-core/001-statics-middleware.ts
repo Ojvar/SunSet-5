@@ -2,9 +2,8 @@ import {
     ExpressHelper,
     MiddlewareInterface,
 } from "core/helpers/express-helper";
-
-import Express from "express";
 import { GlobalMethods } from "core/helpers/global-methods-helper";
+import Express from "express";
 
 /**
  * Default export

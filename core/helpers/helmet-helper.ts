@@ -1,8 +1,7 @@
-import { Application, NextFunction, Request, Response } from "express";
 import { config as HelmetConfig, HelmetConfigType } from "@CONFIGS/core/helmet";
-
-import Helmet from "helmet";
 import { randomBytes } from "crypto";
+import { Application, NextFunction, Request, Response } from "express";
+import Helmet from "helmet";
 
 /**
  * HelmetHelper class

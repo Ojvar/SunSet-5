@@ -1,11 +1,10 @@
 import { config as ServerConfig, ServerConfigType } from "@CONFIGS/core/server";
-import { lstatSync, readFileSync } from "fs";
-
 import Express from "express";
-import { GlobalMethods } from "./global-methods-helper";
+import { lstatSync, readFileSync } from "fs";
 import Http from "http";
 import Https from "https";
 import { LoggerType } from "./global-data-helper";
+import { GlobalMethods } from "./global-methods-helper";
 import { RouteManager } from "./route-manager";
 
 /**

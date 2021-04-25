@@ -2,7 +2,6 @@ import {
     ExpressHelper,
     MiddlewareInterface,
 } from "core/helpers/express-helper";
-
 import Express from "express";
 
 /**

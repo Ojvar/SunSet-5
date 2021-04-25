@@ -1,3 +1,5 @@
+import { ConnectOptions } from "mongoose";
+
 /**
  * Config
  */
@@ -5,9 +7,11 @@ export const config = (): DatabaseConfigType => {
     return {
         driver: process.env.DB_DRIVER || "none",
         mongoose: {
-            useNewUrlParser: true,
-            useFindAndModify: false,
-            useCreateIndex: true,
+            options: {
+                useNewUrlParser: true,
+                useFindAndModify: false,
+                useCreateIndex: true,
+            },
 
             connection: {
                 dbHost: process.env.DB_HOST || "127.0.0.1",
@@ -26,6 +30,7 @@ export const config = (): DatabaseConfigType => {
 export type DatabaseConfigType = {
     driver: DatabaseDriverType;
     mongoose?: {
+        options?: ConnectOptions;
         connection?: {
             dbHost: string;
             dbName: string;

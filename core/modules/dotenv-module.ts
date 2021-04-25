@@ -1,6 +1,6 @@
-import { CoreModule } from "./core-module-interface";
-import DotEnv from "dotenv";
 import { GlobalMethods } from "@CORE/helpers/global-methods-helper";
+import DotEnv from "dotenv";
+import { CoreModule } from "./core-module-interface";
 
 /**
  * DotEnv module

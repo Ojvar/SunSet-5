@@ -1,11 +1,10 @@
+import { PassportConfigType } from "@CONFIGS/core/passport";
+import User, { IUserDocument } from "models/user-model";
+import Passport, { Profile } from "passport";
 import {
     Strategy as GoogleStrategy,
     StrategyOptions,
 } from "passport-google-oauth20";
-import Passport, { Profile } from "passport";
-import User, { IUserDocument } from "models/user-model";
-
-import { PassportConfigType } from "@CONFIGS/core/passport";
 
 /**
  * Google OAuth Strategy

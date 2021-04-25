@@ -1,6 +1,6 @@
-import { CoreModule } from "./core-module-interface";
 import { ExpressHelper } from "core/helpers/express-helper";
 import { GlobalData } from "core/helpers/global-data-helper";
+import { CoreModule } from "./core-module-interface";
 
 /**
  * Express module

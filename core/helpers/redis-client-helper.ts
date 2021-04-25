@@ -1,5 +1,4 @@
-import { Callback, ClientOpts, RedisClient, createClient } from "redis";
-
+import { Callback, ClientOpts, createClient, RedisClient } from "redis";
 import { LoggerType } from "./global-data-helper";
 
 /**

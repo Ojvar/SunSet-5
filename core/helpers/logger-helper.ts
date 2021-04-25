@@ -1,13 +1,11 @@
-import "winston-daily-rotate-file";
-
 import { config as LoggerConfig, LoggerConfigType } from "@CONFIGS/core/logger";
 import { config as ServerConfig, ServerConfigType } from "@CONFIGS/core/server";
-
-import { GlobalMethods } from "./global-methods-helper";
-import { LoggerType } from "./global-data-helper";
-import { default as Winston } from "winston";
 import { default as _ } from "lodash";
 import { basename } from "path";
+import { default as Winston } from "winston";
+import "winston-daily-rotate-file";
+import { LoggerType } from "./global-data-helper";
+import { GlobalMethods } from "./global-methods-helper";
 
 /**
  * Logger helper class

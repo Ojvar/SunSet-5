@@ -2,7 +2,6 @@ import {
     ExpressHelper,
     MiddlewareInterface,
 } from "core/helpers/express-helper";
-
 import { Application } from "express";
 import { PassportHelper } from "../../helpers/passport-helper";
 

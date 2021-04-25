@@ -11,18 +11,6 @@ module.exports = () => ({
     ],
     splitChunks: {
         chunks: "all",
-        // name(module) {
-        //     let packageName = module.context.match(
-        //         /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-        //     );
-
-        //     if ((packageName || []).length < 2) {
-        //         return null;
-        //     }
-        //     packageName = packageName[1];
-
-        //     return `chunks/${packageName.replace("@", "")}`;
-        // },
         cacheGroups: {
             vue: {
                 test: /[\\/]node_modules[\\/]vue/i,

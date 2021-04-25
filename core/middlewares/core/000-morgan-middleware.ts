@@ -1,9 +1,8 @@
+import { config as MorganConfig } from "@CONFIGS/core/morgan";
 import {
     ExpressHelper,
     MiddlewareInterface,
 } from "core/helpers/express-helper";
-import { config as MorganConfig, MorganConfigType } from "@CONFIGS/core/morgan";
-
 import Express from "express";
 
 /**

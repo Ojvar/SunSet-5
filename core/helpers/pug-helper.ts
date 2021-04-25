@@ -1,10 +1,9 @@
 import { config as ServerConfig, ServerConfigType } from "@CONFIGS/core/server";
-
+import { Hash } from "@Lib/types/hash-type";
 import { GlobalData } from "./global-data-helper";
 import { GlobalMethods } from "./global-methods-helper";
-import { Hash } from "@Lib/types/hash-type";
-import { RouteItemType } from "./route-manager";
 import { applyArguments } from "./route-helper";
+import { RouteItemType } from "./route-manager";
 
 /**
  * PugHelper class

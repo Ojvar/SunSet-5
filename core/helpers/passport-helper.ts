@@ -1,6 +1,6 @@
 import {
     config as PassportConfig,
-    PassportConfigType
+    PassportConfigType,
 } from "@CONFIGS/core/passport";
 import { Application } from "express";
 import User, { IUserDocument } from "models/user-model";

@@ -1,10 +1,9 @@
+import { HelmetHelper } from "@/core/helpers/helmet-helper";
 import {
     ExpressHelper,
     MiddlewareInterface,
 } from "core/helpers/express-helper";
-
 import Express from "express";
-import { HelmetHelper } from "@/core/helpers/helmet-helper";
 
 /**
  * Default export

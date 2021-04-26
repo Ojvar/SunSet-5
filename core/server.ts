@@ -1,6 +1,6 @@
-import { ICoreModule } from "./modules/core-module-interface";
-import { LoggerType } from "./helpers/global-data-helper";
 import { ServerInitClass } from "@APP/server-init";
+import { LoggerType } from "./helpers/global-data-helper";
+import { ICoreModule } from "./modules/core-module-interface";
 
 /**
  * Server class

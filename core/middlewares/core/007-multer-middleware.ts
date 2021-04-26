@@ -1,15 +1,14 @@
+import { GlobalData } from "@/core/helpers/global-data-helper";
+import { GlobalMethods } from "@/core/helpers/global-methods-helper";
+import { config as ServerConfig } from "@CONFIGS/core/server";
 import {
     ExpressHelper,
     MiddlewareInterface,
 } from "core/helpers/express-helper";
-import { default as Multer, StorageEngine, diskStorage } from "multer";
-
-import { GlobalData } from "@/core/helpers/global-data-helper";
-import { GlobalMethods } from "@/core/helpers/global-methods-helper";
-import { default as MKDirP } from "mkdirp";
-import MimeTypes from "mime-types";
 import { Request } from "express";
-import { config as ServerConfig } from "@CONFIGS/core/server";
+import MimeTypes from "mime-types";
+import { default as MKDirP } from "mkdirp";
+import { default as Multer, diskStorage, StorageEngine } from "multer";
 import { v4 as uuidV4 } from "uuid";
 
 /**

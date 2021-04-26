@@ -2,12 +2,10 @@ import {
     config as DatabaseConfig,
     DatabaseConfigType,
 } from "@CONFIGS/core/database";
-import Mongoose, { ConnectOptions } from "mongoose";
-
-import { CoreModule } from "../modules/core-module-interface";
-import { GlobalMethods } from "core/helpers/global-methods-helper";
 import { Hash } from "@Lib/types/hash-type";
 import { IDatabaseDriver } from "core/modules/database-module";
+import Mongoose, { ConnectOptions } from "mongoose";
+import { CoreModule } from "../modules/core-module-interface";
 
 /**
  * MongoDB Driver module
@@ -127,7 +125,7 @@ export class MongoDBDriver extends CoreModule implements IDatabaseDriver {
     public prepareConnectionOptions(
         config: DatabaseConfigType
     ): Mongoose.ConnectOptions {
-        let options: Mongoose.ConnectOptions = {};
+        let options: Mongoose.ConnectOptions = config.mongoose?.options || {};
 
         if (config.mongoose?.connection?.dbUser) {
             options.auth = {

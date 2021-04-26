@@ -1,11 +1,10 @@
+import { GlobalMethods } from "@/core/helpers/global-methods-helper";
+import { config as ServerConfig } from "@CONFIGS/core/server";
 import {
     ExpressHelper,
     MiddlewareInterface,
 } from "core/helpers/express-helper";
-import { config as ServerConfig, ServerConfigType } from "@CONFIGS/core/server";
-
 import Express from "express";
-import { GlobalMethods } from "@/core/helpers/global-methods-helper";
 import { Store } from "express-session";
 
 /**

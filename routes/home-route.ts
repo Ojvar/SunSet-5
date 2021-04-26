@@ -1,6 +1,6 @@
 import { HomeController } from "@CONTROLLERS/home-controller";
-import { PassportMiddleware } from "./../app/middlewares/passport-middleware";
-import { RouteItem } from "core/helpers/route-helper";
+import { RouteItem } from "@CORE/helpers/route-helper";
+import { PassportMiddleware } from "@APP/middlewares/passport-middleware";
 
 const controller: HomeController = new HomeController();
 

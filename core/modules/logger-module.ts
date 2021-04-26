@@ -1,6 +1,6 @@
-import { CoreModule } from "./core-module-interface";
 import { GlobalData } from "core/helpers/global-data-helper";
 import { LoggerHelper } from "core/helpers/logger-helper";
+import { CoreModule } from "./core-module-interface";
 
 /**
  * Logger module

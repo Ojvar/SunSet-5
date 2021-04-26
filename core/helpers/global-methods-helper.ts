@@ -1,10 +1,8 @@
-import { basename, extname, resolve } from "path";
-
-import Glob from "glob";
-import { LoggerType } from "./global-data-helper";
-import { Request } from "express";
 import { config as ServerConfig } from "@CONFIGS/core/server";
-import { join } from "path";
+import { Request } from "express";
+import Glob from "glob";
+import { basename, extname, join, resolve } from "path";
+import { LoggerType } from "./global-data-helper";
 
 /**
  * Global methods

@@ -1,6 +1,5 @@
 FROM    registry.hub.docker.com/library/node:alpine
 
-
 # Data
 LABEL   MAINTAINER=MOjvar.AmirHossein@GMail.com
 

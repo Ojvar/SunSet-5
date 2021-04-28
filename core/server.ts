@@ -1,5 +1,5 @@
 import { ServerInitClass } from "@APP/server-init";
-import { GlobalData, LoggerType } from "./helpers/global-data-helper";
+import { LoggerType } from "./helpers/global-data-helper";
 import { ICoreModule } from "./modules/core-module-interface";
 
 /**

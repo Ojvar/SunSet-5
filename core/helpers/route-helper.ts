@@ -1,4 +1,5 @@
 import { RequestHandler } from "express";
+import { stringify } from "qs";
 
 /**
  * Router-Itme class
@@ -156,13 +157,19 @@ export type RequestType =
  * Apply arguments on url path
  * @param url {string}
  * @param args {any}
+ * @param queryString {any} Arguments
  */
-export function applyArguments(url: string, args: any = {}): string {
+export function applyArguments(
+    url: string,
+    args: any = {},
+    queryString: any = {}
+): string {
     /* Extract tokens */
     const tokens: RegExpMatchArray | null = url.match(/\:\b(?!\d)\w*\b/g);
 
     let result = url;
 
+    /* Apply arguments string */
     if (tokens) {
         tokens.forEach((key) => {
             const field = key.replace(/[:?]/g, "");
@@ -171,6 +178,11 @@ export function applyArguments(url: string, args: any = {}): string {
 
             result = result.replace(regex, args[field] ? args[field] : "");
         });
+    }
+
+    /* Apply query string */
+    if (Object.keys(queryString).length > 0) {
+        result += "?" + stringify(queryString);
     }
 
     return result;

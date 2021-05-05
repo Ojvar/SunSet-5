@@ -26,9 +26,9 @@
     "author": "",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/rg2taak/tradeMaster/issues"
+        "url": "https://github.com/Ojvar/SunSet-5/issues"
     },
-    "homepage": "https://github.com/rg2taak/tradeMaster#readme",
+    "homepage": "https://github.com/Ojvar/SunSet-5#readme",
     "devDependencies": {
         "@babel/core": "^7.12.13",
         "@types/body-parser": "^1.19.0",

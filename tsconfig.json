@@ -29,6 +29,7 @@
         "paths": {
             "@CORE/*": ["core/*"],
             "@APP/*": ["app/*"],
+            "@MODELS/*": ["models/*"],
             "@CONTROLLERS/*": ["app/controllers/*"],
             "@TYPES/*": ["lib/types/*"],
             "@CONFIGS/*": ["configs/*"],

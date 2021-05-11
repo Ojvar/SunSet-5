@@ -1,4 +1,4 @@
-import { default as Axios, AxiosResponse } from "axios";
+import { AxiosResponse, default as Axios } from "axios";
 
 /* Export axios items */
 export { Axios, AxiosResponse };

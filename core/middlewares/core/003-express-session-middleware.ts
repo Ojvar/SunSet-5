@@ -1,4 +1,4 @@
-import { GlobalMethods } from "@/core/helpers/global-methods-helper";
+import { GlobalMethods } from "@CORE/helpers/global-methods-helper";
 import { config as ServerConfig } from "@CONFIGS/core/server";
 import {
     ExpressHelper,

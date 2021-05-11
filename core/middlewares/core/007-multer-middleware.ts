@@ -1,10 +1,10 @@
-import { GlobalData } from "@/core/helpers/global-data-helper";
-import { GlobalMethods } from "@/core/helpers/global-methods-helper";
 import { config as ServerConfig } from "@CONFIGS/core/server";
+import { GlobalData } from "@CORE/helpers/global-data-helper";
+import { GlobalMethods } from "@CORE/helpers/global-methods-helper";
 import {
     ExpressHelper,
     MiddlewareInterface,
-} from "core/helpers/express-helper";
+} from "@CORE/helpers/express-helper";
 import { Request } from "express";
 import MimeTypes from "mime-types";
 import { default as MKDirP } from "mkdirp";

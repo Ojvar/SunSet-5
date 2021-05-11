@@ -1,5 +1,4 @@
-import userModel from "@/models/user-model";
-import { IUserDocument } from "models/user-model";
+import userModel, { IUserDocument } from "@MODELS/user-model";
 import Passport from "passport";
 import { Strategy } from "passport-local";
 

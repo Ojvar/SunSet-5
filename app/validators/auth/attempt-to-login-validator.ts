@@ -1,14 +1,18 @@
-import { AttributeNames, Rules } from "validatorjs";
 import {
     BaseValidatorInterface,
-    ValidatorMiddlewareResultType,
     validate,
-} from "./../base-validator";
-import { EMailRule, MaxRule, MinRule, RequiredRule } from "../validation-rules";
-
+    ValidatorMiddlewareResultType,
+} from "@APP/validators/base-validator";
+import {
+    EMailRule,
+    MaxRule,
+    MinRule,
+    RequiredRule,
+} from "@APP/validators/validation-rules";
 import { ActionResultType } from "@Lib/types/global/action-result-type";
-import { AttempToLoginType } from "@APP/controllers/auth-controller";
+import { AttempToLoginType } from "@TYPES/backend/auth-types";
 import { Request } from "express";
+import { AttributeNames, Rules } from "validatorjs";
 
 /**
  * Validator class
@@ -42,13 +46,15 @@ export class AttempToLoginValidator extends BaseValidatorInterface {
      */
     public validate(data: AttempToLoginType): ActionResultType {
         try {
-            let userData: AttempToLoginType = JSON.parse(JSON.stringify(data));
+            const userData: AttempToLoginType = JSON.parse(
+                JSON.stringify(data)
+            );
 
             return super.validateData<AttempToLoginType>(this, userData);
         } catch (err) {
             return {
-                success: false,
                 data: err,
+                success: false,
             };
         }
     }

@@ -26,6 +26,7 @@ module.exports = (entries) => ({
         "@TYPES": Path.resolve("./lib/types"),
         "@CONFIGS": Path.resolve("./configs"),
         "@Lib": Path.resolve("./lib"),
+        "@MODELS": Path.resolve("./models"),
 
         /* Frontend */
         "@VueC": Path.resolve("./resources/scripts/components"),

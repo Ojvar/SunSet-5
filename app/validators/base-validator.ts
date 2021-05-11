@@ -1,3 +1,4 @@
+import { ActionResultType } from "@Lib/types/global/action-result-type";
 import { NextFunction, Request, Response } from "express";
 import ValidatorJs, {
     AttributeNames,
@@ -5,8 +6,6 @@ import ValidatorJs, {
     Rules,
     Validator,
 } from "validatorjs";
-
-import { ActionResultType } from "@Lib/types/global/action-result-type";
 
 /**
  * Base validator

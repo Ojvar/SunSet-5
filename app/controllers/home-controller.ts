@@ -1,7 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 
-import { RouteManager } from "@/core/helpers/route-manager";
-
 /**
  * Home controller
  */

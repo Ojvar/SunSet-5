@@ -1,7 +1,6 @@
-import { NextFunction, Request, Response } from "express";
-
-import { GlobalData } from "@/core/helpers/global-data-helper";
+import { GlobalData } from "@CORE/helpers/global-data-helper";
 import { config as PassportConfig } from "@CONFIGS/core/passport";
+import { NextFunction, Request, Response } from "express";
 import { authenticate } from "passport";
 
 /**

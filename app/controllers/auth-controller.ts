@@ -1,6 +1,5 @@
+import { GlobalData } from "@CORE/helpers/global-data-helper";
 import { NextFunction, Request, Response } from "express";
-
-import { GlobalData } from "@/core/helpers/global-data-helper";
 
 /**
  * Auth controller
@@ -8,9 +7,9 @@ import { GlobalData } from "@/core/helpers/global-data-helper";
 export class AuthController {
     /**
      * Login function
-     * @param req
-     * @param res
-     * @param next
+     * @param req { Request }
+     * @param res { Response }
+     * @param next { NextFunction }
      */
     public login(req: Request, res: Response, next: NextFunction) {
         res.render("pages/auth/login.pug", { user: req.user });
@@ -18,9 +17,9 @@ export class AuthController {
 
     /**
      * Logout function
-     * @param req
-     * @param res
-     * @param next
+     * @param req { Request }
+     * @param res { Response }
+     * @param next { NextFunction }
      */
     public logout(req: Request, res: Response, next: NextFunction) {
         res.redirect(
@@ -30,22 +29,14 @@ export class AuthController {
 
     /**
      * AttempToLogin function
-     * @param req
-     * @param res
-     * @param next
+     * @param req { Request }
+     * @param res { Response }
+     * @param next { NextFunction }
      */
     public attempToLogin(req: Request, res: Response, next: NextFunction) {
         res.send({
-            success: true,
             data: GlobalData.express?.app.RouteManager.routePath("home.index"),
+            success: true,
         });
     }
 }
-
-/**
- * Attemp-to-login Type
- */
-export type AttempToLoginType = {
-    email: string;
-    pwd: string;
-};

@@ -1,4 +1,4 @@
-import { GlobalData } from "@/core/helpers/global-data-helper";
+import { GlobalData } from "@CORE/helpers/global-data-helper";
 
 /**
  * Server init class

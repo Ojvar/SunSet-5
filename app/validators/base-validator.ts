@@ -13,7 +13,7 @@ import ValidatorJs, {
 export class BaseValidator {
     /**
      * Generate error string
-     * @param errors Errors lsit
+     * @param errors Errors list
      */
     public generateErrorString(errors: ValidatorJs.ValidationErrors): string {
         const errorValues: Array<any> = Object.values(errors);

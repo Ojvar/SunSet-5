@@ -1,9 +1,9 @@
-import { GlobalMethods } from "@CORE/helpers/global-methods-helper";
 import { config as ServerConfig } from "@CONFIGS/core/server";
 import {
     ExpressHelper,
     MiddlewareInterface,
-} from "core/helpers/express-helper";
+} from "@CORE/helpers/express-helper";
+import { GlobalMethods } from "@CORE/helpers/global-methods-helper";
 import Express from "express";
 import { Store } from "express-session";
 

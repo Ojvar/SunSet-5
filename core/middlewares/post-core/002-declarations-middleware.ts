@@ -1,4 +1,4 @@
-import { MiddlewareInterface } from "core/helpers/express-helper";
+import { MiddlewareInterface } from "@CORE/helpers/express-helper";
 
 /**
  * Default export

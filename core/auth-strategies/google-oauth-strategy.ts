@@ -1,5 +1,5 @@
 import { PassportConfigType } from "@CONFIGS/core/passport";
-import User, { IUserDocument } from "models/user-model";
+import User, { IUserDocument } from "@MODELS/user-model";
 import Passport, { Profile } from "passport";
 import {
     Strategy as GoogleStrategy,
@@ -60,7 +60,7 @@ export class GoogleOAuthStrategy {
 
             done(null, currentUser);
         } catch (err) {
-            err;
+            done(err);
         }
     }
 }

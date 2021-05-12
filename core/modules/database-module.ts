@@ -3,9 +3,9 @@ import {
     DatabaseConfigType,
     DatabaseDriverType,
 } from "@CONFIGS/core/database";
-import { GlobalData } from "core/helpers/global-data-helper";
-import { MongoDBDriver } from "../database-drivers/mongodb-driver";
-import { CoreModule } from "./core-module-interface";
+import { MongoDBDriver } from "@CORE/database-drivers/mongodb-driver";
+import { GlobalData } from "@CORE/helpers/global-data-helper";
+import { CoreModule } from "@CORE/modules/core-module-interface";
 
 /**
  * Database module

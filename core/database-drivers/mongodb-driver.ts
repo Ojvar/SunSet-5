@@ -2,17 +2,15 @@ import {
     config as DatabaseConfig,
     DatabaseConfigType,
 } from "@CONFIGS/core/database";
-import { Hash } from "@Lib/types/hash-type";
-import { IDatabaseDriver } from "core/modules/database-module";
+import { CoreModule } from "@CORE/modules/core-module-interface";
+import { IDatabaseDriver } from "@CORE/modules/database-module";
 import Mongoose, { ConnectOptions } from "mongoose";
-import { CoreModule } from "../modules/core-module-interface";
 
 /**
  * MongoDB Driver module
  */
 export class MongoDBDriver extends CoreModule implements IDatabaseDriver {
     private _db?: Mongoose.Mongoose;
-    private models: Hash<any> = {};
 
     /**
      * Get db data

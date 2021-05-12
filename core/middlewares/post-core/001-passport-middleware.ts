@@ -1,9 +1,9 @@
 import {
     ExpressHelper,
     MiddlewareInterface,
-} from "core/helpers/express-helper";
+} from "@CORE/helpers/express-helper";
+import { PassportHelper } from "@CORE/helpers/passport-helper";
 import { Application } from "express";
-import { PassportHelper } from "../../helpers/passport-helper";
 
 /**
  * Default export

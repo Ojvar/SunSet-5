@@ -1,8 +1,8 @@
-import { IDatabaseDriver } from "core/modules/database-module";
-import { default as ExpressModule } from "core/modules/express-module";
+import { PugHelper } from "@CORE/helpers/pug-helper";
+import { IDatabaseDriver } from "@CORE/modules/database-module";
+import { default as ExpressModule } from "@CORE/modules/express-module";
 import { Multer } from "multer";
 import { default as Winston } from "winston";
-import { PugHelper } from "./pug-helper";
 
 /**
  * Global data

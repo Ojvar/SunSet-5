@@ -2,11 +2,11 @@ import {
     config as PassportConfig,
     PassportConfigType,
 } from "@CONFIGS/core/passport";
+import { GoogleOAuthStrategy } from "@CORE/auth-strategies/google-oauth-strategy";
+import { LocalLoginStrategy } from "@CORE/auth-strategies/local-strategy";
+import User, { IUserDocument } from "@MODELS/user-model";
 import { Application } from "express";
-import User, { IUserDocument } from "models/user-model";
 import Passport from "passport";
-import { GoogleOAuthStrategy } from "../auth-strategies/google-oauth-strategy";
-import { LocalLoginStrategy } from "../auth-strategies/local-strategy";
 
 /**
  * PassportHelper class

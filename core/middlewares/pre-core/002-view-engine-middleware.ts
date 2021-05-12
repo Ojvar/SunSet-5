@@ -1,10 +1,10 @@
 import {
     ExpressHelper,
     MiddlewareInterface,
-} from "core/helpers/express-helper";
-import { GlobalData } from "core/helpers/global-data-helper";
-import { GlobalMethods } from "core/helpers/global-methods-helper";
-import { PugHelper } from "core/helpers/pug-helper";
+} from "@CORE/helpers/express-helper";
+import { GlobalData } from "@CORE/helpers/global-data-helper";
+import { GlobalMethods } from "@CORE/helpers/global-methods-helper";
+import { PugHelper } from "@CORE/helpers/pug-helper";
 import Express, { NextFunction, Request, Response } from "express";
 
 /**

@@ -10,6 +10,9 @@ export interface IUserModelType {
     nick_name: string;
     pwd?: string;
     updated_at: Date;
+    profile: {
+        google?: any;
+    };
 }
 
 /**
@@ -36,6 +39,17 @@ export const UserSchema = new Schema<IUserDocument, IUserModel>(
             required: false,
             type: Date,
         },
+
+        profile: {
+            _id: false,
+            required: false,
+
+            google: {
+                _id: false,
+                required: false,
+                type: Object,
+            },
+        },
     },
     {
         timestamps: {
@@ -57,8 +71,8 @@ UserSchema.statics.registerByGoogleProfile = async function(
     profile: any
 ): Promise<IUserDocument> {
     return this.create({
-        email: profile.email,
-        nick_name: profile.display_name,
+        email: profile.emails[0].value,
+        nick_name: profile.displayName,
         profile: {
             google: profile,
         },

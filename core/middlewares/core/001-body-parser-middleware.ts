@@ -2,6 +2,7 @@ import {
     ExpressHelper,
     MiddlewareInterface,
 } from "@CORE/helpers/express-helper";
+import { config as ServerConfig, ServerConfigType } from "@CONFIGS/core/server";
 import Express from "express";
 
 /**
@@ -26,17 +27,12 @@ export default class BodyParserMiddleware implements MiddlewareInterface {
         const app: Express.Application = this._expressHelper
             ?.App as Express.Application;
 
-        /* TODO: READ LIMIT VALUE FROM CONFIG FILE */
+        const config: ServerConfigType = ServerConfig();
 
         // parse application/x-www-form-urlencoded
-        app.use(
-            Express.urlencoded({
-                extended: false,
-                limit: "5M",
-            })
-        );
+        app.use(Express.urlencoded(config.express.urlencoded));
 
         // parse application/json
-        app.use(Express.json());
+        app.use(Express.json(config.express.json));
     }
 }

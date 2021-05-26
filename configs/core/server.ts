@@ -21,6 +21,15 @@ export const config = (): ServerConfigType => {
                 process.env.SSL_SERVER_KEY || "private/ssl/server-key.pem",
         },
         storage: process.env.STORAGE || "storage",
+
+        express: {
+            urlencoded: {
+                limit: process.env.EXPRESS_URL_ENCODE_LIMIT || "2mb",
+            },
+            json: {
+                limit: process.env.EXPRESS_JSON_LIMIT || "2mb",
+            },
+        },
     } as ServerConfigType;
 };
 
@@ -29,16 +38,20 @@ export const config = (): ServerConfigType => {
  */
 export type ServerConfigType = {
     appName: string;
-    proto: string;
-    port: number;
+    basePath: string;
     host: string;
+    port: number;
+    proto: string;
+    publicPath: string;
     serverUrl: string;
     sessionStore: "redis" | "memory" | null;
-    publicPath: string;
-    basePath: string;
+    storage: string;
+    express: {
+        urlencoded: any;
+        json: any;
+    };
     ssl: {
         serverCert: string;
         serverKey: string;
     };
-    storage: string;
 };

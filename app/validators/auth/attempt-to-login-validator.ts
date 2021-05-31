@@ -44,7 +44,10 @@ export class AttempToLoginValidator extends BaseValidatorInterface {
      * Validate data
      * @param data Input data
      */
-    public validate(data: AttempToLoginType): ActionResultType {
+    public validate(
+        data: AttempToLoginType,
+        asyncCall: boolean = false
+    ): ActionResultType | Promise<ActionResultType> {
         try {
             const userData: AttempToLoginType = JSON.parse(
                 JSON.stringify(data)

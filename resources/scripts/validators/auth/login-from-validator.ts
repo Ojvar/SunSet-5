@@ -1,10 +1,10 @@
+import { BaseValidatorInterface } from "@APP/validators/base-validator";
 import {
-    BaseValidatorInterface,
     EMailRule,
     MaxRule,
     MinRule,
     RequiredRule,
-} from "@APP/validators/base-validator";
+} from "@APP/validators/validation-rules";
 import { ActionResultType } from "@Lib/types/global/action-result-type";
 import { AttempToLoginType } from "@TYPES/backend/auth-types";
 import { AttributeNames, Rules } from "validatorjs";

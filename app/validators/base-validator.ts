@@ -39,8 +39,10 @@ export class BaseValidator {
         validator.setup<T>(validatorJS);
         validatorJS.setAttributeNames(validator.getAttributes(data));
 
-        /* Check */
-        result.success = true == validatorJS.passes();
+        /* Check async */
+        result.success = validatorJS.check();
+
+        /* Setup result */
         if (!result.success) {
             result.data = {
                 validator: validatorJS,
@@ -49,6 +51,53 @@ export class BaseValidator {
         }
 
         return result;
+    }
+
+    /**
+     * Validate data async
+     */
+    public validateDataAsync<T>(
+        validator: BaseValidatorInterface,
+        data: any
+    ): Promise<ActionResultType> {
+        return new Promise((resolve: Function, reject: Function) => {
+            const result: ActionResultType = {} as ActionResultType;
+
+            /* Preparation */
+            const validatorJS: ValidatorJs.Validator<T> = new ValidatorJs(
+                data,
+                validator.getRules(data),
+                validator.getMessages(data)
+            );
+            validator.setup<T>(validatorJS);
+            validatorJS.setAttributeNames(validator.getAttributes(data));
+
+            /* Setup resultFunctionO func */
+            const resultFunction = (): void => {
+                if (!result.success) {
+                    result.data = {
+                        validator: validatorJS,
+                        errors: this.generateErrorString(
+                            validatorJS.errors.all()
+                        ),
+                    } as ValidatorErrorType;
+                }
+
+                resolve(result);
+            };
+
+            /* Check async */
+            validatorJS.checkAsync(
+                () => {
+                    result.success = true;
+                    resultFunction();
+                },
+                () => {
+                    result.success = false;
+                    resultFunction();
+                }
+            );
+        });
     }
 }
 
@@ -60,7 +109,8 @@ export class BaseValidator {
  */
 export function validate<T>(
     dataCollector: (req: Request) => Promise<T> | T,
-    validator: BaseValidatorInterface
+    validator: BaseValidatorInterface,
+    asyncValidation: boolean = false
 ): ValidatorMiddlewareResultType {
     return async (
         req: Request,
@@ -75,13 +125,13 @@ export function validate<T>(
             req.payload = documentData;
         } catch (err) {
             next("Invalid arguments");
-
             return;
         }
 
         /* Validate data */
-        const validationResult: ActionResultType = validator.validate(
-            documentData
+        const validationResult: ActionResultType = await validator.validate(
+            documentData,
+            asyncValidation
         );
 
         if (!validationResult.success) {
@@ -102,20 +152,20 @@ export function validate<T>(
 }
 
 /**
- * Validator interface
+ * Abstract Validator class
  */
 export abstract class BaseValidatorInterface extends BaseValidator {
     /**
      * Post setup method
      * @param validator Validator<T>
      */
-    setup<T>(validator: Validator<T>): void {}
+    public setup<T>(validator: Validator<T>): void {}
 
     /**
      * Get rules
      * @param data T data
      */
-    getRules<T>(data?: T): Rules {
+    public getRules<T>(data?: T): Rules {
         return {};
     }
 
@@ -123,7 +173,7 @@ export abstract class BaseValidatorInterface extends BaseValidator {
      * Get Attributes
      * @param data T data
      */
-    getAttributes<T>(data?: T): AttributeNames {
+    public getAttributes<T>(data?: T): AttributeNames {
         return {};
     }
 
@@ -131,7 +181,7 @@ export abstract class BaseValidatorInterface extends BaseValidator {
      * Get Custom messages
      * @param data T data
      */
-    getMessages<T>(data?: T): ErrorMessages {
+    public getMessages<T>(data?: T): ErrorMessages {
         return {};
     }
 
@@ -139,7 +189,10 @@ export abstract class BaseValidatorInterface extends BaseValidator {
      * Validate
      * @param data T data
      */
-    abstract validate(data: any): ActionResultType;
+    abstract validate(
+        data: any,
+        asyncCall: boolean
+    ): ActionResultType | Promise<ActionResultType>;
 }
 
 /**

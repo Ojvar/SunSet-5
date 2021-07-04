@@ -18,6 +18,13 @@ export class ExpressHelper {
     private routeManager?: RouteManager;
 
     /**
+     * Get Server instance
+     */
+     public get Server(): Http.Server {
+        return this.server as Http.Server;
+    }
+
+    /**
      * Get logger
      */
     public get Logger(): LoggerType {

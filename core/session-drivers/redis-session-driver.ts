@@ -1,9 +1,9 @@
 import { config as RedisConfig } from "@CONFIGS/core/redis";
+import { GlobalData } from "@CORE/helpers/global-data-helper";
+import { RedisClientHelper } from "@CORE/helpers/redis-client-helper";
+import { ISessionDriver } from "@CORE/middlewares/core/003-express-session-middleware";
 import ConnectRedis from "connect-redis";
 import ExpressSession, { Store } from "express-session";
-import { GlobalData } from "../helpers/global-data-helper";
-import { RedisClientHelper } from "../helpers/redis-client-helper";
-import { ISessionDriver } from "../middlewares/core/003-express-session-middleware";
 
 /**
  * Redis session driver

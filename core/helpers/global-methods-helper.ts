@@ -1,8 +1,8 @@
 import { config as ServerConfig } from "@CONFIGS/core/server";
+import { LoggerType } from "@CORE/helpers/global-data-helper";
 import { Request } from "express";
 import Glob from "glob";
 import { basename, extname, join, resolve } from "path";
-import { LoggerType } from "./global-data-helper";
 
 /**
  * Global methods

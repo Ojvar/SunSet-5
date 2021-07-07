@@ -1,5 +1,5 @@
+import { LoggerType } from "@CORE/helpers/global-data-helper";
 import { Callback, ClientOpts, createClient, RedisClient } from "redis";
-import { LoggerType } from "./global-data-helper";
 
 /**
  * Redis-client helper class

@@ -1,10 +1,10 @@
 import { config as ServerConfig, ServerConfigType } from "@CONFIGS/core/server";
+import { LoggerType } from "@CORE/helpers/global-data-helper";
+import { GlobalMethods } from "@CORE/helpers/global-methods-helper";
+import { applyArguments, RouteItem } from "@CORE/helpers/route-helper";
 import { Hash } from "@Lib/types/hash-type";
 import Express from "express";
 import { lstatSync } from "fs";
-import { LoggerType } from "./global-data-helper";
-import { GlobalMethods } from "./global-methods-helper";
-import { applyArguments, RouteItem } from "./route-helper";
 
 export class RouteManager {
     private logger: LoggerType = console;

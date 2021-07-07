@@ -1,16 +1,14 @@
+import { RouteHelper } from "@APP/helpers/route-helper";
 import { PassportMiddleware } from "@APP/middlewares/passport-middleware";
 import { AttempToLoginValidator } from "@APP/validators/auth/attempt-to-login-validator";
-import { AuthController } from "@CONTROLLERS/auth-controller";
 import { RouteItem } from "@CORE/helpers/route-helper";
-
-const controller: AuthController = new AuthController();
 
 export const routeBase: string = "/auth";
 export const routes: RouteItem[] = [
-    RouteItem.get("/login", controller.login.bind(controller), "auth.login"),
+    RouteItem.get("/login", RouteHelper.action("auth@login"), "auth.login"),
     RouteItem.get(
         "/logout",
-        [PassportMiddleware.logout(), controller.logout.bind(controller)],
+        [PassportMiddleware.logout(), RouteHelper.action("auth@logout")],
         "auth.logout"
     ),
 
@@ -34,7 +32,7 @@ export const routes: RouteItem[] = [
         [
             AttempToLoginValidator.validate(),
             PassportMiddleware.localAuth(),
-            controller.attempToLogin.bind(controller),
+            RouteHelper.action("auth@attempToLogin"),
         ],
         "auth.attempt-to-login"
     ),

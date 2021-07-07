@@ -29,10 +29,10 @@
 </template>
 
 <script lang="ts">
-import { Vue } from "@Scripts/vendors/vue";
 import { ActionResultType } from "@Lib/types/global/action-result-type";
 import { PageHelper } from "@Scripts/helpers/page-helper";
-import { LoginStore, UserLoginDataType } from "./store";
+import { Vue } from "@Scripts/vendors/vue";
+import { LoginStore, UserLoginDataType } from "@VueC/auth/store";
 
 /**
  * Extends Vue

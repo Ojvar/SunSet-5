@@ -1,18 +1,15 @@
-import { RouteHelper } from "@APP/helpers/route-helper";
 import { PassportMiddleware } from "@APP/middlewares/passport-middleware";
-import { HomeController } from "@CONTROLLERS/home-controller";
+import { ActionHelper } from "@CORE/helpers/action-helper";
 import { RouteItem } from "@CORE/helpers/route-helper";
-
-const controller: HomeController = new HomeController();
 
 export const routeBase: string = "/";
 export const routes: RouteItem[] = [
-    RouteItem.get("/", RouteHelper.action("home@index"), "home.index"),
-    RouteItem.get("/about", RouteHelper.action("home@about"), "home.about"),
+    RouteItem.get("/", ActionHelper.action("home@index"), "home.index"),
+    RouteItem.get("/about", ActionHelper.action("home@about"), "home.about"),
 
     RouteItem.get(
         "/reportIssue",
-        RouteHelper.action("home@reportIssue"),
+        ActionHelper.action("home@reportIssue"),
         "home.reposrt-issue"
     ),
 
@@ -20,7 +17,7 @@ export const routes: RouteItem[] = [
         "/privatePage",
         [
             PassportMiddleware.isLoggedIn(),
-            RouteHelper.action("home@privatePage"),
+            ActionHelper.action("home@privatePage"),
         ],
         "home.private-page"
     ),

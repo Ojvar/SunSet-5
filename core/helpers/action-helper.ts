@@ -3,7 +3,7 @@ import { GlobalMethods } from "@CORE/helpers/global-methods-helper";
 import { Hash } from "@TYPES/hash-type";
 import { NextFunction, Request, RequestHandler, Response } from "express";
 
-export class RouteHelper {
+export class ActionHelper {
     public static controllers: Hash<any> = {};
 
     /**

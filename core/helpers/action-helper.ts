@@ -15,7 +15,7 @@ export class ActionHelper {
             const tokens = name.split("@");
 
             if (tokens.length != 2) {
-                throw Error("Invalid name");
+                throw Error("Invalid name : " + name);
             }
 
             const methodName = tokens[1];

@@ -44,12 +44,12 @@ export class ActionHelper {
                 this.controllers[controllerName] = controller;
             }
 
-            /* Return route */
-            return (controller as any)[methodName].bind(controller)(
+            await (controller as any)[methodName].bind(controller)(
                 req,
                 res,
                 next
             );
+            next();
         };
     }
 }

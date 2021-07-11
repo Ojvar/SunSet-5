@@ -49,7 +49,6 @@ export class ActionHelper {
                 res,
                 next
             );
-            next();
         };
     }
 }

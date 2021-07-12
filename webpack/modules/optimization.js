@@ -10,7 +10,7 @@ module.exports = () => ({
         }),
     ],
     splitChunks: {
-//         chunks: "all",
+        chunks: "all",
         cacheGroups: {
             vue: {
                 ...groupsOptions,
@@ -44,18 +44,18 @@ module.exports = () => ({
                 priority: 100,
             },
 
-//             default: {
-//                 test: /[\\/]node_modules[\\/]/i,
-//                 name(module) {
-//                     const packageName = module.context.match(
-//                         /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-//                     )[1];
+            default: {
+                test: /[\\/]node_modules[\\/]/i,
+                name(module) {
+                    const packageName = module.context.match(
+                        /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+                    )[1];
 
-//                     return `chunks/${packageName.replace("@", "")}`;
-//                 },
+                    return `chunks/${packageName.replace("@", "")}`;
+                },
 
-//                 ...groupsOptions,
-//             },
+                ...groupsOptions,
+            },
         },
     },
 });

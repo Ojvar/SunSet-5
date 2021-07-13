@@ -13,6 +13,15 @@ module.exports = {
     loadModule: (name) => require(Path.resolve("webpack/modules", name)),
 
     /**
+     * Return cacheGroups
+     */
+    getCacheGroups: () => {
+        const { cacheGroups } = require("../../webpack.entries");
+
+        return cacheGroups || {};
+    },
+
+    /**
      * Return webpack entries as a flat-object
      */
     getEntries: () => {

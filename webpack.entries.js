@@ -19,4 +19,34 @@ module.exports = {
             to: "./images/cancel.[contenthash].png",
         },
     ],
+
+    cacheGroups: {
+        vue: {
+            test: /[\\/]node_modules[\\/]vue/i,
+            name: "chunks/vue",
+            chunks: "all",
+            priority: 100,
+        },
+
+        buefy: {
+            test: /[\\/]node_modules[\\/]buefy/i,
+            name: "chunks/buefy",
+            chunks: "all",
+            priority: 100,
+        },
+
+        validatorjs: {
+            test: /[\\/]node_modules[\\/]validatorjs/i,
+            name: "chunks/validatorjs",
+            chunks: "all",
+            priority: 100,
+        },
+
+        axios: {
+            test: /[\\/]node_modules[\\/]axios/i,
+            name: "chunks/axios",
+            chunks: "all",
+            priority: 100,
+        },
+    },
 };

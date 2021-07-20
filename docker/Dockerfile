@@ -1,4 +1,4 @@
-FROM    registry.hub.docker.com/library/node:alpine
+FROM    docker.io/library/node:alpine
 
 # Data
 LABEL   MAINTAINER=MOjvar.AmirHossein@GMail.com

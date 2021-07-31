@@ -2,5 +2,6 @@
     "vetur.format.options.tabSize": 4,
     "editor.tabSize": 4,
     "prettier.tabWidth": 4,
-    "pugFormatter.tabSize": 4
+    "pugFormatter.tabSize": 4,
+    "jira-plugin.workingProject": ""
 }

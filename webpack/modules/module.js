@@ -27,31 +27,27 @@ module.exports = () => ({
             test: /\.js$/,
             loader: "babel-loader",
         },
-
         {
-            test: /\.(png|jpe?g|gif|tiff?)$/i,
-            loader: "file-loader",
-            options: {
-                outputPath: (url, resourcePath, context) => {
-                    let result = resourcePath.replace(context + "/", "");
-
-                    return result;
+            test: /\.(woff2?|eot|ttf|otf|svg)$/i,
+            type: "asset",
+            parser: {
+                dataUrlCondition: {
+                    maxSize: 8 * 1024, // 8kb
                 },
-                name: `[name]${Global.devMode ? "" : ".[contenthash]"}.[ext]`,
             },
-            include: [/images/],
+            generator: {
+                filename: `fonts/[name]${
+                    Global.devMode ? "" : ".[contenthash]"
+                }.[ext][query]`,
+            },
         },
-
         {
-            test: /\.(woff|woff2|eot|ttf|otf|svg)$/i,
-            loader: "file-loader",
-            options: {
-                outputPath: "fonts",
-                name: `[name]${Global.devMode ? "" : ".[contenthash]"}.[ext]`,
+            test: /\.(?:ico|gif|tiff?|png|jpe?g)$/i,
+            type: "asset/resource",
+            generator: {
+                filename: "images/[name][ext][query]",
             },
-            include: [/fonts/],
         },
-
         {
             test: /\.less$/,
             use: [

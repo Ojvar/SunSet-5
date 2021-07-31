@@ -102,7 +102,7 @@ module.exports = () => ({
         },
 
         {
-            test: /\.tsx?$/,
+            test: /\.tsx?$/i,
             use: {
                 loader: "ts-loader",
                 options: {

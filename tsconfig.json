@@ -2,7 +2,7 @@
     "exclude": ["node_modules", "webpack*", "webpack/", "dist"],
 
     "compilerOptions": {
-        "jsx": "preserve",
+        "jsx": "react",
         "module": "CommonJS",
         "moduleResolution": "Node",
         "target": "ESNext",

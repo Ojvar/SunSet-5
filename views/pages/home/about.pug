@@ -1,7 +1,15 @@
-extend ../../layout/app.pug
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Sunset with REACT
 
-block content
-    .section
-        .columns
-            .column.has-text-centered
-                h1.title.is-1.has-text-primary About Sunset V5
+    body 
+        #app
+            | To see this message is meaning react has not initialized correctly
+
+    script(defer, src=Helper.mix("chunks/vendors.js"))
+    script(defer, src=Helper.mix("chunks/react.js"))
+    script(defer, src=Helper.mix("scripts/pages/auth/about.js"))

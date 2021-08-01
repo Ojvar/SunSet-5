@@ -3,7 +3,7 @@ import { Document, Model, model, Schema } from "mongoose";
 /**
  * UserDocument interface
  */
-export interface IUserModelType {
+export interface IUserModelType extends Document {
     activated_at: Date;
     created_at: Date;
     email: string;

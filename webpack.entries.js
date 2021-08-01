@@ -9,7 +9,6 @@ module.exports = {
         /* Styles */
         "styles/pages/errors/500": "./resources/styles/pages/errors/500.scss",
         "styles/layout/base": "./resources/styles/layout/base.scss",
-        "styles/layout/app": "./resources/styles/layout/app.scss",
         "styles/components/global/logo":
             "./resources/styles/components/global/logo.scss",
     },
@@ -36,9 +35,9 @@ module.exports = {
             priority: 100,
         },
 
-        buefy: {
-            test: /[\\/]node_modules[\\/]buefy/i,
-            name: "chunks/buefy",
+        bulma: {
+            test: /[\\/]node_modules[\\/]bulma/i,
+            name: "chunks/bulma",
             chunks: "all",
             priority: 100,
         },

@@ -7,14 +7,12 @@ html(lang="en")
         title SunS37 5
 
         //- link(rel="stylesheet", href=Helper.mix("chunks/vendors.css"))
+        link(rel="stylesheet", href=Helper.mix("chunks/bulma.css"))
         link(rel="stylesheet", href=Helper.mix("styles/layout/base.css"))
-        link(rel="stylesheet", href=Helper.mix("chunks/buefy.css"))
-        link(rel="stylesheet", href=Helper.mix("styles/layout/app.css"))
         block styles
 
         script(defer, async, src=Helper.mix("chunks/vendors.js")) 
         script(defer, async, src=Helper.mix("chunks/vue.js")) 
-        script(defer, async, src=Helper.mix("chunks/buefy.js")) 
         block scripts
     body 
         #app

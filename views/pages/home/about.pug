@@ -6,10 +6,14 @@ html(lang="en")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Sunset with REACT
 
+        link(rel="stylesheet", href=Helper.mix("chunks/bulma.css"))
+        link(rel="stylesheet", href=Helper.mix("styles/layout/base.css"))
+        block styles
     body 
-        #app
-            | To see this message is meaning react has not initialized correctly
+        #app.container
+                | To see this message is meaning react has not initialized correctly
 
-    script(defer, src=Helper.mix("chunks/vendors.js"))
+
+    script(defer, src=Helper.mix("chunks/vendors.js")) 
     script(defer, src=Helper.mix("chunks/react.js"))
     script(defer, src=Helper.mix("scripts/pages/auth/about.js"))

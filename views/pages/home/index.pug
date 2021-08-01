@@ -38,7 +38,7 @@ block content
                     |   console.log(alert("Hello Sunset"));
 
 block scripts
-    script(defer, async, src=Helper.mix("scripts/pages/home/index.js")) 
+    script(defer, src=Helper.mix("scripts/pages/home/index.js")) 
     script(nonce=nonce).
         console.log("To Use inline javascript snippets, add 'nonce=nonce' attribute to script tag");
     script().

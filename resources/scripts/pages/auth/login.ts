@@ -1,7 +1,7 @@
 import { routes } from "@Scripts/pages/auth/routes";
 import { Vue, VueRouter } from "@Scripts/vendors/vue";
-import { LoadingMixin } from "@Scripts/vue-mixins/loading-mixin";
-import { VueRouterMixin } from "@Scripts/vue-mixins/vue-router-mixin";
+import { LoadingMixin } from "@Scripts/vue/mixins/loading-mixin";
+import { VueRouterMixin } from "@Scripts/vue/mixins/vue-router-mixin";
 
 /**
  * LoginPage class

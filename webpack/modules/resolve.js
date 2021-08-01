@@ -29,7 +29,8 @@ module.exports = (entries) => ({
         "@MODELS": Path.resolve("./models"),
 
         /* Frontend */
-        "@VueC": Path.resolve("./resources/scripts/components"),
+        "@VueC": Path.resolve("./resources/scripts/vue/components"),
+        "@ReactC": Path.resolve("./resources/scripts/react/components"),
         "@Scripts": Path.resolve("./resources/scripts"),
         "@Styles": Path.resolve("./resources/styles"),
         "@Fonts": Path.resolve("./resources/fonts"),

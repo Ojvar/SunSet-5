@@ -1,14 +1,15 @@
+import { GlobalData } from "@CORE/helpers/global-data-helper";
 import { IEventListener } from "@Lib/interfaces/globa/event-interfaces";
 
 /**
- * Logger listener
+ * ServerInit listener
  */
-export default class LoggerListener implements IEventListener {
+export default class ServerInitListener implements IEventListener {
     /**
      * Get listener name
      */
     public name(): string {
-        return "on-log";
+        return "on-server-init";
     }
 
     /**
@@ -16,7 +17,7 @@ export default class LoggerListener implements IEventListener {
      * @param payload {any} Payload data
      */
     public async handle(payload?: any): Promise<any> {
-        console.log("Log event handler", payload);
+        GlobalData.logger.info("Server initalized successfully");
 
         return payload;
     }

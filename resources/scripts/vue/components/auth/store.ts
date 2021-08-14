@@ -2,9 +2,10 @@ import { ValidatorErrorType } from "@APP/validators/base-validator";
 import { ActionResultType } from "@Lib/types/global/action-result-type";
 import { AxiosHelper, AxiosResponse } from "@Scripts/helpers/axios-helper";
 import { PageHelper } from "@Scripts/helpers/page-helper";
-import { routes } from "@Scripts/helpers/route-helper";
+import { getRoute } from "@Scripts/helpers/route-helper";
 import { LoginFormValidator } from "@Scripts/validators/auth/login-from-validator";
 import { Vuex } from "@Scripts/vendors/vue";
+import { ActionResultType } from "@Lib/types/global/action-result-type";
 
 /**
  * Login store
@@ -54,7 +55,7 @@ export function LoginStore() {
              * Login by google
              */
             async loginByGoogle() {
-                PageHelper.redirect(routes["auth.google"]);
+                PageHelper.redirect(getRoute("auth.google"));
             },
 
             /**
@@ -81,7 +82,7 @@ export function LoginStore() {
                 let data: ActionResultType;
 
                 try {
-                    const url: string = routes["auth.attempt-to-login"];
+                    const url: string = getRoute("auth.attempt-to-login");
                     const result: AxiosResponse = await AxiosHelper.post(
                         url,
                         context.getters.userLoginData

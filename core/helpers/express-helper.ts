@@ -20,7 +20,7 @@ export class ExpressHelper {
     /**
      * Get Server instance
      */
-     public get Server(): Http.Server {
+    public get Server(): Http.Server {
         return this.server as Http.Server;
     }
 
@@ -109,12 +109,12 @@ Server started successfully
         if ("https" == this.config.proto) {
             const serverPKeyPath: string = GlobalMethods.rPath(
                 this.config.basePath,
-                this.config.ssl.serverKey
+                this.config.ssl.serverKey,
             );
 
             const serverCertPath: string = GlobalMethods.rPath(
                 this.config.basePath,
-                this.config.ssl.serverCert
+                this.config.ssl.serverCert,
             );
 
             /* Setup server */
@@ -134,17 +134,19 @@ Server started successfully
      * @param basePath {string} GroupName
      */
     public async setupCustomMiddlewares(basePath: string): Promise<void> {
-        const files: Array<string> = GlobalMethods.files([
-            ServerConfig().basePath,
+        const files: Array<string> = GlobalMethods.files(
             basePath,
-        ]).filter((file: string) => !lstatSync(file).isDirectory());
+            "**/*",
+            true,
+            true,
+        );
 
         for (let i = 0; i < files.length; ++i) {
             const file: string = files[i];
 
             const Middleware = (await GlobalMethods.importFile(file)).default;
             const middleware: MiddlewareInterface = new Middleware(
-                this
+                this,
             ) as MiddlewareInterface;
 
             /* Setup middleware */

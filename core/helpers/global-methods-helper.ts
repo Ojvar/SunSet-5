@@ -1,6 +1,7 @@
 import { config as ServerConfig } from "@CONFIGS/core/server";
 import { LoggerType } from "@CORE/helpers/global-data-helper";
 import { Request } from "express";
+import { lstatSync } from "fs";
 import Glob from "glob";
 import { basename, extname, join, resolve } from "path";
 
@@ -38,7 +39,7 @@ export class GlobalMethods {
      * @param path string[]
      */
     public static rPath(...path: string[]) {
-        return resolve(...path);
+        return resolve(...path.filter((x: string) => x));
     }
 
     /**
@@ -47,16 +48,30 @@ export class GlobalMethods {
      */
     public static files(
         path: string | Array<string>,
-        pattern: string = "**/*"
+        pattern: string = "**/*",
+        removeDirectories: boolean = false,
+        useBasePath: boolean = false,
     ): string[] {
         if (Array.isArray(path)) {
             path = join(...path);
         }
 
-        path = this.rPath(path);
-        pattern = path + "/" + pattern;
+        /* Setup distPath */
+        const distPath: string = useBasePath ? ServerConfig().basePath : "";
 
-        return Glob.sync(pattern);
+        /* Get directories and files list path */
+        path = this.rPath(distPath, path);
+        pattern = path + "/" + pattern;
+        let result: string[] = Glob.sync(pattern);
+
+        /* Remove directories */
+        if (removeDirectories) {
+            result = result.filter(
+                (file: string) => !lstatSync(file).isDirectory(),
+            );
+        }
+
+        return result;
     }
 
     /**

@@ -1,5 +1,5 @@
-import { LoadingMixin } from "@Scripts/vue/mixins/loading-mixin";
 import { Vue } from "@Scripts/vendors/vue";
+import { LoadingMixin } from "@Scripts/vue/mixins/loading-mixin";
 
 /**
  * HomePage class

@@ -1,6 +1,6 @@
 import { BASE_URL } from "@CONFIGS/frontend/server";
-import { Hash } from "@Lib/types/hash-type";
 import { applyArguments } from "@CORE/helpers/route-helper";
+import { Hash } from "@Lib/types/hash-type";
 
 /**
  * Export routes
@@ -34,11 +34,11 @@ export const routes: Hash<string> = {
 export function getRoute(
     routeName: string,
     args: any = {},
-    queryString: any = {}
+    queryString: any = {},
 ): string {
     let route = routes[routeName]
         ? `${BASE_URL}/${routes[routeName]}`
         : routeName;
-        
+
     return applyArguments(route, args, queryString);
 }

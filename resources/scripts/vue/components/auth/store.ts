@@ -5,7 +5,6 @@ import { PageHelper } from "@Scripts/helpers/page-helper";
 import { getRoute } from "@Scripts/helpers/route-helper";
 import { LoginFormValidator } from "@Scripts/validators/auth/login-from-validator";
 import { Vuex } from "@Scripts/vendors/vue";
-import { ActionResultType } from "@Lib/types/global/action-result-type";
 
 /**
  * Login store
@@ -47,7 +46,7 @@ export function LoginStore() {
              */
             validateLoginData(context: any, data: any): ActionResultType {
                 return new LoginFormValidator().validate(
-                    context.getters.userLoginData
+                    context.getters.userLoginData,
                 );
             },
 
@@ -66,7 +65,7 @@ export function LoginStore() {
             async attemptToLogin(context: any): Promise<ActionResultType> {
                 /* Validate user login data */
                 const validationResult: ActionResultType = await context.dispatch(
-                    "validateLoginData"
+                    "validateLoginData",
                 );
 
                 if (!validationResult.success) {
@@ -85,7 +84,7 @@ export function LoginStore() {
                     const url: string = getRoute("auth.attempt-to-login");
                     const result: AxiosResponse = await AxiosHelper.post(
                         url,
-                        context.getters.userLoginData
+                        context.getters.userLoginData,
                     );
                     data = result.data;
                 } catch (err) {

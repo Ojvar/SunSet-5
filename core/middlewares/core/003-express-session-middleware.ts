@@ -40,7 +40,7 @@ export default class CookieSession implements MiddlewareInterface {
                 resave: false,
                 saveUninitialized: false,
                 cookie: {
-                    secure: app.get("env") === "production",
+                    secure: ServerConfig().proto == "https",
                     maxAge: 1 * 60 * 60 * 1000 /* 1Hour */,
                 },
                 store,

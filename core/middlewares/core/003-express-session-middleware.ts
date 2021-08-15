@@ -26,25 +26,23 @@ export default class CookieSession implements MiddlewareInterface {
      * @param payload {any} Payload data
      */
     public async check(payload?: any): Promise<void> {
+        const config = ServerConfig();
+
         const app: Express.Application = this._expressHelper
             ?.App as Express.Application;
 
         /*  Select proper store */
         const store: Store = await this.getUserSelectedStore();
 
-        /* TODO: READ CONFIG FILE */
         const ExpressSession = (await import("express-session")).default;
         app.use(
             ExpressSession({
                 secret: "MySecretCode_Comes_here",
                 resave: false,
                 saveUninitialized: false,
-                cookie: {
-                    secure: ServerConfig().proto == "https",
-                    maxAge: 1 * 60 * 60 * 1000 /* 1Hour */,
-                },
+                cookie: config.session.cookie,
                 store,
-            })
+            }),
         );
     }
 
@@ -56,7 +54,7 @@ export default class CookieSession implements MiddlewareInterface {
 
         let sessionDriver: any = (
             await GlobalMethods.importFile(
-                `./core/session-drivers/${config.sessionStore?.toLowerCase()}-session-driver`
+                `./core/session-drivers/${config.sessionStore?.toLowerCase()}-session-driver`,
             )
         ).default;
 

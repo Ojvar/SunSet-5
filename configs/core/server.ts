@@ -1,3 +1,5 @@
+export const C_1_HOUR: string = (1 * 60 * 60 * 1000).toString();
+
 /**
  * Export config
  */
@@ -30,6 +32,15 @@ export const config = (): ServerConfigType => {
                 limit: process.env.EXPRESS_JSON_LIMIT || "2mb",
             },
         },
+
+        session: {
+            cookie: {
+                secure: process.env.SESSION_SECURE
+                    ? process.env.SESSION_SECURE.toLowerCase() == "true"
+                    : ("" + process.env.PROTO).toLowerCase() == "https",
+                maxAge: +(process.env.SESSION_MAX_AGE || C_1_HOUR),
+            },
+        },
     } as ServerConfigType;
 };
 
@@ -53,5 +64,11 @@ export type ServerConfigType = {
     ssl: {
         serverCert: string;
         serverKey: string;
+    };
+    session: {
+        cookie: {
+            secure: boolean;
+            maxAge: number;
+        };
     };
 };

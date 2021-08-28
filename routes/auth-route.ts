@@ -10,14 +10,14 @@ export const routes: RouteItem[] = [
     RouteItem.get(
         "/logout",
         [PassportMiddleware.logout(), ActionHelper.action("auth@logout")],
-        "auth.logout",
+        "auth.logout"
     ),
 
     /* Google OAuth routes */
     RouteItem.get(
         "/google",
         [PassportMiddleware.googleOAuthLogin()],
-        "auth.google",
+        "auth.google"
     ),
 
     RouteItem.get(
@@ -26,7 +26,7 @@ export const routes: RouteItem[] = [
             PassportMiddleware.googleOAuth(),
             PassportMiddleware.redirectToHomePage(),
         ],
-        "auth.google.callback",
+        "auth.google.callback"
     ),
 
     RouteItem.post(
@@ -36,6 +36,6 @@ export const routes: RouteItem[] = [
             PassportMiddleware.localAuth(),
             ActionHelper.action("auth@attempToLogin"),
         ],
-        "auth.attempt-to-login",
+        "auth.attempt-to-login"
     ),
 ];

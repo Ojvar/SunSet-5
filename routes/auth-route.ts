@@ -5,7 +5,8 @@ import { RouteItem } from "@CORE/helpers/route-helper";
 
 export const routeBase: string = "/auth";
 export const routes: RouteItem[] = [
-    RouteItem.get("/login", ActionHelper.action("auth@login"), "auth.login"),
+    RouteItem.get("/login", [ActionHelper.action("auth@login")], "auth.login"),
+
     RouteItem.get(
         "/logout",
         [PassportMiddleware.logout(), ActionHelper.action("auth@logout")],
@@ -15,9 +16,10 @@ export const routes: RouteItem[] = [
     /* Google OAuth routes */
     RouteItem.get(
         "/google",
-        PassportMiddleware.googleOAuthLogin(),
+        [PassportMiddleware.googleOAuthLogin()],
         "auth.google"
     ),
+
     RouteItem.get(
         "/google/callback",
         [

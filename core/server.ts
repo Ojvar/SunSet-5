@@ -1,4 +1,4 @@
-import { ServerInitClass } from "@APP/server-init";
+import ServerInitClass from "@APP/server-init";
 import { LoggerType } from "@CORE/helpers/global-data-helper";
 import { ICoreModule } from "@CORE/modules/core-module-interface";
 

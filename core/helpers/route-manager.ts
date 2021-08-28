@@ -131,7 +131,7 @@ export class RouteManager {
      * @param data {any}
      */
     public routePath(alias: string, data: any = {}): string {
-        return applyArguments(this.routeData(alias).path, data);
+        return applyArguments(this.routeData(alias)?.path || "", data);
     }
 }
 

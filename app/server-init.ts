@@ -1,14 +1,14 @@
 import { GlobalData } from "@CORE/helpers/global-data-helper";
 
 /**
- * ServerInit listener
+ * ServerInit class
  */
-export class ServerInitClass {
+export default class ServerInitClass {
     /**
-     * Handle event
-     * @param payload {server} Server instance
+     * onServerInitialized
+     * @param payload {any} Payload data
      */
-    public async onServerInitialized(server: any): Promise<any> {
+    public async onServerInitialized(payload?: any) {
         GlobalData.Events.emit("server-init");
     }
 }

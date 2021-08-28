@@ -46,7 +46,7 @@ export class GoogleOAuthStrategy {
         accessToken: string,
         refreshToken: string,
         profile: Profile,
-        done: Function
+        done: Function,
     ) {
         try {
             let currentUser: IUserDocument | null = await User.findOne({

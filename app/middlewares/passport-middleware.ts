@@ -1,6 +1,6 @@
-import { GlobalData } from "@CORE/helpers/global-data-helper";
 import { config as PassportConfig } from "@CONFIGS/core/passport";
-import { NextFunction, Request, Response } from "express";
+import { GlobalData } from "@CORE/helpers/global-data-helper";
+import { NextFunction, Request, RequestHandler, Response } from "express";
 import { authenticate } from "passport";
 
 /**
@@ -10,11 +10,11 @@ export class PassportMiddleware {
     /**
      * Redirect to HomePage middleware
      */
-    public static redirectToHomePage() {
+    public static redirectToHomePage(): RequestHandler {
         return (req: Request, res: Response, next: NextFunction) => {
             res.redirect(
                 GlobalData.express?.app.RouteManager.routePath("home.index") ||
-                    ""
+                    "",
             );
         };
     }
@@ -22,7 +22,7 @@ export class PassportMiddleware {
     /**
      * Logout middleware
      */
-    public static logout() {
+    public static logout(): RequestHandler {
         return (req: Request, res: Response, next: NextFunction) => {
             req.logout();
             next();
@@ -32,13 +32,13 @@ export class PassportMiddleware {
     /**
      * IsLogged in
      */
-    public static isLoggedIn() {
+    public static isLoggedIn(): RequestHandler {
         return (req: Request, res: Response, next: NextFunction) => {
             if (undefined == req.user) {
                 res.redirect(
                     GlobalData.express?.app.RouteManager.routePath(
-                        "auth.login"
-                    ) || ""
+                        "auth.login",
+                    ) || "",
                 );
             } else {
                 next();
@@ -49,14 +49,14 @@ export class PassportMiddleware {
     /**
      * Local auth middleware
      */
-    public static localAuth() {
+    public static localAuth(): any {
         return authenticate("local");
     }
 
     /**
      * Google OAuth login middleware
      */
-    public static googleOAuthLogin() {
+    public static googleOAuthLogin(): any {
         const config = PassportConfig();
 
         return authenticate("google", {
@@ -67,11 +67,15 @@ export class PassportMiddleware {
     /**
      * Google OAuth auth middleware
      */
-    public static googleOAuth() {
+    public static googleOAuth(): any {
+        const failureRedirect:
+            | string
+            | undefined = GlobalData.Express.app.RouteManager.routePath(
+            "auth.login",
+        );
+
         return authenticate("google", {
-            failureRedirect: GlobalData.express?.app.RouteManager.routePath(
-                "auth.login"
-            ),
+            failureRedirect,
         });
     }
 }

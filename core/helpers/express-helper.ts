@@ -1,5 +1,5 @@
 import { config as ServerConfig, ServerConfigType } from "@CONFIGS/core/server";
-import { LoggerType } from "@CORE/helpers/global-data-helper";
+import { GlobalData, LoggerType } from "@CORE/helpers/global-data-helper";
 import { GlobalMethods } from "@CORE/helpers/global-methods-helper";
 import { RouteManager } from "@CORE/helpers/route-manager";
 import Express from "express";

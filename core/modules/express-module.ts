@@ -38,13 +38,13 @@ export default class ExpressModule extends CoreModule {
      * @param payload any
      */
     public async boot(payload?: any): Promise<any> {
+        /* Store in Global-data */
+        GlobalData.express = this;
+
         this.expressHelper = new ExpressHelper(this.logger);
 
         await this.expressHelper.init();
         await this.expressHelper.listen();
-
-        /* Store in Global-data */
-        GlobalData.express = this;
 
         this.logger.log("Boot Module: Express");
         return this;

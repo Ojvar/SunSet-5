@@ -33,7 +33,7 @@ export class PugHelper {
             );
 
             this.assetsList = (await import(filePath)).default;
-        } catch (err) {
+        } catch (err:any) {
             return err;
         }
     }

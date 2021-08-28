@@ -1,4 +1,5 @@
-import { GlobalData, LoggerType } from "@CORE/helpers/global-data-helper";
+import ServerInitClass from "@APP/server-init";
+import { LoggerType } from "@CORE/helpers/global-data-helper";
 import { ICoreModule } from "@CORE/modules/core-module-interface";
 
 /**
@@ -25,7 +26,7 @@ export class Server {
         await this.initModule("express");
 
         /* Run server-init class */
-        await GlobalData.Events.emit("on-server-init", this);
+        await new ServerInitClass().onServerInitialized(this);
     }
 
     /**

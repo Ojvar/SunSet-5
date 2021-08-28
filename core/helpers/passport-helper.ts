@@ -33,7 +33,7 @@ export class PassportHelper {
             try {
                 const user: IUserDocument | null = await User.findById(id);
 
-                if (null != user) {
+                if (user) {
                     done(null, user);
                 } else {
                     done("User not found");

@@ -21,7 +21,7 @@ export class RouteItem {
         rType: RequestType,
         path: string,
         handler: RequestHandler | RequestHandler[],
-        alias?: string
+        alias?: string,
     ) {
         this.routeType = rType;
         this.path = path;
@@ -40,7 +40,7 @@ export class RouteItem {
         rType: RequestType,
         path: string,
         handler: RequestHandler | RequestHandler[],
-        alias?: string
+        alias?: string,
     ) {
         return new RouteItem(rType, path, handler, alias);
     }
@@ -54,7 +54,7 @@ export class RouteItem {
     public static get(
         path: string,
         handler: RequestHandler | RequestHandler[],
-        alias?: string
+        alias?: string,
     ) {
         return this.route("get", path, handler, alias);
     }
@@ -68,7 +68,7 @@ export class RouteItem {
     public static head(
         path: string,
         handler: RequestHandler | RequestHandler[],
-        alias?: string
+        alias?: string,
     ) {
         return this.route("head", path, handler, alias);
     }
@@ -82,7 +82,7 @@ export class RouteItem {
     public static post(
         path: string,
         handler: RequestHandler | RequestHandler[],
-        alias?: string
+        alias?: string,
     ) {
         return this.route("post", path, handler, alias);
     }
@@ -96,7 +96,7 @@ export class RouteItem {
     public static patch(
         path: string,
         handler: RequestHandler | RequestHandler[],
-        alias?: string
+        alias?: string,
     ) {
         return this.route("patch", path, handler, alias);
     }
@@ -110,7 +110,7 @@ export class RouteItem {
     public static put(
         path: string,
         handler: RequestHandler | RequestHandler[],
-        alias?: string
+        alias?: string,
     ) {
         return this.route("put", path, handler, alias);
     }
@@ -124,7 +124,7 @@ export class RouteItem {
     public static del(
         path: string,
         handler: RequestHandler | RequestHandler[],
-        alias?: string
+        alias?: string,
     ) {
         return this.route("delete", path, handler, alias);
     }
@@ -138,7 +138,7 @@ export class RouteItem {
     public static option(
         path: string,
         handler: RequestHandler | RequestHandler[],
-        alias?: string
+        alias?: string,
     ) {
         return this.route("option", path, handler, alias);
     }
@@ -162,7 +162,7 @@ export type RequestType =
 export function applyArguments(
     url: string,
     args: any = {},
-    queryString: any = {}
+    queryString: any = {},
 ): string {
     /* Extract tokens */
     const tokens: RegExpMatchArray | null = url.match(/\:\b(?!\d)\w*\b/g);

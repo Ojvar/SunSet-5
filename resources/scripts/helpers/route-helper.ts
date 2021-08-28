@@ -7,22 +7,12 @@ import { Hash } from "@Lib/types/hash-type";
  */
 export const routes: Hash<string> = {
     /* GET */
-    "accounts.accounts": "accounts/accounts",
-    "accounts.load-exchange-list": "accounts/loadExchangeList",
     "auth.google": "auth/google",
     "auth.login": "auth/login",
     "auth.logout": "auth/logout",
 
     /* POST */
-    "accounts.reg-exchange-accounte": "accounts/regExchangeAccounte",
     "auth.attempt-to-login": "auth/login",
-    "auth.new-user-Activation-code": "auth/newUserActivationCode",
-    "auth.register-new-user": "auth/registerNewUser",
-    "auth.resend-new-user-Activation-code": "auth/resendNewUserActivationCode",
-    "auth.resend-reset-pwd-Activation-code":
-        "auth/resendResetPwdActivationCode",
-    "auth.reset-password": "auth/resetPassword",
-    "auth.reset-pwd-activation-code": "auth/resetPwdActivationCode",
 };
 
 /**

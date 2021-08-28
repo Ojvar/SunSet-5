@@ -5,26 +5,28 @@ import { RouteItem } from "@CORE/helpers/route-helper";
 
 export const routeBase: string = "/auth";
 export const routes: RouteItem[] = [
-    RouteItem.get("/login", ActionHelper.action("auth@login"), "auth.login"),
+    RouteItem.get("/login", [ActionHelper.action("auth@login")], "auth.login"),
+
     RouteItem.get(
         "/logout",
         [PassportMiddleware.logout(), ActionHelper.action("auth@logout")],
-        "auth.logout"
+        "auth.logout",
     ),
 
     /* Google OAuth routes */
     RouteItem.get(
         "/google",
-        PassportMiddleware.googleOAuthLogin(),
-        "auth.google"
+        [PassportMiddleware.googleOAuthLogin()],
+        "auth.google",
     ),
+
     RouteItem.get(
         "/google/callback",
         [
             PassportMiddleware.googleOAuth(),
             PassportMiddleware.redirectToHomePage(),
         ],
-        "auth.google.callback"
+        "auth.google.callback",
     ),
 
     RouteItem.post(
@@ -34,6 +36,6 @@ export const routes: RouteItem[] = [
             PassportMiddleware.localAuth(),
             ActionHelper.action("auth@attempToLogin"),
         ],
-        "auth.attempt-to-login"
+        "auth.attempt-to-login",
     ),
 ];

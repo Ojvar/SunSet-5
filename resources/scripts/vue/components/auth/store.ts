@@ -87,7 +87,7 @@ export function LoginStore() {
                         context.getters.userLoginData,
                     );
                     data = result.data;
-                } catch (err) {
+                } catch (err: any) {
                     data = {
                         success: false,
                         data: "Server request failed",

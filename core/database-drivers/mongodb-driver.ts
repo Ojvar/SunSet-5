@@ -81,7 +81,7 @@ export class MongoDBDriver extends CoreModule implements IDatabaseDriver {
                 ${connectionString}
                 ${JSON.stringify(connectionOptions, null, 2)}
             `);
-        } catch (err) {
+        } catch (err: any) {
             this.logger.error("Connection to database failed");
             this.logger.error(err);
 

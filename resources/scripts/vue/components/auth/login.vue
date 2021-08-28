@@ -59,7 +59,7 @@ export default Vue.extend({
         async loginByGoogle() {
             try {
                 this.$store.dispatch("loginByGoogle");
-            } catch (err) {
+            } catch (err: any) {
                 console.error(err);
                 alert("Send request fialed");
             }
@@ -79,7 +79,7 @@ export default Vue.extend({
                 } else {
                     alert(data.data);
                 }
-            } catch (err) {
+            } catch (err: any) {
                 console.error(err);
                 alert("Send request fialed");
             }

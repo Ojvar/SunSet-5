@@ -59,7 +59,7 @@ export class GoogleOAuthStrategy {
             }
 
             done(null, currentUser);
-        } catch (err) {
+        } catch (err: any) {
             done(err);
         }
     }

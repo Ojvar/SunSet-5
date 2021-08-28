@@ -1,9 +1,10 @@
 import { config as ServerConfig, ServerConfigType } from "@CONFIGS/core/server";
+
 import { GlobalData } from "@CORE/helpers/global-data-helper";
 import { GlobalMethods } from "@CORE/helpers/global-methods-helper";
-import { applyArguments } from "@CORE/helpers/route-helper";
-import { RouteItemType } from "@CORE/helpers/route-manager";
 import { Hash } from "@Lib/types/hash-type";
+import { RouteItemType } from "@CORE/helpers/route-manager";
+import { applyArguments } from "@CORE/helpers/route-helper";
 
 /**
  * PugHelper class
@@ -33,7 +34,7 @@ export class PugHelper {
             );
 
             this.assetsList = (await import(filePath)).default;
-        } catch (err) {
+        } catch (err: any) {
             return err;
         }
     }

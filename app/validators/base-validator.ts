@@ -123,7 +123,7 @@ export function validate<T>(
         try {
             documentData = (await dataCollector(req)) as T;
             req.payload = documentData;
-        } catch (err) {
+        } catch (err: any) {
             next("Invalid arguments");
             return;
         }

@@ -46,7 +46,7 @@ export class LoginFormValidator extends BaseValidatorInterface {
             );
 
             return super.validateData<AttempToLoginType>(this, userData);
-        } catch (err) {
+        } catch (err: any) {
             return {
                 data: err,
                 success: false,

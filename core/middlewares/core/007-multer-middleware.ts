@@ -41,7 +41,7 @@ export default class HelmetMiddleware implements MiddlewareInterface {
 
                 try {
                     MKDirP(path);
-                } catch (err) {}
+                } catch (err: any) {}
 
                 callback(null, path);
             },

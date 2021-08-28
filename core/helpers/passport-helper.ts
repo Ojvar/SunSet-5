@@ -38,7 +38,7 @@ export class PassportHelper {
                 } else {
                     done("User not found");
                 }
-            } catch (err) {
+            } catch (err: any) {
                 done(err);
             }
         });

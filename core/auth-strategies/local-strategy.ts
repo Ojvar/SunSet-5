@@ -51,7 +51,7 @@ export class LocalLoginStrategy {
             } else {
                 done(null, user);
             }
-        } catch (err) {
+        } catch (err: any) {
             done(err);
         }
     }

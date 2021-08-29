@@ -23,7 +23,7 @@ export const routes: RouteItem[] = [
     RouteItem.get(
         "/google/callback",
         [
-            PassportMiddleware.googleOAuth(),
+            PassportMiddleware.localAuth(),
             PassportMiddleware.redirectToHomePage(),
         ],
         "auth.google.callback"

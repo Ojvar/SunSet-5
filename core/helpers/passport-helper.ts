@@ -1,12 +1,12 @@
 import {
     config as PassportConfig,
-    PassportConfigType,
+    PassportConfigType
 } from "@CONFIGS/core/passport";
 import { GoogleOAuthStrategy } from "@CORE/auth-strategies/google-oauth-strategy";
 import { LocalLoginStrategy } from "@CORE/auth-strategies/local-strategy";
 import User, { IUserDocument } from "@MODELS/user-model";
 import { Application } from "express";
-import Passport from "passport";
+import passport from "passport";
 
 /**
  * PassportHelper class
@@ -25,11 +25,11 @@ export class PassportHelper {
         ]);
 
         /* Setup serialization and deserialization */
-        Passport.serializeUser((user: any, done: Function) => {
+        passport.serializeUser((user: any, done: Function) => {
             done(null, user._id || user.id);
         });
 
-        Passport.deserializeUser(async (id: any, done: Function) => {
+        passport.deserializeUser(async (id: any, done: Function) => {
             try {
                 const user: IUserDocument | null = await User.findById(id);
 
@@ -38,13 +38,13 @@ export class PassportHelper {
                 } else {
                     done("User not found");
                 }
-            } catch (err: any) {
+            } catch (err) {
                 done(err);
             }
         });
 
         /* Setup passport middlewares */
-        app.use(Passport.initialize());
-        app.use(Passport.session());
+        app.use(passport.initialize());
+        app.use(passport.session());
     }
 }

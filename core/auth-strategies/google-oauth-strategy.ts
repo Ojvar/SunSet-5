@@ -1,6 +1,6 @@
 import { PassportConfigType } from "@CONFIGS/core/passport";
 import User, { IUserDocument } from "@MODELS/user-model";
-import Passport, { Profile } from "passport";
+import passport from "passport";
 import {
     Strategy as GoogleStrategy,
     StrategyOptions,
@@ -19,7 +19,7 @@ export class GoogleOAuthStrategy {
             return;
         }
 
-        new GoogleOAuthStrategy().setup(config);
+        await new GoogleOAuthStrategy().setup(config);
     }
 
     /**
@@ -27,12 +27,9 @@ export class GoogleOAuthStrategy {
      * @param config {PassportConfigType} Passport config object
      */
     public async setup(config: PassportConfigType) {
-        if (!config.google?.clientID) {
-            return;
-        }
-
-        const configG: StrategyOptions = config.google;
-        Passport.use(new GoogleStrategy(configG, this.googleOAuthCallback));
+        const configG: StrategyOptions =
+            config.google || ({} as StrategyOptions);
+        passport.use(new GoogleStrategy(configG, this.googleOAuthCallback));
     }
 
     /**
@@ -45,7 +42,7 @@ export class GoogleOAuthStrategy {
     private async googleOAuthCallback(
         accessToken: string,
         refreshToken: string,
-        profile: Profile,
+        profile: passport.Profile,
         done: Function,
     ) {
         try {
@@ -59,7 +56,7 @@ export class GoogleOAuthStrategy {
             }
 
             done(null, currentUser);
-        } catch (err: any) {
+        } catch (err) {
             done(err);
         }
     }

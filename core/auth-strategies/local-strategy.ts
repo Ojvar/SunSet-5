@@ -1,5 +1,5 @@
 import userModel, { IUserDocument } from "@MODELS/user-model";
-import Passport from "passport";
+import passport from "passport";
 import { Strategy } from "passport-local";
 
 /**
@@ -10,22 +10,22 @@ export class LocalLoginStrategy {
      * Init local login strategy
      */
     public static async initLocalLoginStrategy() {
-        new LocalLoginStrategy().setup();
+        await new LocalLoginStrategy().setup();
     }
 
     /**
      * Setup
      */
     public async setup() {
-        Passport.use(
+        passport.use(
             new Strategy(
                 {
                     usernameField: "email",
                     passwordField: "pwd",
                     session: true,
                 },
-                this.authenticationFunc
-            )
+                this.authenticationFunc,
+            ),
         );
     }
 
@@ -38,7 +38,7 @@ export class LocalLoginStrategy {
     private async authenticationFunc(
         username: string,
         password: string,
-        done: Function
+        done: Function,
     ) {
         try {
             const user: IUserDocument | null = await userModel.findOne({
@@ -51,7 +51,7 @@ export class LocalLoginStrategy {
             } else {
                 done(null, user);
             }
-        } catch (err: any) {
+        } catch (err) {
             done(err);
         }
     }

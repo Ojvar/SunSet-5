@@ -1,7 +1,7 @@
 import { config as PassportConfig } from "@CONFIGS/core/passport";
 import { GlobalData } from "@CORE/helpers/global-data-helper";
 import { NextFunction, Request, RequestHandler, Response } from "express";
-import { authenticate } from "passport";
+import passport from "passport";
 
 /**
  * Passport middleware
@@ -50,7 +50,7 @@ export class PassportMiddleware {
      * Local auth middleware
      */
     public static localAuth(): any {
-        return authenticate("local");
+        return passport.authenticate("local");
     }
 
     /**
@@ -59,7 +59,7 @@ export class PassportMiddleware {
     public static googleOAuthLogin(): any {
         const config = PassportConfig();
 
-        return authenticate("google", {
+        return passport.authenticate("google", {
             scope: config.google?.scope,
         });
     }
@@ -74,7 +74,7 @@ export class PassportMiddleware {
             "auth.login",
         );
 
-        return authenticate("google", {
+        return passport.authenticate("google", {
             failureRedirect,
         });
     }
